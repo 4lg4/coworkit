@@ -1,0 +1,8 @@
+/* Black */
+.eosSkinBlack .mceToolbar .mceToolbarStart span, .eosSkinBlack .mceToolbar .mceToolbarEnd span, .eosSkinBlack .mceButton, .eosSkinBlack .mceSplitButton, .eosSkinBlack .mceSeparator, .eosSkinBlack .mceSplitButton a.mceOpen, .eosSkinBlack .mceListBox a.mceOpen {background-image:url(/img/tinymce/button_bg.png)}
+.eosSkinBlack td.mceToolbar, .eosSkinBlack td.mceStatusbar, .eosSkinBlack .mceMenuItemTitle a, .eosSkinBlack .mceMenuItemTitle span.mceText, .eosSkinBlack .mceStatusbar div, .eosSkinBlack .mceStatusbar span, .eosSkinBlack .mceStatusbar a {background:#808080; color:#FFF}
+.eosSkinBlack table.mceListBoxEnabled .mceText, o2k7SkinBlack .mceListBox .mceText {background:#FFF; border:1px solid #CBCFD4; border-bottom-color:#989FA9; border-right:0}
+.eosSkinBlack table.mceListBoxEnabled:hover .mceText, .eosSkinBlack .mceListBoxHover .mceText, .eosSkinBlack .mceListBoxSelected .mceText {background:#FFF; border:1px solid #FFBD69; border-right:0}
+.eosSkinBlack .mceExternalToolbar, .eosSkinBlack .mceListBox .mceText, .eosSkinBlack div.mceMenu, .eosSkinBlack table.mceLayout, .eosSkinBlack .mceMenuItemTitle a, .eosSkinBlack table.mceLayout tr.mceFirst td, .eosSkinBlack table.mceLayout, .eosSkinBlack .mceMenuItemTitle a, .eosSkinBlack table.mceLayout tr.mceLast td, .eosSkinBlack .mceIframeContainer {border-color: #808080; }
+.eosSkinBlack table.mceSplitButtonEnabled:hover a.mceAction, .eosSkinBlack .mceSplitButtonHover a.mceAction, .eosSkinBlack .mceSplitButtonSelected {background-image:url(/img/tinymce/button_bg.png)}
+.eosSkinBlack .mceMenu .mceMenuItemEnabled a:hover, .eosSkinBlack .mceMenu .mceMenuItemActive { background-color:#354e72; }
