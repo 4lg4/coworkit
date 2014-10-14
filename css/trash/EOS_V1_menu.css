@@ -1,0 +1,579 @@
+html, body
+  	{
+  	overflow: hidden;
+  	width: 100%;
+  	height: 100%;
+	padding: 0px;
+	margin: 0px;
+  	}
+
+/* Main, Div que carrega os modulos */
+#main
+	{
+	/*
+	background-color:#fff !important;
+	border-top:1px #354e72 solid;
+	border-left:1px #354e72 solid; 
+	margin-left: 60px !important; 
+	*/
+	width:100%;
+	height:100%;
+	}
+
+/* Main, Div que comporta o iframe dos modulos */
+#main_container
+	{
+	bottom:0px;
+	right:0px;
+	position:relative;
+	float:right;
+	width:94%;
+	height:95.5%;
+	}
+	
+/* Corpo, Div para delimitar todo o documento */
+#corpo
+	{
+	position:relative;
+	overflow: hidden;
+	top:0px;
+	height:100%;
+	width:100%;
+	min-width:1024px;
+	min-height:550px;
+	}
+
+/* Menu, where am i DIV */
+#menu_top
+	{
+	position:relative;
+	letter-spacing:0.05em;
+	font-size:10px;
+	font-weight:normal;
+	border:none;
+	min-height:19px;
+	height:4%;
+	background-color:#d9d9d9;
+	color:#333;
+	padding-left:60px;
+  	padding-top: 3px;
+	border-bottom:1px solid;
+	}
+	
+#menu_top_home	
+	{
+	float:left;
+	}
+
+#menu_top_home a > img
+	{
+	height:15px;
+	border:0px;
+	margin-top:1px;
+	cursor:pointer;
+	}
+	
+.menu_top_modules
+	{
+	float:left;  
+	padding-top:1px; 
+	padding-right:8px; 
+	padding-left:5px; 
+	border-top-right-radius:100px; 
+	/* border-bottom-right-radius:100px; */
+	border-right:1px solid #666; 
+	margin-right:4px;
+	height:17px;
+	}
+
+.menu_top_modules_opt
+	{
+	padding-top:2px; 
+	font-weight:bold;
+	}
+
+/* Menu, top icones DIV */
+#menu_top_right
+	{
+	position:absolute;
+	z-index:1;
+	top:0px;
+	right:0px;
+	}
+	
+/* Menu Actions Principal   -------------------------- */
+#menu_actions
+  	{
+  	position: relative;
+	float: left;
+  	top: 0px;
+  	left: 0px;
+	width:5%;
+  	min-width: 60px;
+	height:100%;
+  	border-right: solid 1px #354e72;
+  	background-color: #d9d9d9;
+	padding-top:25px;
+  	}
+
+
+
+
+
+
+
+/* itens do menu */
+#submenu
+	{
+	background-color:#d9d9d9 !important;
+	border:solid 1px #354e72 !important;
+	left:0.25% !important;
+	right:0.25% !important;
+	position:relative !important;
+	top:0px !important;
+	}
+
+.submenu
+	{
+	color: #666 !important;
+	}
+	
+.submenu_item
+	{
+	letter-spacing:0.05em;
+	font-weight:normal !important;
+	font-size:11px;
+	color:#333 !important;
+	}
+
+.submenu_item:hover
+	{
+	color:#fff !important;
+	background-color:#354e72 !important;
+	}
+	
+#eye
+	{
+	position:absolute;
+	z-index:999999;
+	top:-18px;
+	left:-15px;
+	width:65px;
+	height:65px;
+	background:#fff;
+	border-bottom-right-radius:100px;
+	box-shadow: 1px 2px 6px rgba(0, 0, 0, 0.5);
+	-moz-box-shadow: 1px 2px 6px rgba(0, 0, 0, 0.5);
+	-webkit-box-shadow: 1px 2px 6px rgba(0, 0, 0, 0.5);
+	background-color:#dbdbdb;
+	border:1px solid #666;
+	}
+	
+	
+
+#bemvindo
+	{
+	padding:5px;
+	padding-bottom:2px;
+	padding-top:8px;
+	left: 0.25%;
+	border-bottom:1px solid #666;
+	border-right:1px solid #666;
+	border-bottom-right-radius:100px !important;
+	border-top-right-radius:100px !important;
+	box-shadow: 1px 2px 6px rgba(0, 0, 0, 0.5);
+	-moz-box-shadow: 1px 2px 6px rgba(0, 0, 0, 0.5);
+	-webkit-box-shadow: 1px 2px 6px rgba(0, 0, 0, 0.5);
+	background-color:#dbdbdb;
+	}
+
+#menu_float
+	{
+	position:absolute; 
+	z-index:9998; 
+	top:30px; 
+	width:890px; 
+	background-color:#dbdbdb; 
+	height:400px; 
+	left:20px; 
+	border-radius:5px; 
+	border-bottom:1px solid #666;
+	}
+
+/* Loader   -------------------------- */ 
+#loading
+  {
+  background: #000;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  z-index: 1000;
+  opacity: 0.65;
+  -moz-opacity: 0.65;
+  filter: alpha(opacity=65);
+  }
+
+#loading img
+  {
+  position: absolute;
+  top: 40%;
+  left: 47%;
+  }
+
+/* Menu Principal   -------------------------- */
+/*
+#menu
+  {
+  position: absolute;
+  left: 0.25%;
+  right: 0.25%;
+  top: 57px;
+  width: 99.5%;
+  height: 21px;
+  color: #ffffff;
+  background-color: #003170;
+  text-align: center;
+  border-top: 2px;
+  }
+
+#menu_options
+  {
+  font-family: Tahoma, sans-serif;
+  font-size: 12px;
+  font-weight: bold;
+  position: relative;
+  margin-left: 0px;
+  margin-right: 1px;
+  width: 130px;
+  height: 21px;
+  float: left;
+  margin-top: 0px;
+  }
+
+#menu_options:hover
+  {
+  cursor: pointer;
+  background-color: #42528c;
+  margin-right: 1px;  
+  }
+*/
+
+#menu_text
+  {
+  position: relative;
+  top: 3px;
+  }
+ 
+#menu div div
+  {
+  width: 250px;	  
+  }
+
+ 
+.menu_selected
+  {
+  background-color: #FFFFFF;
+  color: #31517b;
+  cursor: pointer;
+  font-weight:bolder;
+  }
+
+.menu_selected:hover
+  {
+  background-color: #FFFFFF !important;
+  color: #31517b !important;
+  cursor: pointer;
+  }
+
+
+/* Sub Menu Principal   -------------------------- */
+#submenu
+  {
+  background-color: #fff;
+  position: absolute;
+  left: 0.5%;
+  right: 0.5%;
+  top: 78px;
+  height: 300px;
+  }
+  
+.submenu_selected
+  {
+  cursor: pointer;
+  color: #31517b;
+  background-color: #b9cae1;
+  }
+  
+ul
+  {
+  padding: 0px 6px;
+  margin-left: 0px;
+  list-style: none;
+  }
+
+li.submenu
+  {
+  font-family: Tahoma, sans-serif;
+  font-size: 14px;
+  font-weight: bold; 
+  color: #999999;
+  text-align: left;
+  text-transform: uppercase;
+  border-bottom: solid 1px #999999;
+  margin-bottom: 6px;
+  }
+
+li a
+  {
+  font-family: Tahoma, sans-serif;
+  font-size: 12px;
+  font-weight: bold; 
+  color: black;
+  text-align: left;
+  margin-left: 5px;
+  text-decoration: none;
+  text-transform: none;
+  display:block;
+  width:80%;
+  padding-left:3px;
+  margin-top:2px;
+  }
+
+li a:hover
+  {
+  color: #31517b;
+  background-color: #ffffdd;
+  margin-right: 1px;
+  display:block;
+  border-radius:4px;
+  }
+
+/* Div de saudacao   -------------------------- */
+#bemvindo
+  {
+  position: absolute;
+  top: 0px;
+  /* right: 5%; */
+  text-align:left;
+  background:#ccc;
+  padding-right:1%;
+  padding-left:1%;
+  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 4px;  
+  }
+
+#bemvindo_titulo
+  {
+  font-family: Tahoma, sans-serif;
+  font-size: 12px;
+  font-weight: bold;
+  color: #808080;
+  }
+
+#bemvindo_campo
+  {
+  font-family: Tahoma, sans-serif;
+  font-size: 12px;
+  font-weight: bold;
+  color: #575971;
+  }
+
+/* Principal onde carregam os modulos   -------------------------- */
+
+.fundo
+  {
+  background-color: #e5e5e5;
+  } 
+ 
+
+
+/* Logotipo Empresa   -------------------------- */
+#header
+  {
+  background-color: #fff;
+  position: absolute;
+  left: 0px;
+  right: 0px;
+  top: 0px;
+  height: 57px;
+  }
+  
+#logotipo
+  {
+  background-color: 575971;
+  position: absolute;
+  left: 5px;
+  top: 5px;
+  }
+
+.head_blk
+  {
+  display: none;  
+  background-color: #000000;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 57px;
+  z-index: 999;
+  opacity: 0.20;
+  -moz-opacity: 0.20;
+  filter: alpha(opacity=20);
+  }
+  
+ul ul
+  {  
+  margin-left: 16px;
+  margin-right: -6px;
+  }
+
+
+/*  [INI] Botoes do menu de acoes ------------------------------------------------------------------------------------ */
+.menu_btn_container 
+	{
+	display:table-cell;
+	vertical-align:bottom;
+	width: 46px;
+	height: 46px;
+	}
+	
+.menu_btn_title 
+	{
+	font-size:12px;
+	padding-top:1px;
+	}
+	
+.menu_btn_title_sub 
+	{
+	font-size:10px;
+	border-bottom: 1px solid #fff;
+	width:40px;
+	}
+	
+.menu_btn_separator 
+	{
+	width: 46px;
+	height: 10px;
+	}
+
+/* Cor Principal ------------------------ */
+.menu_btn {
+	margin-top:3px;
+	width: 46px;
+	height: 46px;
+	cursor: pointer;
+	/* background: url(/img/icon_glow.png) top center #70242d; */
+	border-radius:3px;
+	font-family:Arial;
+	color:#fff;
+	margin-top:3px;
+
+
+	background:#354e72;
+	text-shadow: 1px 1px 0px rgb(77,34,39);	
+}
+.menu_btn:hover {
+	background-image: linear-gradient(bottom, #354e72 65%, #99adcb 98%);
+	background-image: -o-linear-gradient(bottom, #354e72 65%, #99adcb 98%);
+	background-image: -moz-linear-gradient(bottom, #354e72 65%, #99adcb 98%);
+	background-image: -webkit-linear-gradient(bottom, #354e72 65%, #99adcb 98%);
+	background-image: -ms-linear-gradient(bottom, #354e72 65%, #99adcb 98%);
+
+	background-image: -webkit-gradient(
+		linear,
+		left bottom,
+		left top,
+		color-stop(0.65, rgb(30,49,105)),
+		color-stop(0.98, rgb(90,98,176))
+	);
+	color:#f0f0f0;
+	text-shadow: -1px -1px 0px #000;
+}
+
+/* Cor 2 ------------------------ */
+.menu_btn_color2 
+	{
+	background-color: #808080;
+	}
+	
+.menu_btn_color2:hover 
+	{
+	background-color:#cc;
+	background-image: linear-gradient(bottom, rgb(95,95,95) 65%, rgb(130,130,130) 98%);
+	background-image: -o-linear-gradient(bottom, rgb(95,95,95) 65%, rgb(130,130,130) 98%);
+	background-image: -moz-linear-gradient(bottom, rgb(95,95,95) 65%, rgb(130,130,130) 98%);
+	background-image: -webkit-linear-gradient(bottom, rgb(95,95,95) 65%, rgb(130,130,130) 98%);
+	background-image: -ms-linear-gradient(bottom, rgb(95,95,95) 65%, rgb(130,130,130) 98%);
+
+	background-image: -webkit-gradient(
+		linear,
+		left bottom,
+		left top,
+		color-stop(0.65, rgb(95,95,95)),
+		color-stop(0.98, rgb(130,130,130))
+	);
+	}
+/*  [END] Botoes do menu de acoes ------------------------------------------------------------------------------------ */
+
+	
+/* menu (topo) */
+#menu
+	{
+	position: relative;
+	left: 0.25%;
+	right: 0.25%;
+	top: 0px;
+	width: 99.4%;
+	height: 21px;
+	color: #fff;
+	text-align: center;
+	border-bottom-left-radius:0px !important;
+	border-bottom-right-radius:0px !important;
+	border-top-left-radius:5px;
+	border-top-right-radius:5px;
+	background-color:#354e72;
+	border:solid 1px #354e72;
+	border-bottom:none;
+	cursor:pointer;
+	}
+	
+#menu_options:hover
+  	{
+	border-top-left-radius:0px;
+	border-top-right-radius:0px;
+  	background-color: #354e72;
+	color: #fff;
+  	}
+
+#menu_options
+  {
+  border-top-left-radius:5px;
+  border-top-right-radius:5px;
+  font-family: Tahoma, sans-serif;
+  font-size: 12px;
+  font-weight: bold;
+  position: relative;
+  margin-left: 0px;
+  margin-right: 1px;
+  width: 130px;
+  height: 21px;
+  float: left;
+  margin-top: 0px;
+  }
+
+.menu_selected
+	{
+	background: #d9d9d9 url(/img/ui/menu_close.png) top right no-repeat;
+	/* background-position: 0px 0px 0px 4px; */
+	color: #354e72;
+	font-weight:bolder;
+	}
+
+.menu_selected:hover
+	{
+	background-color: #FFFFFF;
+	color: #354e72;
+	}
+

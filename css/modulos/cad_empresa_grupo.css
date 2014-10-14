@@ -1,0 +1,29 @@
+/* ********************************************************
+  Folha de Estilos do formulario de cadastro de empresas
+*********************************************************** */
+
+/* estilo Grupo e Dados ----------------------------------------------- */
+.navigateable_box {
+	min-height: 20px; 
+	overflow-y: auto; 
+	background-color: white; padding: 10px; 
+	padding-top:0px;
+}
+
+.DVgeral {
+	position:relative; 
+	margin:7px;
+	min-width:500px; 
+	width:98%;
+	margin-bottom:5px;
+	float:left;
+}
+.DVtittle {
+	width:100%;
+	background:#808080; 
+	color:#fff;
+	margin:0px;
+	border:1px solid #808080;
+	border-right:0px;
+	border-left:0px;
+}

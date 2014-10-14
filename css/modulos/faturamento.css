@@ -1,0 +1,32 @@
+.teste_form #cliente_descrp
+	{
+	width:91%;
+	}
+.form_faturamento_config input
+	{
+	width:50%;
+	}
+    
+.form_faturamento #form_faturamento_fields {
+    width  : 100%; 
+    float  : left; 
+    height : 189px; 
+    overflow : hidden; 
+    background : #3167b3;
+}
+
+.form_faturamento #DVNF {
+    color : #fff;
+}
+.form_faturamento .grids th,
+.form_faturamento .navigateable th {
+    color : #fff;
+    font-weight:bold;
+}
+
+.form_faturamento .grids td,
+.form_faturamento .navigateable td {
+    color : #fff;
+    border-bottom: 1px dotted #fff;
+}
+

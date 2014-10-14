@@ -1,0 +1,474 @@
+#!/usr/bin/perl
+
+require "relatorio_prod_preview.cgi";
+
+use HTML::Entities;
+use Encode;
+use Spreadsheet::WriteExcel;
+# use Spreadsheet::WriteExcel::Utility;
+# use Excel::Writer::XLSX;
+use utf8;
+
+# $nacess = "903";
+# require "../cfg/init.pl";
+# $RELATORIO = &get('RELATORIO');
+
+# define encode para acentos vindo do banco
+$dbh->{pg_enable_utf8} = 1;
+# testa se erro
+# if($dbh->err ne "") { &erroDBH("Falha ao gerar relatório !!!"); &erroDBR; exit; } 
+
+
+
+# [INI] SQLs necessarios para relatorio ----------------------------------------------------------------------------------------	  
+# Soma totais
+# $DB = &select("select sum(tempo_exec) as tempo_exec_total, sum(tempo_faturado) as tempo_faturado_total, (sum(tempo_exec) - sum(tempo_faturado)) as total_geral from coletor_relatorio_data where pai = $RELATORIO;");
+# $TOTAL = $DB->fetchrow_hashref();
+
+# Pega dados do pai
+# $DB = &select("select coletor_relatorio.*, usuario.nome as usuario_nome, empresa.nome as cliente_nome, empresa.apelido as cliente_apelido from coletor_relatorio left join usuario on (usuario.usuario = coletor_relatorio.usuario) left join empresa on (empresa.codigo = coletor_relatorio.cliente) where coletor_relatorio.codigo = $RELATORIO;");
+# $PAI = $DB->fetchrow_hashref();
+# corrige se campo apelido estiver vazio
+# if($PAI->{cliente_apelido} eq "")
+# 	{
+# 	$name = $PAI->{cliente_nome};
+# 	} 
+# else
+# 	{
+# 	$name = $PAI->{cliente_apelido};
+# 	} 
+# ajuste para listagem avulsa
+# if($PAI->{cliente} == NULL)
+# 	{
+# 	$name = "Clientes Avulso";
+# 	$ORDERBY = "order by empresa.nome, codigo desc";
+# 	}
+# else
+# 	{
+# 	$ORDERBY = "order by codigo desc";
+# 	}
+
+# Inicializa
+print $query->header(-type=>"application/excel", -attachment=>"relatorio_prod.xls");
+
+# Create a new workbook called simple.xls and add a worksheet
+my $workbook  = Spreadsheet::WriteExcel->new('-');
+# my $workbook  = Excel::Writer::XLSX->new('-');
+
+# Definie cores
+my $done_verde = $workbook->set_custom_color(40, '#008080');
+my $done_cinza = $workbook->set_custom_color(41, '#808080');
+my $done_azul = $workbook->set_custom_color(42, '#001150');
+my $done_cinza_escuro = $workbook->set_custom_color(43, '#333333');
+my $done_cinza_claro = $workbook->set_custom_color(44, '#D0D0D0');
+
+
+# Definie fonte
+my $font  = $workbook->add_format(font => 'Arial Unicode MS');
+
+my $format_title = $workbook->add_format();
+$format_title->set_border(0);
+$format_title->set_font($font);
+$format_title->set_color('white');
+$format_title->set_bold();
+$format_title->set_size(12);
+$format_title->set_align('center');
+$format_title->set_align('vcenter');
+$format_title->set_bg_color($done_azul);
+
+my $format_stitle = $workbook->add_format();
+$format_stitle->set_border(1);
+$format_stitle->set_font($font);
+$format_stitle->set_color('white');
+$format_stitle->set_size(10);
+$format_stitle->set_align('center');
+$format_stitle->set_align('vcenter');
+$format_stitle->set_bg_color($done_cinza);
+
+my $format_stitlem = $workbook->add_format();
+$format_stitlem->set_border(1);
+# $format_stitlem->set_font($font);
+$format_stitlem->set_color('black');
+$format_stitlem->set_size(10);
+$format_stitlem->set_align('left');
+$format_stitlem->set_align('vcenter');
+# $format_stitlem->set_bg_color($done_cinza_claro);
+
+my $format_stitle2 = $workbook->add_format();
+$format_stitle2->set_border(1);
+# $format_stitle2->set_font($font);
+$format_stitle2->set_color('white');
+$format_stitle2->set_size(10);
+$format_stitle2->set_align('right');
+$format_stitle2->set_align('vcenter');
+# $format_stitle2->set_bg_color($done_cinza);
+
+my $format_stitle2m = $workbook->add_format();
+$format_stitle2m->set_border(1);
+# $format_stitle2m->set_font($font);
+$format_stitle2m->set_color('white');
+$format_stitle2m->set_size(10);
+$format_stitle2m->set_align('right');
+$format_stitle2m->set_align('vcenter');
+# $format_stitle2m->set_bg_color($done_cinza);
+
+my $format_stitle3 = $workbook->add_format();
+$format_stitle3->set_border(1);
+# $format_stitle3->set_font($font);
+$format_stitle3->set_color('white');
+$format_stitle3->set_size(10);
+$format_stitle3->set_align('center');
+$format_stitle3->set_align('vcenter');
+# $format_stitle3->set_bg_color($done_cinza_escuro);
+
+my $format_txt = $workbook->add_format();
+$format_txt->set_border(1);
+# $format_txt->set_font($font);
+$format_txt->set_color('black');
+$format_txt->set_size(9);
+$format_txt->set_align('justify');
+$format_txt->set_align('vjustify');
+$format_txt->set_text_wrap(1);
+
+my $format_txtm = $workbook->add_format();
+$format_txtm->set_border(0);
+# $format_txtm->set_font($font);
+$format_txtm->set_color('black');
+$format_txtm->set_size(9);
+$format_txtm->set_align('justify');
+$format_txtm->set_align('vjustify');
+$format_txtm->set_text_wrap(1);
+
+my $format_txt2 = $workbook->add_format();
+$format_txt2->set_border(1);
+# $format_txt2->set_font($font);
+$format_txt2->set_color('black');
+$format_txt2->set_size(9);
+$format_txt2->set_align('center');
+$format_txt2->set_align('top');
+
+my $format_txt3 = $workbook->add_format();
+$format_txt3->set_border(1);
+# $format_txt3->set_font($font);
+$format_txt3->set_color('black');
+$format_txt3->set_size(9);
+$format_txt3->set_align('right');
+$format_txt3->set_align('top');
+
+my $format_time =  $workbook->add_format();
+$format_time->set_num_format('[HH]:MM:SS');
+$format_time->set_border(1);
+$format_time->set_color('black');
+$format_time->set_size(9);
+$format_time->set_align('right');
+  
+ 
+# Cria planilha
+$ws = $workbook->add_worksheet('Relatório de Produção');
+
+# Ajusta formato da página
+$ws->set_landscape();
+$ws->set_paper(9); # A4
+$ws->center_horizontally();
+$ws->repeat_rows(0, 1);
+$ws->hide_gridlines(2);
+$ws->fit_to_pages(1, 0);
+
+
+# Define Título
+# $ws->merge_range(0, 0, 0, 8, $name." - Período: ".&dateToShow($PAI->{data_ini},"DATE")." até ".&dateToShow($PAI->{data_fim},"DATE"), $format_title);
+$ws->merge_range(0, 0, 0, 4, "$titulo_nome Período: ".$titulo_datas, $format_title);
+
+$ws->set_row(0, 21);
+
+$L = 1; # linha inicial
+$C = 0; # coluna inicial
+
+# header
+$ws->set_column(0, 0, 40);
+$ws->set_column(1, 1, 20);
+$ws->set_column(2, 2, 20);
+$ws->set_column(3, 3, 20);
+$ws->set_column(4, 4, 20);
+
+# relatorio por tecnicos  ------------------------------------------------------------------------------------------------------
+$L=2;
+$ws->merge_range($L, 0, $L, 2, "Técnicos", $format_title);
+$L++;
+$ws->write($L, 0, "Técnico", $format_stitle);
+$ws->write($L, 1, "Chamados", $format_stitle);
+$ws->write($L, 2, "Tempo Executado", $format_stitle);
+$L++;
+
+while($c = $DBtec->fetchrow_hashref)
+	{
+	$C=0;
+	
+	# tecnico
+	$ws->write($L, $C, $c->{executor}, $format_txt);
+	$C++;
+	
+	# quantidade de chamados
+	$ws->write($L, $C, $c->{chamados}, $format_txt);
+	$C++;
+	
+	# tempo executado
+	$c->{tempo_executado} =~ /^(\d+)\:(\d+)/;
+	$ws->write_number($L, $C, ($1+($2/60))/24, $format_time);
+	$C++;
+    
+	$L++;
+	}
+
+# relatorio por tecnicos, por tipo ---------------------------------------------------------------------------------------------
+$wstec_tipo = $workbook->add_worksheet('Técnico + Tipo');
+$wstec_tipo->merge_range(0, 0, 0, 4, "$titulo_nome Período: ".$titulo_datas, $format_title);
+
+# Ajusta formato da página
+$wstec_tipo->set_landscape();
+$wstec_tipo->set_paper(9); # A4
+$wstec_tipo->center_horizontally();
+$wstec_tipo->repeat_rows(0, 1);
+$wstec_tipo->hide_gridlines(2);
+$wstec_tipo->fit_to_pages(1, 0);
+
+$wstec_tipo->set_column(0, 0, 40);
+$wstec_tipo->set_column(1, 1, 20);
+$wstec_tipo->set_column(2, 2, 20);
+$wstec_tipo->set_column(3, 3, 20);
+$wstec_tipo->set_column(4, 4, 20);
+
+$L=2;
+$wstec_tipo->merge_range($L, 0, $L, 4, "Técnicos + Tipo", $format_title);
+$L++;
+$wstec_tipo->write($L, 0, "Técnico", $format_stitle);
+$wstec_tipo->write($L, 1, "Tipo", $format_stitle);
+$wstec_tipo->write($L, 2, "Chamados", $format_stitle);
+$wstec_tipo->write($L, 3, "Tempo Executado", $format_stitle);
+$L++;
+
+while($c = $DBtec_tipo->fetchrow_hashref)
+	{
+	$C=0;
+	
+	# tecnico
+	$wstec_tipo->write($L, $C, $c->{executor}, $format_txt);
+	$C++;
+	
+	# tipo do chamado
+	$wstec_tipo->write($L, $C, $c->{tipo}, $format_txt);
+	$C++;
+	
+	# quantidade de chamados
+	$wstec_tipo->write($L, $C, $c->{chamados}, $format_txt);
+	$C++;
+	
+	# tempo executado
+	$c->{tempo_executado} =~ /^(\d+)\:(\d+)/;
+	$wstec_tipo->write_number($L, $C, ($1+($2/60))/24, $format_time);
+	$C++;
+	
+	$L++;
+	}
+
+# relatorio por empresa  -------------------------------------------------------------------------------------------------------
+$wsemp = $workbook->add_worksheet('Empresa');
+$wsemp->merge_range(0, 0, 0, 4, "$titulo_nome Período: ".$titulo_datas, $format_title);
+
+# Ajusta formato da página
+$wsemp->set_landscape();
+$wsemp->set_paper(9); # A4
+$wsemp->center_horizontally();
+$wsemp->repeat_rows(0, 1);
+$wsemp->hide_gridlines(2);
+$wsemp->fit_to_pages(1, 0);
+
+$wsemp->set_column(0, 0, 60);
+$wsemp->set_column(1, 1, 20);
+$wsemp->set_column(2, 2, 20);
+$wsemp->set_column(3, 3, 20);
+$wsemp->set_column(4, 4, 20);
+
+$L=2;
+$wsemp->merge_range($L, 0, $L, 2, "Empresa", $format_title);
+$L++;
+$wsemp->write($L, 0, "Empresa", $format_stitle);
+$wsemp->write($L, 1, "Chamados", $format_stitle);
+$wsemp->write($L, 2, "Tempo Executado", $format_stitle);
+$L++;
+
+while($c = $DBemp->fetchrow_hashref)
+	{
+	$C=0;
+	
+	# empresa
+	$wsemp->write($L, $C, $c->{empresa}, $format_txt);
+	$C++;
+	
+	# quantidade de chamados
+	$wsemp->write($L, $C, $c->{chamados}, $format_txt);
+	$C++;
+	
+	# tempo executado
+	$c->{tempo_executado} =~ /^(\d+)\:(\d+)/;
+	$wsemp->write_number($L, $C, ($1+($2/60))/24, $format_time);
+	$C++;
+	
+	$L++;
+	}
+
+# relatorio por empresa, por tecnico  ------------------------------------------------------------------------------------------
+$wsemp_tec = $workbook->add_worksheet('Empresa + Técnico');
+$wsemp_tec->merge_range(0, 0, 0, 4, "$titulo_nome Período: ".$titulo_datas, $format_title);
+
+# Ajusta formato da página
+$wsemp_tec->set_landscape();
+$wsemp_tec->set_paper(9); # A4
+$wsemp_tec->center_horizontally();
+$wsemp_tec->repeat_rows(0, 1);
+$wsemp_tec->hide_gridlines(2);
+$wsemp_tec->fit_to_pages(1, 0);
+
+$wsemp_tec->set_column(0, 0, 60);
+$wsemp_tec->set_column(1, 1, 20);
+$wsemp_tec->set_column(2, 2, 20);
+$wsemp_tec->set_column(3, 3, 20);
+$wsemp_tec->set_column(4, 4, 20);
+
+$L=2;
+$wsemp_tec->merge_range($L, 0, $L, 3, "Empresa + Técnico", $format_title);
+$L++;
+$wsemp_tec->write($L, 0, "Empresa", $format_stitle);
+$wsemp_tec->write($L, 1, "Técnico", $format_stitle);
+$wsemp_tec->write($L, 2, "Chamados", $format_stitle);
+$wsemp_tec->write($L, 3, "Tempo Executado", $format_stitle);
+$L++;
+
+while($c = $DBemp_tec->fetchrow_hashref)
+	{
+	$C=0;
+	
+	# empresa
+	$wsemp_tec->write($L, $C, $c->{empresa}, $format_txt);
+	$C++;
+	
+	# tecnico
+	$wsemp_tec->write($L, $C, $c->{tecnico}, $format_txt);
+	$C++;
+	
+	# quantidade de chamados
+	$wsemp_tec->write($L, $C, $c->{chamados}, $format_txt);
+	$C++;
+	
+	# tempo executado
+	$c->{tempo_executado} =~ /^(\d+)\:(\d+)/;
+	$wsemp_tec->write_number($L, $C, ($1+($2/60))/24, $format_time);
+	$C++;
+	
+	$L++;
+	}
+
+# relatorio por empresa, por tipo  ---------------------------------------------------------------------------------------------
+$wsemp_tipo = $workbook->add_worksheet('Empresa + Tipo');
+$wsemp_tipo->merge_range(0, 0, 0, 4, "$titulo_nome Período: ".$titulo_datas, $format_title);
+
+# Ajusta formato da página
+$wsemp_tipo->set_landscape();
+$wsemp_tipo->set_paper(9); # A4
+$wsemp_tipo->center_horizontally();
+$wsemp_tipo->repeat_rows(0, 1);
+$wsemp_tipo->hide_gridlines(2);
+$wsemp_tipo->fit_to_pages(1, 0);
+
+
+$wsemp_tipo->set_column(0, 0, 60);
+$wsemp_tipo->set_column(1, 1, 20);
+$wsemp_tipo->set_column(2, 2, 20);
+$wsemp_tipo->set_column(3, 3, 20);
+$wsemp_tipo->set_column(4, 4, 20);
+
+$L=2;
+$wsemp_tipo->merge_range($L, 0, $L, 3, "Empresa + Tipo", $format_title);
+$L++;
+$wsemp_tipo->write($L, 0, "Empresa", $format_stitle);
+$wsemp_tipo->write($L, 1, "Tipo", $format_stitle);
+$wsemp_tipo->write($L, 2, "Chamados", $format_stitle);
+$wsemp_tipo->write($L, 3, "Tempo Executado", $format_stitle);
+$L++;
+
+while($c = $DBemp_tipo->fetchrow_hashref)
+	{
+	$C=0;
+	
+	# empresa
+	$wsemp_tipo->write($L, $C, $c->{empresa}, $format_txt);
+	$C++;
+	
+	# tipo
+	$wsemp_tipo->write($L, $C, $c->{tipo}, $format_txt);
+	$C++;
+	
+	# quantidade de chamados
+	$wsemp_tipo->write($L, $C, $c->{chamados}, $format_txt);
+	$C++;
+	
+	# tempo executado
+	$c->{tempo_executado} =~ /^(\d+)\:(\d+)/;
+	$wsemp_tipo->write_number($L, $C, ($1+($2/60))/24, $format_time);
+	$C++;
+	
+	$L++;
+	}
+
+# relatorio por tipo  ----------------------------------------------------------------------------------------------------------
+$wstipo = $workbook->add_worksheet('Tipo Atendimento');
+$wstipo->merge_range(0, 0, 0, 4, "$titulo_nome Período: ".$titulo_datas, $format_title);
+
+# Ajusta formato da página
+$wstipo->set_landscape();
+$wstipo->set_paper(9); # A4
+$wstipo->center_horizontally();
+$wstipo->repeat_rows(0, 1);
+$wstipo->hide_gridlines(2);
+$wstipo->fit_to_pages(1, 0);
+
+
+$wstipo->set_column(0, 0, 40);
+$wstipo->set_column(1, 1, 20);
+$wstipo->set_column(2, 2, 20);
+$wstipo->set_column(3, 3, 20);
+$wstipo->set_column(4, 4, 20);
+
+$L=2;
+$wstipo->merge_range($L, 0, $L, 3, "Tipo", $format_title);
+$L++;
+$wstipo->write($L, 0, "Tipo", $format_stitle);
+$wstipo->write($L, 1, "Chamados", $format_stitle);
+$wstipo->write($L, 2, "Tipo", $format_stitle);
+$wstipo->write($L, 3, "Tempo Executado", $format_stitle);
+$L++;
+
+while($c = $DBtipo->fetchrow_hashref)
+	{
+	$C=0;
+	
+	# tipo
+	$wstipo->write($L, $C, $c->{tipo}, $format_txt);
+	$C++;
+	
+	# quantidade de chamados
+	$wstipo->write($L, $C, $c->{chamados}, $format_txt);
+	$C++;
+	
+	# tipo
+	$wstipo->write($L, $C, $c->{tipo}, $format_txt);
+	$C++;
+	
+	# tempo executado
+	$c->{tempo_executado} =~ /^(\d+)\:(\d+)/;
+	$wstipo->write_number($L, $C, ($1+($2/60))/24, $format_time);
+	$C++;
+		
+	$L++;
+	}
+	

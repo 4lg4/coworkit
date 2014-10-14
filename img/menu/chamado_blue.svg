@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 15.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="61.439px" height="61.439px" viewBox="0 0 61.439 61.439" enable-background="new 0 0 61.439 61.439" xml:space="preserve">
+<rect id="bg" x="0" y="0" fill="#3E96FF" width="61.439" height="61.439"/>
+<g id="tkt_1_">
+	
+		<rect x="26.992" y="7.44" transform="matrix(0.948 -0.3183 0.3183 0.948 -7.6772 13.5747)" fill="none" stroke="#FFFFFF" stroke-width="2" width="21.403" height="45.671"/>
+	
+		<rect x="31.417" y="20.731" transform="matrix(0.948 -0.3183 0.3183 0.948 -9.2131 14.3829)" fill="#FFFFFF" width="15.983" height="29.308"/>
+	
+		<rect x="24.757" y="10.937" transform="matrix(0.948 -0.3184 0.3184 0.948 -3.2483 11.2358)" fill="#FFFFFF" width="15.984" height="9.237"/>
+	
+		<text transform="matrix(-0.3029 -0.9021 0.948 -0.3183 47.6677 47.0964)" fill="#3E96FF" font-family="'ArialMT'" font-size="12.3085">ticket</text>
+	
+		<text transform="matrix(1.1356 -0.3813 0.3183 0.948 27.6223 21.2546)" fill="#3E96FF" font-family="'ArialMT'" font-size="10.0171">80</text>
+</g>
+<g id="tkt_esq">
+	
+		<rect x="11.73" y="9.44" transform="matrix(0.958 0.2868 -0.2868 0.958 10.2002 -5.0775)" fill="#3E96FF" stroke="#FFFFFF" stroke-width="2" width="21.402" height="45.671"/>
+	
+		<rect x="12.892" y="22.786" transform="matrix(0.958 0.2869 -0.2869 0.958 11.6203 -4.4179)" fill="#FFFFFF" width="15.983" height="29.307"/>
+	
+		<rect x="18.892" y="12.782" transform="matrix(0.958 0.2868 -0.2868 0.958 6.1203 -6.9797)" fill="#FFFFFF" width="15.984" height="9.237"/>
+	
+		<text transform="matrix(0.273 -0.9116 0.958 0.2869 20.8757 51.7703)" fill="#3E96FF" font-family="'ArialMT'" font-size="12.3085">ticket</text>
+	
+		<text transform="matrix(1.1476 0.3436 -0.2869 0.958 19.4089 19.0984)" fill="#3E96FF" font-family="'ArialMT'" font-size="10.0171">80</text>
+</g>
+</svg>

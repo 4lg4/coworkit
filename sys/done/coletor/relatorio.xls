@@ -1,0 +1,286 @@
+#!/usr/bin/perl
+
+use HTML::Entities;
+use Encode;
+use Spreadsheet::WriteExcel;
+use utf8;
+
+$nacess = "903";
+require "../cfg/init.pl";
+$RELATORIO = &get('RELATORIO');
+
+# define encode para acentos vindo do banco
+$dbh->{pg_enable_utf8} = 1;
+# testa se erro
+if($dbh->err ne "") { &erroDBH("Falha ao gerar relatório !!!"); &erroDBR; exit; } 
+
+
+
+# [INI] SQLs necessarios para relatorio ----------------------------------------------------------------------------------------	  
+# Soma totais
+$DB = &select("select sum(tempo_exec) as tempo_exec_total, sum(tempo_faturado) as tempo_faturado_total, (sum(tempo_exec) - sum(tempo_faturado)) as total_geral from coletor_relatorio_data where pai = $RELATORIO;");
+$TOTAL = $DB->fetchrow_hashref();
+
+# Pega dados do pai
+$DB = &select("select coletor_relatorio.*, usuario.nome as usuario_nome, empresa.nome as cliente_nome, empresa.apelido as cliente_apelido from coletor_relatorio left join usuario on (usuario.usuario = coletor_relatorio.usuario) left join empresa on (empresa.codigo = coletor_relatorio.cliente) where coletor_relatorio.codigo = $RELATORIO;");
+$PAI = $DB->fetchrow_hashref();
+# corrige se campo apelido estiver vazio
+if($PAI->{cliente_apelido} eq "")
+	{
+	$name = $PAI->{cliente_nome};
+	} 
+else
+	{
+	$name = $PAI->{cliente_apelido};
+	} 
+# ajuste para listagem avulsa
+if($PAI->{cliente} == NULL)
+	{
+	$name = "Clientes Avulso";
+	$ORDERBY = "order by empresa.nome, codigo desc";
+	}
+else
+	{
+	$ORDERBY = "order by codigo desc";
+	}
+
+
+
+# Inicializa
+print $query->header(-type=>"application/excel", -attachment=>"timesheet_$name.xls");
+
+# Create a new workbook called simple.xls and add a worksheet
+my $workbook  = Spreadsheet::WriteExcel->new('-');
+
+# Definie cores
+my $done_verde = $workbook->set_custom_color(40, '#008080');
+my $done_cinza = $workbook->set_custom_color(41, '#808080');
+my $done_azul = $workbook->set_custom_color(42, '#001150');
+my $done_cinza_escuro = $workbook->set_custom_color(43, '#333333');
+my $done_cinza_claro = $workbook->set_custom_color(44, '#D0D0D0');
+
+
+# Definie fonte
+my $font  = $workbook->add_format(font => 'Arial Unicode MS');
+
+
+# Define padrões visuais
+my $format_title = $workbook->add_format();
+$format_title->set_border(0);
+$format_title->set_font($font);
+$format_title->set_color('white');
+$format_title->set_bold();
+$format_title->set_size(12);
+$format_title->set_align('center');
+$format_title->set_align('vcenter');
+$format_title->set_bg_color($done_azul);
+
+my $format_stitle = $workbook->add_format();
+$format_stitle->set_border(1);
+$format_stitle->set_font($font);
+$format_stitle->set_color('white');
+$format_stitle->set_size(10);
+$format_stitle->set_align('center');
+$format_stitle->set_align('vcenter');
+$format_stitle->set_bg_color($done_cinza);
+
+my $format_stitlem = $workbook->add_format();
+$format_stitlem->set_border(1);
+$format_stitlem->set_font($font);
+$format_stitlem->set_color('black');
+$format_stitlem->set_size(10);
+$format_stitlem->set_align('left');
+$format_stitlem->set_align('vcenter');
+$format_stitlem->set_bg_color($done_cinza_claro);
+
+my $format_stitle2 = $workbook->add_format();
+$format_stitle2->set_border(1);
+$format_stitle2->set_font($font);
+$format_stitle2->set_color('white');
+$format_stitle2->set_size(10);
+$format_stitle2->set_align('right');
+$format_stitle2->set_align('vcenter');
+$format_stitle2->set_bg_color($done_cinza);
+
+my $format_stitle2m = $workbook->add_format();
+$format_stitle2m->set_border(1);
+$format_stitle2m->set_font($font);
+$format_stitle2m->set_color('white');
+$format_stitle2m->set_size(10);
+$format_stitle2m->set_align('right');
+$format_stitle2m->set_align('vcenter');
+$format_stitle2m->set_bg_color($done_cinza);
+
+my $format_stitle3 = $workbook->add_format();
+$format_stitle3->set_border(1);
+$format_stitle3->set_font($font);
+$format_stitle3->set_color('white');
+$format_stitle3->set_size(10);
+$format_stitle3->set_align('center');
+$format_stitle3->set_align('vcenter');
+$format_stitle3->set_bg_color($done_cinza_escuro);
+
+my $format_txt = $workbook->add_format();
+$format_txt->set_border(1);
+$format_txt->set_font($font);
+$format_txt->set_color('black');
+$format_txt->set_size(9);
+$format_txt->set_align('justify');
+$format_txt->set_align('vjustify');
+$format_txt->set_text_wrap(1);
+
+my $format_txtm = $workbook->add_format();
+$format_txtm->set_border(0);
+$format_txtm->set_font($font);
+$format_txtm->set_color('black');
+$format_txtm->set_size(9);
+$format_txtm->set_align('justify');
+$format_txtm->set_align('vjustify');
+$format_txtm->set_text_wrap(1);
+
+my $format_txt2 = $workbook->add_format();
+$format_txt2->set_border(1);
+$format_txt2->set_font($font);
+$format_txt2->set_color('black');
+$format_txt2->set_size(9);
+$format_txt2->set_align('center');
+$format_txt2->set_align('top');
+
+my $format_txt3 = $workbook->add_format();
+$format_txt3->set_border(1);
+$format_txt3->set_font($font);
+$format_txt3->set_color('black');
+$format_txt3->set_size(9);
+$format_txt3->set_align('right');
+$format_txt3->set_align('top');
+
+
+# Cria planilha
+$ws = $workbook->add_worksheet('Relatório de Horas');
+
+# Ajusta formato da página
+$ws->set_landscape();
+$ws->set_paper(9); # A4
+$ws->center_horizontally();
+$ws->repeat_rows(0, 1);
+$ws->hide_gridlines(2);
+$ws->fit_to_pages(1, 0);
+
+
+# Define Título
+$ws->merge_range(0, 0, 0, 7, $name." - Período: ".&dateToShow($PAI->{data_ini},"DATE")." até ".&dateToShow($PAI->{data_fim},"DATE"), $format_title);
+$ws->set_row(0, 21);
+
+$L = 1; # linha inicial
+$C = 0; # coluna inicial
+
+
+
+# [INI] Headers ---------------------------------------------------------------------------------------------------------------
+@headers_receber = ("Data", "Solicitante", "Descrição", "Profissional", "Forma", "Servidor", "Duração", "Faturado");
+
+foreach (@headers_receber) 
+	{
+	# define titulos das colunas
+	$ws->write($L, $C,  $_, $format_stitle);
+	$C++;
+	}
+
+$ws->set_column(0, 7, 10);
+$ws->set_column(0, 0, 20);
+$ws->set_column(1, 1, 30);
+$ws->set_column(2, 2, 50);
+$ws->set_column(3, 3, 30);
+$ws->set_column(4, 4, 20);
+# [END] Headers ---------------------------------------------------------------------------------------------------------------	
+
+
+
+
+# gera relatorio
+$sth = &select("select coletor_relatorio_data.*, empresa.nome as cliente_nome from coletor_relatorio_data left join empresa on (empresa.codigo = coletor_relatorio_data.cliente) where coletor_relatorio_data.pai = $RELATORIO $ORDERBY;");
+if($sth->rows() < 1) { &erroDBH("Nenhum !!!"); &erroDBR; exit; } 
+# [END] SQLs necessarios para relatorio ----------------------------------------------------------------------------------------	  
+
+$old_cli = "";
+while($coletores = $sth->fetchrow_hashref)
+	{
+	if($PAI->{cliente} == NULL)
+		{ 
+		# corrige se campo apelido estiver vazio
+		if($coletores->{cliente_apelido} ne "")
+			{
+			$coletores->{cliente_nome} = $coletores->{cliente_apelido};
+			}
+		if($old_cli ne $coletores->{cliente_nome})
+			{
+			$L++;
+			$ws->set_row($L, 18);
+			$ws->merge_range($L, 0, $L, 7, $coletores->{cliente_nome}, $format_stitlem);
+			}
+		}
+	
+	$L++;
+	$C=0;
+	# data 
+	$ws->write($L, $C, &dateToShow($coletores->{data_exec},"DATE"), $format_txt2);
+	$C++;
+
+	# solicitante
+	$ws->write($L, $C, $coletores->{solicitante}, $format_txt);
+	$C++;
+
+	# descricao
+	$ws->write($L, $C, decode_entities($coletores->{descrp}), $format_txt);
+	$C++;
+
+	# técnico
+	$ws->write($L, $C, $coletores->{profissional}, $format_txt);
+	$C++;
+
+
+	# forma
+	$ws->write($L, $C, $coletores->{forma}, $format_txt);
+	$C++;
+
+	# servidor
+	if($coletores->{servidor} == 1)
+		{
+		$ws->write($L, $C, "Sim", $format_txt2);
+		}
+	else
+		{
+		$ws->write($L, $C, "Não", $format_txt2);
+		}
+	$C++;
+
+	# duracao
+	$ws->write($L, $C, &dateToShow($coletores->{tempo_exec})."h", $format_txt3);
+	$C++;
+
+	# faturado
+	$ws->write($L, $C, &dateToShow($coletores->{tempo_faturado})."h", $format_txt3);
+	$C++;
+
+
+	$old_cli = $coletores->{cliente_nome};
+	}
+
+
+# titulo final
+$L++;
+$ws->set_row($L, 15);
+$ws->merge_range($L, 0, $L, 5, "Total de Horas: ", $format_stitle2m);
+$ws->write($L, 6, &dateToShow($TOTAL->{tempo_exec_total})."h", $format_stitle2);
+$ws->write($L, 7, &dateToShow($TOTAL->{tempo_faturado_total})."h", $format_stitle2);
+
+
+
+if($PAI->{obs} ne "")
+	{
+	$L++;
+	$ws->set_row($L, 50);
+	$ws->merge_range($L, 0, $L, 7, "Obs.: ".$PAI->{obs}, $format_txtm);
+	}
+
+

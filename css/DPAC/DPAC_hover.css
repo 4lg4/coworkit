@@ -1,0 +1,41 @@
+/*
+	DPAC_TOUCH
+		css especifico para touch
+*/
+
+#DTouchPages_bird_view div:hover
+	{
+	background: #c8d9f2;
+	}
+
+.DTouchPages_bottomright:hover
+	{
+	border-bottom: 60px solid #c8d9f2;
+	}
+
+.DTouchPages_bottomleft:hover
+	{
+	border-bottom: 60px solid #c8d9f2;
+	}
+
+.DTouchPages_pagenav div:hover
+	{
+	color:#354e72;
+	background: #c8d9f2;
+	}	
+	
+.DTouchRadio:hover
+	{
+	background:#5580BD;
+    color: #fff !important;
+	}
+	
+.DTouchRadio_selected:hover
+	{
+	background:#5D91D9;
+	}
+	
+.DTouchList:hover
+	{
+	background:#5580BD;
+	}

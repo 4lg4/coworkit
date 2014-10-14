@@ -1,0 +1,20 @@
+/** 
+ *  Formulario
+ */
+
+/* linha container */
+.pagamento_form {
+    width    : 98%;
+    clear    : both;
+    overflow : hidden;
+    margin   : 1%;
+}
+
+.pagamento_form {
+    overflow : auto;
+}
+
+
+
+
+

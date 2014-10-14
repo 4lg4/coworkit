@@ -1,0 +1,271 @@
+#!/usr/bin/perl
+
+
+#use warnings;
+#use strict;
+
+require LWP::UserAgent;
+use URI::Escape;
+
+my $ua = LWP::UserAgent->new;
+$ua->timeout(60);
+
+# Versão do script
+$ver_my = '20130114';
+
+&get_time;
+
+
+# Define arquivo de LOG, um para cada dia da semana
+$logfile= "/var/log/done_eye-".$diaSem_string[$diaSem].".log";
+
+# Abre log
+open(LOG, ">", $logfile) || die('Não foi possível criar um log');
+print LOG "Iniciando monitoramento em ".$diaSem_string[$diaSem].", $dia de ".$mes_string[$mes-1]." de $ano às $hora:$min:$sec\n";
+
+
+if(-e '/etc/done_eye.conf')
+	{
+	&get_config('/etc/done_eye.conf', \%config);
+	}
+else
+	{
+	# Erro no caso de não ter arquivo de configuração
+	print LOG "ERRO: Não foi encontrado arquivo de configuração.\n";
+	exit;
+	}
+
+# Dados servidor monitoramento
+if($config{server} eq "")
+	{
+	$config{server} = $config{servidor};
+	if($config{server} eq "")
+		{
+		$config{server} = 'http://coworkit.done.com.br';
+		}
+	}
+# URL no servidor
+$config{addr} = '/sys/monitor/add.cgi';
+$config{update} = '/sys/monitor/update.cgi';
+
+if($config{code} eq "")
+	{
+	$config{code} = $config{codigo};
+	}
+# Testa o código
+if($config{code} !~ /^\d+$/)
+	{
+	print LOG "ERRO: Código inválido.\n";
+	exit;
+	}
+
+if($config{key} eq "")
+	{
+	$config{key} = $config{chave};
+	}
+# Testa a chave
+if($config{key} !~ /^\d+$/)
+	{
+	print LOG "ERRO: Chave inválido.\n";
+	exit;
+	}
+	
+
+
+# Inicializa variável das partições que devem ser ignoradas
+$parts_ignora = "";
+
+# Usa o sistema operacional para obter a lista de partições montadas
+$tmp = `/bin/df`;
+
+# Transforma em uma matriz o resultado, para trabalhar linha-a-linha
+@parts = split("\n", $tmp);
+
+
+for($f=1; $f<scalar(@parts); $f++)
+	{
+	# Quebra 1 linha em campos
+	my @parts_camp = split(/\s+/, $parts[$f]);
+
+	if($parts_camp[5] =~ /^\/dev/)
+		{
+		# Não monitora /dev
+		}
+	elsif($parts_camp[5] =~ /^\/run/)
+		{
+		# Não monitora /run
+		}
+	elsif($parts_camp[5] =~ /^\/lib\/init\/rw$/)
+		{
+		# Não monitora /lib/init/rw
+		}
+	else
+		{
+		if($parts_ignora !~ /\s$parts_camp[5]\s/)
+			{
+			# Monitora
+			$parts_ignora .= " ".$parts_camp[5]." ";
+			
+			# Envia para servidor, 1 - partição, 2 - KB, 3 - Total do HD, 4 - Disponível
+			&sendlog($parts_camp[5], '4', ($parts_camp[3]+$parts_camp[2]), $parts_camp[2]); 
+			}
+		}
+	}
+
+
+&get_time;
+print LOG "Monitoramento completo em ".$diaSem_string[$diaSem].", $dia de ".$mes_string[$mes-1]." de $ano às $hora:$min:$sec\n\n\n";	
+	
+	
+	
+	
+	
+sub sendlog
+	{
+	my ($vld, $vlund, $vlmax, $vlnow) = @_;
+
+	print LOG "Enviando: partição $vld ocupado $vlnow KB de $vlmax KB... ";
+	
+	my $vld = uri_escape($vld);
+	my $response = $ua->get($config{server}.$config{addr}.'?codigo='.$config{code}.'&chave='.$config{key}.'&descrp='.$vld.'&tipo='.$vlund.'&max='.$vlmax.'&valor='.$vlnow);
+
+	if($response->is_success)
+		{
+		print LOG $response->content."\n";
+        	if($response->content ne "")
+			{
+			&chk_update($response->content);
+			}
+		}
+	else
+        	{
+        	print LOG "Falha ao enviar mensagem no LOG remoto!\n";
+        	if($response->content ne "")
+			{
+			&chk_update($response->content);
+			}
+        	}
+	}
+	
+sub get_config
+	{
+	local ($config_line, $Name, $Value, $Config);
+
+	($File, $Config) = @_;
+
+	if(!open (CONFIG, "$File"))
+		{
+		# Erro no caso de não ter arquivo de configuração
+		print LOG "ERRO: Não foi encontrado arquivo de configuração.\n";
+		exit;
+		}
+	while(<CONFIG>)
+		{
+		$config_line=$_;
+		chop($config_line);          # Get rid of the trailling \n
+		$config_line =~ s/\s*//g;    # Remove espaços
+		$config_line =~ s/#.*//g;    # Remove comentários
+
+		if(($config_line !~ /^#/) && ($config_line ne ""))
+			{    # Ignore lines starting with # and blank lines
+			($Name, $Value) = split (/=/, $config_line);          # Split each line into name value pairs
+			$$Config{$Name} = $Value;                             # Create a hash of the name value pairs
+			}
+		}
+	close(CONFIG);
+	}
+	
+sub chk_update
+	{
+	my ($r) = @_;
+	
+	# Verifica se o servidor está atualizado
+	$r =~ /(Ver.\s+)(\d+)/;
+	$ver_server = $2;
+	if($ver_server =~ /^\d+$/)
+		{
+		if($ver_server > $ver_my)
+			{
+			print LOG "É necessário um update do script da versão $ver_my para a $ver_server\n";
+			&update;
+			}
+		}
+	else
+		{
+		print LOG "Não foi possível identificar a versão do servidor\n";
+		exit;
+		}
+	}
+	
+sub update
+	{
+	my $response = $ua->get($config{server}.$config{update}.'?codigo='.$config{code}.'&chave='.$config{key}.'&sis=linux');
+
+	if($response->is_success)
+		{
+		$bat=$response->content;
+		}
+	
+	if($bat !~ /^#!\/usr\/bin\/perl/)
+		{
+		print LOG "ERRO: Update corrompido! Abortando...\n";
+		exit;
+		}
+		
+	if($bat !~ /Done$/)
+		{
+		print LOG "ERRO: Update corrompido! Abortando...\n";
+		exit;
+		}
+
+	if($bat !~ /'$ver_server'/)
+		{
+		print LOG "ERRO: Versão incorreta no update! Abortando...\n";
+		exit;
+		}
+		
+	# Altera o script
+	if(open(ARQ, ">", $0))
+		{
+		print ARQ $bat;
+		close(ARQ);
+	
+		print LOG "Update realizado com sucesso!\n";
+		}
+	else
+		{
+		print LOG "Não foi possível alterar o script $0: $!\n";
+		}
+	}
+	
+sub get_time
+	{
+	($sec, $min, $hora, $dia, $mes, $ano, $diaSem, $yday, $isdst) = localtime(time);
+	$ano += 1900;
+	@diaSem_string = ("Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab");
+	@mes_string = ("Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro");
+	$mes++;
+	if($mes < 10)
+        	{
+        	$mes = "0".$mes;
+        	}
+	if($dia < 10)
+        	{
+        	$dia = "0".$dia;
+        	}
+	if($hora < 10)
+       		{
+        	$hora = "0".$hora;
+        	}
+	if($min < 10)
+        	{
+        	$min = "0".$min;
+        	}
+	if($sec < 10)
+        	{
+        	$sec = "0".$sec;
+        	}
+	}	
+
+
+# Done

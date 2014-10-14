@@ -1,0 +1,44 @@
+#bloco_upload
+	{
+	width:auto;
+	min-width:45%;
+	max-width: 99%;
+	padding:4px;
+	height:400px;
+	display:none; 
+	}
+	
+#bloco_modulos
+	{
+	width:95%;
+	padding:4px;
+	height:400px;
+	}
+#modulos
+	{
+	height:90%;
+	}
+	
+.fieldUpload_files,#upload
+	{
+	height:80% !important;
+	margin-top: 2px;
+	}
+	
+#modulos>.DTouchRadio_items
+	{
+	text-align:left !important;
+	margin-top:2px !important;
+
+	}
+#modulos>.DTouchRadio_items>.DTouchRadio_descrp
+	{
+	text-align:left !important;
+	margin-left:3px !important;
+	}
+#modulos>.DTouchRadio_items>.DTouchRadio_descrp span
+	{
+	width:5% !important;
+	height:4px !important;
+	cursor: pointer;
+	}

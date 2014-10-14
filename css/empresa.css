@@ -1,0 +1,791 @@
+/* 
+*    Empresa
+*        modulo empresas /sys/cad/empresa
+*/	
+
+
+/* 
+*    Abas dados / mais dados / dados bancarios
+*        abas com dados principais
+*/
+#top_tabs
+	{
+	margin-bottom:5px; 
+	margin-right:6px; 
+	margin-top:10px; 
+	float:left; 
+	width:65%;
+	}
+.top_abas 
+	{
+	height:110px; 
+	background-color:#e5e5e5 !important;
+	}
+#t-0, #t-1, #t-2
+	{
+	border-radius:3px;
+	position:relative !important;
+	overflow: hidden;
+	z-index:0;
+	}
+	
+/* empresa dados principais */
+#empresa_basic
+	{
+	float:left; 
+	width:65%;
+	margin-left:2%;	
+	margin-top:3px;
+	}
+#empresa_basic table
+	{
+	width:100%;
+	}
+	
+/* empresa obs principal */	
+#empresa_obs 
+	{
+	float:left; 
+	width:28%; 
+	margin-left:3%; 
+	margin-top:4px;
+	}
+#empresa_obs textarea 
+	{
+	height:95px; 
+	width:100%; 
+	}
+/* [END]  Abas dados / mais dados / dados bancarios */
+
+
+/* 
+*    Grupos Relacionados e Existentes 
+*        grupos que a empresa faz parte
+*/
+#grupos_tabs {
+	float:right; 
+	width:33%;
+	margin-bottom:5px; 
+	margin-right:6px; 
+	margin-top:10px; 
+}
+#g-0 {
+    border-radius:3px;
+}
+	
+#empresa_grupos
+	{
+	float:left; 
+	width:100%;
+	}		
+#empresa_grupos_part
+	{
+	float:left; 
+	width:50%;
+	height:100%;
+	height:110px !important; 
+	border-right:1px solid #354e72;
+	}
+#empresa_grupos_exis
+	{
+	float:left; 
+	width:49.5%;
+	height:110px; 
+	}
+
+#empresa_grupos_part_title
+	{
+	text-align:center;
+	height:20px;
+	background:#cdcdcd;
+	padding-top:5px;
+	font-weight:bold;
+	}
+
+#empresa_grupos_exis_title
+	{
+	text-align:center;
+	height:25px;
+	background:#cdcdcd;
+	font-weight:bold;
+	}
+#empresa_grupos_exis_title div
+	{
+	padding-top:3px;
+	}
+		
+#empresa_grupos_exis_body, #empresa_grupos_part_body
+	{
+	height:85px;
+	}
+	
+#DVgrupo_showlist, #DVgrupo_showlist_exis
+	{
+	overflow:auto;
+	height:76%;
+	}
+
+/* listas interligadas */
+.grupos_connect
+	{
+	height:80%;
+	margin-top:0px;
+	padding:0px 3px;
+	}
+	
+.grupos_connect li
+	{
+	background:#ccc;
+	margin-top:2px;
+	color:#354e72;
+	padding:1px 3px;
+	font-size:0.8em;
+	}
+
+.grupos_connect li:hover
+	{	
+	color:#354e72;
+	background:#c8d9f2;
+	}
+	
+#grupos_participantes_ul li
+	{
+	background:#354e72;
+	color:#fff;
+	}
+	
+#grupos_participantes_ul li:hover
+	{	
+	color:#354e72;
+	background:#c8d9f2;
+	}
+
+/* campo para cadastro de novos grupos */
+#grupo_add_title
+	{
+	position:absolute;
+	z-index:1;
+	width:50%;
+	text-align:center;
+	/* margin-top:3px; */
+	}
+	
+#grupo_add
+	{
+	left:2px;
+	top:29px;
+	position:absolute;
+	z-index:2;
+	text-align:right;
+	background:#cdcdcd;
+	width:49%;
+	display:none;
+	}
+
+/* campo adicionar grupo */
+#grupo_add input[type=text]
+	{
+	float:right;
+	margin-right:5px;
+	margin-top:2px;
+	width:62%;
+	}
+	
+/* botao adicionar grupo / esconder formulario */
+#grupo_hide_img, #grupo_add_img
+	{
+	float:right;
+	margin-top:4px;
+	margin-right:3px;
+	}
+	
+#grupo_add_show
+	{
+	float:right;
+	margin-right:6px;
+	}
+/* [END]  Grupos Relacionados e Existentes  */
+		
+
+/* ------------------------------------------------------------------------------------------------------------------------------
+	[INI]	Enderecos
+------------------------------------------------------------------------------------------------------------------------------ */
+/* abas dados / mapa */
+#SEPARA_CONTEUDO_DAS_ABAS
+	{
+	padding-top:0px; 
+	margin-right: 54px;
+	}
+.btns
+	{
+	float:left; 
+	width:50px; 
+	position:relative;
+	}
+.btn_dados
+	{
+	position:absolute;  
+	margin-top:5px;
+	height:90px;
+	padding-top:10px;
+	
+	cursor:pointer;
+	text-align:center;
+	}
+.btn_mapa
+	{
+	position:absolute; 
+	top:107px; 
+
+	height:75px;
+	padding-top:10px;
+	
+	cursor:pointer;
+	text-align:center;
+	}
+
+/* MAPA */
+.aba_mapa
+	{
+	position:absolute;
+	z-index:5;
+	width:100%;
+	height:100%;
+	top:0px;
+	left:0px;
+	background:#ccc;
+	display:none;
+	}
+	
+.aba_vertical_active
+	{
+	background:#354e72;
+	color:#fff;
+	font-weight:bold;
+	border-top-left-radius:3px;
+	border-bottom-left-radius:3px;
+	width:30px;
+	}
+	
+.aba_vertical_inactive
+	{
+	background:#ccc;
+	color:#354e72;
+	font-weight:bold;
+	border-top-left-radius:3px;
+	border-bottom-left-radius:3px;
+	width:29px;
+	}
+.aba_vertical_inactive:hover
+	{
+	background:#c8d9f2;
+	}
+.empresa_endereco_container
+	{
+	position:relative; 
+	z-index:2; 
+	width:100%; 
+	min-height:385px; 
+	left:30px; 
+	top:0px; 
+	background:#e5e5e5; 
+	padding:10px;
+	border-radius:3px;
+	border:1px solid #354e72;
+	overflow-y:hidden;
+	}
+	
+.empresa_endereco_container_master
+	{
+    border: 0px !important;
+	padding-right:5px !important;
+	margin-bottom:20px;
+	}
+
+.empresa_endereco_dados
+	{
+	float:left; 
+	width:69%;
+	}
+.empresa_endereco_dados table
+	{
+	width:100%;
+	border:none; 
+	text-align:center; 
+	}
+	
+.empresa_endereco_obs
+	{
+	float:right; 
+	width:30%;
+	padding-right:5px;	
+	}
+.empresa_endereco_obs textarea
+	{
+	height:76px; 
+	width:100%;
+	}
+/* [END]  Enderecos ----------------------------------------------------------------------------------------------------------- */
+
+/* [INI]  ------------------------------------------------------------------------------------------------------------------------
+	Mais Dados 
+------------------------------------------------------------------------------------------------------------------------------- */
+.empresa_mais_dados
+	{
+	width:80%;
+	margin-top:5px;
+	margin-left:10px;
+	}
+/* [END]  Mais Dados ---------------------------------------------------------------------------------------------------------- */
+
+/* [INI]  ------------------------------------------------------------------------------------------------------------------------
+	Bancos
+------------------------------------------------------------------------------------------------------------------------------- */
+#DVdadostitle
+	{
+	height:20px;
+	background:#ccc;
+	padding-left:7px;
+	padding-top:2px;
+	padding-bottom:5px;
+	margin-bottom:2px;
+	font-weight:bold;
+	
+	}
+
+#DVdadostitle input[type="text"]
+	{
+	width:15%;
+	margin-right:2%;
+	}
+	
+#DVdadostitle select
+	{
+	width:20%;
+	margin-right:2%;
+	}
+	
+#DVdadostitle div
+	{
+	float:right;
+	margin-top:5px;
+	margin-right:5px;
+	}
+	
+
+.lista
+	{
+	width:100%;
+	clear:both;
+	}
+	
+.lista
+	{
+	width:100%;
+	height:72.6%;
+	overflow-y:auto;
+	}
+/* */	
+#bancos_tb thead
+	{
+	display:none;
+	}
+	
+#bancos_tb
+	{
+	width:100% !important;
+	}
+
+#banco_icon_update 
+	{
+	display:none;
+	}
+	
+#anexos_tb thead
+	{
+	display:none !important;
+	}
+	
+#anexos_tb
+	{
+	width:100% !important;
+	}
+
+#banco_icon_update 
+	{
+	display:none;
+	}
+/* [END]  Bancos ------------------------------------------------------------------------------------------------------------- */
+
+/* ------------------------------------------------------------------------------------------------------------------------------
+	[INI]	Contatos
+------------------------------------------------------------------------------------------------------------------------------ */
+.endereco_contatos
+	{
+	width:100%;
+	}
+.contacts
+	{
+	width:100% !important;
+	height:250px;
+	/* border:1px solid red; */
+	margin-top:20px;
+	
+	}
+.icon_refresh
+	{
+	cursor:pointer;
+	width:23px;
+	height: 23px;
+	margin-bottom:-9px;
+	display:none;
+	
+	}
+.contacts_nav_left
+	{
+	float:left;
+	width:1%;
+	height:35px;
+	border-top-left-radius:3px;
+	border-bottom-left-radius:3px;
+	background:#354e72;
+	color:#fff;
+	font-weight:bold;
+	margin-top:25px;
+	margin-right:0px;
+	padding-top:25px;
+	padding-left:3px;
+	padding-right:3px;
+	cursor:pointer;
+	margin-left:1.02%;
+	}
+	
+.contacts_nav_right
+	{
+	float:right;
+	width:1%;
+	height:35px;
+	border-top-right-radius:3px;
+	border-bottom-right-radius:3px;
+	background:#354e72;
+	color:#fff;
+	font-weight:bold;
+	margin-top:25px;
+	margin-right:0px;
+	padding-top:25px;
+	padding-left:3px;
+	padding-right:3px;
+	cursor:pointer;
+	margin-right:1.0%;
+	}
+
+.contacts_nav_bottom
+	{
+	height:25px;
+	padding-right:20px;
+	padding-left:20px;
+	padding-top:5px;
+	
+	}
+	
+.contato_loader
+	{
+	position: relative;
+	}
+	
+.contacts_nav_bottom a
+	{
+	text-decoration:none;
+	display:inline-block;
+	width:18px;
+	height:17px;
+	border-radius:18px;
+	background:#ccc;
+	color:#354e72;
+	padding-bottom:1px;
+	margin-right:10px;
+	text-align:center;
+	font-weight:bold;
+	}
+.contacts_nav_bottom a:hover
+	{
+	background:#c8d9f2;
+	}
+.contacts_nav_bottom a.selected 
+	{
+	text-decoration: underline;
+	background:#354e72; 
+	color:#fff;
+	}
+	
+.contacts_container
+	{
+	float:none;
+	width:95%;
+	height:250px;
+	border:1px solid #354e72;
+	border-radius:3px;
+	}
+
+#contato_loader
+	{
+	
+	}
+	
+.contact_container
+	{
+	width:100%;
+	height:240px;
+	}
+	
+.contact
+	{
+	width:345px !important;
+	min-width:250px !important;
+	height:210px;
+	border:1px solid #CCC;
+	background: #F6F6F6;
+	float:left;
+	margin-right:10px;
+	list-style:none;
+	overflow-y:auto;
+	overflow-x:hidden;
+	padding:6px;
+	}
+	
+/*.contact input
+	{
+	margin-top:2px;
+	vertical-align:middle;
+	width:100%;
+	height:22px;
+	border:none;
+	border-right: 1px solid #cdc9bf;
+	border-top: 1px solid #cdc9bf;
+	border-bottom: 1px solid #cdc9bf;
+	color: rgb(102, 102, 102);
+	cursor: text;
+	background:#D9D9D9;
+	border-top-right-radius: 3px;
+	border-bottom-right-radius: 3px;
+	border-top-left-radius: 3px;
+	border-bottom-left-radius: 3px;
+	padding-left:2px;
+	text-align:middle;
+	}*/
+	
+.ContatoTitle
+	{
+	background:#354e72;
+	color: #fff;
+	padding-left:7px;
+	padding-top:2px;
+	padding-bottom:2px;
+	font-weight:bold;
+	}
+	
+.ContatoTitle div
+	{
+	float:right;
+	margin-top:5px;
+	margin-right:5px;
+	}
+	
+.ContatoTitle input
+	{
+	width:82%;
+	}
+	
+.contatos_tb thead
+	{
+	display:none !important;
+	}
+	
+.contatos_tb
+	{
+	width:100% !important;
+	}
+	
+.remove_contato
+	{
+	cursor:pointer;
+	margin:-10px;
+	}
+	
+.add_contato
+	{
+	cursor:pointer;
+	width:20px;
+	height: 20px;
+	margin-bottom:-6px;
+	margin-right:2px;
+	}
+	
+.delete_contato
+	{
+	cursor:pointer;
+	width:25px;
+	height: 25px;
+	margin-bottom:-9px;
+	margin-right:2px;
+	}
+	
+.descricao
+	{
+	width:60% !important;
+	margin-right:4px !important;
+	}
+/*------------------------------------------------------------------------Tabela da lista*/
+.table_lista
+	{
+	display:table;
+	width:100% !important;
+	min-height:8px !important;
+	}
+.table_row_lista:hover
+	{
+	background: #e5ebfe;
+	cursor:pointer;
+	}
+	
+.table_row_lista
+	{
+	display:table-row;
+	max-height:8px !important;
+	height:8px !important;
+	margin:0px;
+	padding:0px;
+	background: #E5E5E5;
+	}
+.table_cell_lista
+	{
+	display:table-cell;
+	max-height:8px !important;
+	height:8px !important;
+	margin-right:-15px !important;
+	padding:2px;
+	}
+/*------------------------------------------------------------------------ Tabela da lista*/	
+
+	
+.table_row
+	{
+	display:table-row;
+	max-height:15px !important;
+	height:15px !important;
+	margin:0px;
+	padding:0px;
+	
+	}	
+.table_cell
+	{
+	display:table-cell;
+	max-height:15px !important;
+	height:15px !important;
+	margin:0px;
+	padding:2px;
+/* 	border:1px solid #000 !important; */
+	}
+.carrousel
+	{
+	padding-left:3px;
+	}
+
+.contato_add
+	{
+	background: #CCC;
+	border-radius:3px;
+	}
+/* [END]  Contatos ----------------------------------------------------------------------------------------------------------- */
+
+
+	.form .form dt
+		{
+		width: 5%;
+		}
+	.form .form dd
+		{
+		width: 90%;
+		}
+
+
+
+	
+
+/* dados principais */
+#empresa_dbox_1 
+	{
+	float:left;
+	/* min-width:1024px; */
+	width:75%;
+	}
+	
+/* grupos */
+#empresa_dbox_2 
+	{
+	float:right;
+	/* min-width:400px; */
+	width:20%;
+	/* max-height:100px;
+	 min-height:100px; 
+	margin-right:80px; */
+	height:80px;
+	}
+	
+/* dados bancarios */
+#empresa_dbox_3 
+	{
+	float:right;
+	width:38%;
+	min-height:158px;
+	max-height:158px;
+	}
+	
+/* enderecos */
+#empresa_dbox_4 
+	{
+	width:55%;
+	float:left;
+	}
+	
+/* enderecos tabs */
+.empresa_tabs
+	{
+	clear:both; 
+	margin:10px; 
+	background-color:transparent;
+	}
+
+.empresa_dbox_end_0
+	{
+	clear:both; 
+	margin:10px;
+	top:100px;
+	}
+#remove_upload img
+	{
+	width:12px;
+	height: 12px;
+	}
+#remove_upload
+	{
+	text-align:center;
+	}
+	
+#remove_banco img
+	{
+	width:12px;
+	height: 12px;
+	text-align:center;
+	}
+#AnexosTitle
+	{
+	height:20px;
+	background:#ccc;
+	padding-left:7px;
+	padding-top:2px;
+	padding-bottom:5px;
+	margin-bottom:2px;
+	font-weight:bold;
+	
+	}

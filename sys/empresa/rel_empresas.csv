@@ -1,0 +1,217 @@
+#!/usr/bin/perl
+
+
+$nacess = "901";
+require "../cfg/init.pl";
+$SHOW = &get('SHOW');
+
+
+
+$rv = $dbh->do("SET CLIENT_ENCODING TO 'WINDOWS-1254'");
+if($dbh->err ne "")
+	  {
+	  print $query->header({charset=>iso-8859-1});
+print<<END;
+	<html><body style='margin-top: 40%'>
+		<center>Falha no acesso ao banco de dados!!!<br><br>Erro número : $dbh->err<br>Descrição: $dbh->errstr</center>
+	</body></html>
+END
+	  exit;
+	  }
+
+require "./empresas_sql.pl";
+
+
+
+if($rv > 0)
+	{
+	print "Content-Disposition: attachment; filename=\"empresas.csv\"; Content-type: text/comma-separated-values;  charset=\"WINDOWS-1254\";\n\n";
+	
+	$CAB1 = "\"Código\";\"Tipo\";\"Nome\";\"Apelido\";\"Observação\";";
+	
+	# Tipo Documentos
+	$sth2 = &select("select * from tipo_doc order by codigo");
+	$rv2 = $sth2->rows();
+	if($rv2 > 0)
+		{
+		$doc_t = 0;
+		while($row2 = $sth2->fetchrow_hashref)
+			{
+			$CAB1 .= "\"$row2->{'descrp'}\";";
+			$tipo_doc[$doc_t] = $row2->{'codigo'};
+			$doc_t++;
+			}
+		}
+		
+	# Tipo Contatos
+	$sth4 = &select("select * from tipo_contato where codigo != '5' order by codigo");
+	$rv4 = $sth4->rows();
+	if($rv4 > 0)
+		{
+		$cont_t = 0;
+		
+		$desc_cont[$cont_t] = "Website";
+		$tipo_cont[$cont_t] = "5";
+		$cont_t++;
+		
+		while($row4 = $sth4->fetchrow_hashref)
+			{
+			$desc_cont[$cont_t] = ucfirst($row4->{'descrp'});
+			$tipo_cont[$cont_t] = $row4->{'codigo'};
+			$cont_t++;
+			
+			$desc_cont[$cont_t] = ucfirst($row4->{'descrp'});
+			$tipo_cont[$cont_t] = $row4->{'codigo'};
+			$cont_t++;
+			}
+		}
+		
+	# Tipo Endereços
+	$sth3 = &select("select * from tipo_endereco order by codigo");
+	$rv3 = $sth3->rows();
+	if($rv3 > 0)
+		{
+		$end_t = 0;
+		while($row3 = $sth3->fetchrow_hashref)
+			{
+			$CAB1 .= "\"Endereço ".ucfirst($row3->{'descrp'})."\";";
+			$CAB1 .= "\"Complemento do Endereço ".ucfirst($row3->{'descrp'})."\";";
+			$CAB1 .= "\"Bairro do Endereço ".ucfirst($row3->{'descrp'})."\";";
+			$CAB1 .= "\"CEP do Endereço ".ucfirst($row3->{'descrp'})."\";";
+			$CAB1 .= "\"Cidade do Endereço ".ucfirst($row3->{'descrp'})."\";";
+			$CAB1 .= "\"UF do Endereço ".ucfirst($row3->{'descrp'})."\";";
+			$CAB1 .= "\"Website do Endereço ".ucfirst($row3->{'descrp'})."\";";
+			$n = 1;
+			for($g=1; $g < $cont_t; $g++)
+				{
+				$CAB1 .= "\"$desc_cont[$g] $n ".ucfirst($row3->{'descrp'})."\";";
+				$CAB1 .= "\"Contato do $desc_cont[$g] $n ".ucfirst($row3->{'descrp'})."\";";
+				if($n == 1)
+					{
+					$n++;
+					}
+				else
+					{
+					$n = 1;
+					}
+				}
+			$tipo_end[$end_t] = $row3->{'codigo'};
+			$end_t++;
+			}
+		}
+		
+
+	while($row = $sth->fetchrow_hashref)
+		{
+		$DAD1 .= "\"$row->{'emp_codigo'}\";";
+		$DAD1 .= "\"$row->{'emp_tipo_descr'}\";";
+		$DAD1 .= "\"$row->{'emp_nome'}\";";
+		$DAD1 .= "\"$row->{'emp_apelido'}\";";
+		$DAD1 .= "\"$row->{'emp_obs'}\";";
+
+		# Documentos
+		for($f=0; $f< $doc_t; $f++)
+			{
+			$sth5 = &select("select * from empresa_doc where empresa_doc.doc = '$tipo_doc[$f]' and empresa_doc.empresa = '$row->{'emp_codigo'}' limit 1");
+			$rv5 = $sth5->rows();
+			if($rv5 > 0)
+				{
+				while($row5 = $sth5->fetchrow_hashref)
+					{
+					$DAD1 .= "\"$row5->{'descrp'}\";";
+					}
+				}
+			else
+				{
+				$DAD1 .= "\"\";";
+				}
+			}
+			
+		# Endereços
+		for($f=0; $f< $end_t; $f++)
+			{
+			$sth6 = &select("select * from empresa_endereco where empresa_endereco.tipo = '$tipo_end[$f]' and empresa_endereco.empresa = '$row->{'emp_codigo'}' limit 1");
+			$rv6 = $sth6->rows();
+			if($rv6 > 0)
+				{
+				while($row6 = $sth6->fetchrow_hashref)
+					{
+					$DAD1 .= "\"$row6->{'endereco'}\";";
+					$DAD1 .= "\"$row6->{'complemento'}\";";
+					$DAD1 .= "\"$row6->{'bairro'}\";";
+					$DAD1 .= "\"$row6->{'cep'}\";";
+					$DAD1 .= "\"$row6->{'cidade'}\";";
+					$DAD1 .= "\"$row6->{'uf'}\";";
+					
+					# Contatos
+					for($h=0; $h< $cont_t; $h+=2)
+						{
+						if($tipo_cont[$h] == "5")
+							{
+							$sth7 = &select("select * from endereco_contato where endereco_contato.tipo = '$tipo_cont[$h]' and endereco_contato.endereco = '$row6->{'codigo'}' limit 1");
+							$rv7 = $sth7->rows();
+							if($rv7 > 0)
+								{
+								while($row7 = $sth7->fetchrow_hashref)
+									{
+									$DAD1 .= "\"$row7->{'valor'}\";";
+									}
+								}
+							else
+								{
+								$DAD1 .= "\"\";";
+								}
+							}
+						else
+							{
+							$sth7 = &select("select * from endereco_contato where endereco_contato.tipo = '$tipo_cont[$h]' and endereco_contato.endereco = '$row6->{'codigo'}' limit 2");
+							$rv7 = $sth7->rows();
+							if($rv7 > 0)
+								{
+								while($row7 = $sth7->fetchrow_hashref)
+									{
+									$DAD1 .= "\"$row7->{'valor'}\";";
+									$DAD1 .= "\"$row7->{'nome'}\";";
+									}
+								if($rv7 == 1)
+									{
+									for($g=0;$g<2;$g++)
+										{
+										$DAD1 .= "\"\";";
+										}
+									}
+								}
+							else
+								{
+								for($g=0;$g<4;$g++)
+									{
+									$DAD1 .= "\"\";";
+									}
+								}
+							}
+						}
+					}
+				}
+			else
+				{
+				for($g=0;$g<6;$g++)
+					{
+					$DAD1 .= "\"\";";
+					}
+				for($h=0; $h< $cont_t; $h++)
+					{
+					$DAD1 .= "\"\";";
+					}
+				}
+			}
+
+
+		$DAD1 .= "\n";
+		}
+	}
+
+$CAB1 =~ s/[;]$/\n/;
+
+print $CAB1;
+print $DAD1;
+

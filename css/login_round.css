@@ -1,0 +1,46 @@
+.fieldUser, .fieldPassword
+	{
+	width:90% !important;
+	height:30px;
+	border-radius:30px !important;
+	background:none !important;
+	font-size:24px;
+	border:solid 1px;
+	}
+	
+#login_form_container 
+	{
+	background:none;
+	width:30%;
+	}
+#login_form
+	{
+	width:70%;
+	} 
+#btn_login
+	{
+	display:none;
+	}
+
+#btn_login_round
+	{
+	display:block !important;
+	border:0px;
+	border-radius:13px;
+	color:#fff;
+	background:#354e72;
+	margin-top: 5px;	
+	padding-bottom: 4px;
+	font-size: 1.5em;
+	width: 80px;
+	height: 25px;
+	}
+
+body
+	{
+	background-size: 60% auto;
+	/* 
+	min-width:1000px;
+	min-height:350px;
+	*/
+	}

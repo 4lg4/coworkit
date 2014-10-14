@@ -1,0 +1,1243 @@
+	
+/* Main, Div que carrega os modulos */
+#main_div {
+	/*
+	background-color:#fff !important;
+	border-top:1px #354e72 solid;
+	border-left:1px #354e72 solid; 
+	margin-left: 60px !important; 
+	*/
+	width:100%;
+	height:100%;
+	/* overflow-x:hidden; */
+    overflow:hidden;
+}
+    
+#main { /* iframe (core v1 e modulos externos) */
+    width:100%;
+    height:100%;
+    overflow-x:hidden;
+}
+
+/* Main, Div que comporta o iframe dos modulos */
+#main_container
+	{
+	bottom:0px;
+	right:0px;
+	position:relative;
+	float:right;
+	width:94%;
+	height:95.5%;
+	}
+	
+/* Corpo, Div para delimitar todo o documento */
+#corpo
+	{
+	position:relative;
+	overflow: hidden;
+	top:0px;
+	height:100%;
+	width:100%;
+	min-width:950px;
+	min-height:550px;
+	}
+
+/* Menu, where am i DIV */
+#menu_top
+	{
+	position:relative;
+	letter-spacing:0.05em;
+	font-size:10px;
+	font-weight:normal;
+	border:none;
+	min-height:25px;
+	height:4%;
+	/* background-color:#354e72; */
+    background-color : #FF9700;
+	color:#fff;
+	padding-left:60px;
+
+
+    border-bottom : 1px solid #FF9700;
+    box-shadow: 0px -1px 8px rgba(0, 0, 0, 1);
+    
+	/* border-bottom: 1px solid #9ca9d2;
+    
+	box-shadow: 1px 2px 6px rgba(0, 0, 0, 0.5);
+	-moz-box-shadow: 1px 2px 6px rgba(0, 0, 0, 0.5);
+	-webkit-box-shadow: 1px 2px 6px rgba(0, 0, 0, 0.5);
+    */
+	z-index:100;
+	}
+
+#menu_whereami
+	{
+	height:100%;
+	float:left;
+	}
+
+#menu_top_home	
+	{
+	float:left;
+	height:100%;
+	}
+
+#menu_top_home a
+	{
+	display:block;
+	height:100%;
+	}
+	
+#menu_top_home a > img
+	{
+	border:0px;
+	margin-top:10%;
+	cursor:pointer;
+	height:70%;
+	}
+
+
+
+/* [INI] menu principal  --------------------------------------------------------------------------------------------------------------- 
+
+	Menu: Menu Avo (tabs) > Menu Pai (ul) > Menu Filho (li)
+	
+------------------------------------------------------------------------------------------------------------------------------------- */
+/* container tabs ----------------------------------- */
+#menu
+	{
+	position: relative;
+	top: 0px;
+	color: #fff;
+	text-align: center;
+	border-radius:0px !important;
+	border:none;
+	/* cursor:pointer; */
+	width:99.9%;
+	}
+#menu div.ui-tabs-panel
+	{
+	border:0px !important;
+	}
+
+/* menu avo ----------------------------------------- */
+#menu ul.ui-tabs-nav
+	{
+	background-color:#354e72 !important;
+	/* height:30px; */
+	padding-top:10px;
+	padding-left:45px;
+	}
+#menu li:hover
+	{ 
+	background: #c8d9f2;
+	color: #fff;
+	}
+#menu a:hover
+	{ 
+	background: #c8d9f2;
+	color: #fff;
+	}
+
+#menu li.ui-state-active, #menu li.ui-state-active 
+	{ 
+	background: #fff;
+	color: #354e72;
+	border-color: #fff !important;
+	}
+#menu li.ui-state-active a, #menu li.ui-state-active a
+	{ 
+	/* color: #354e72; */
+	border:0px !important;
+	}
+	
+/* menu pai ----------------------------------------- */
+.menu_pai 
+	{
+    font-size: 14px;
+    font-weight: bold;
+    color: #354e72;
+    text-align: left;
+    text-transform: uppercase;
+    border-bottom: 1px solid rgb(153, 153, 153);
+	margin-bottom:10px;
+	}
+.menu_pai:hover
+	{
+	background-color:#fff !important;
+	}
+
+.menu ul
+	{
+	font-weight:bold;
+	font-size:1.2em;
+	text-align:left;
+	}
+	
+/* menu filho ----------------------------------------- */
+.menu li
+	{
+	margin-left:10px;
+	font-weight: bold;
+	}	
+
+.menu li a
+	{
+	font-weight:normal;
+	font-size:10px;
+	cursor:pointer;
+	}	
+
+/* dashboard  ---------------------------------------- */
+.menu_icone:hover
+	{
+	background-color:transparent !important;
+	}
+
+.menu_icone a:hover
+	{
+	background-color:transparent !important;
+	font-weight:bold;
+	letter-spacing:1.3px;
+	}
+	
+.menu_icone a
+	{
+	text-align:center;
+	letter-spacing:2px;
+	}
+
+.menu_icone
+	{
+	margin-bottom:10px;
+	}
+.menu_icone a img {
+    width:32%;
+    max-width:32%;
+}
+/* [END] menu principal  ------------------------------------------------------------------------------------------------------------ */
+/*
+.menu_top_modules
+	{
+	float:left;  
+	padding-right:12px; 
+	padding-left:5px; 
+	border-top-right-radius:100px; 
+	border-right:1px solid #bbb; 
+	margin-right:4px;
+	height:93%;
+	cursor:pointer;
+	padding-top:4%;
+	}
+*/
+.menu_top_modules {
+    float: left;
+    padding: 0;
+    padding-left: 5px;
+    border-right: 1px solid #FFB048;
+    margin-right: 4px;
+    height: 100%;
+    cursor: pointer;
+    padding-right: 10px;
+}
+
+.menu_top_modules a
+	{
+	font-size: 1.1em;
+	letter-spacing: 0.1em;
+	display: block;
+    margin-top: 9%;
+	}
+
+.menu_top_modules_opt
+	{
+	padding-top:2px; 
+	font-weight:bold;
+	}
+
+#verify {
+    width       : 50%;
+    position    : absolute;
+    margin-left : 25%;
+    font-size   : 14px;
+    transition  : all 0.5s ease;
+    opacity     : 0.3;
+    z-index     : 101;
+    color       : #fff;
+    font-weight : bold;
+    text-align  : center;
+    top         : 0px;
+}
+#verify:hover {
+    opacity : 1;
+}
+#verify a {
+    cursor : pointer;
+}
+/* -----------------------------------------------------------------------------------------------------------------------------------
+	[INI] Menu Top Right Secretaria / Chats / user / lock
+---------------------------------------------------------------------------------------------------------------------------------- */
+#menu_top_right
+	{
+	position:relative;
+	float:right;
+	color:#fff;
+	height:100%;
+	width:25%;
+	}
+	
+.menu_top_right_children
+	{
+	margin-right:15px;
+	position:relative;
+	height:100%;
+	float:right;
+	cursor:pointer;
+	}
+	
+.menu_top_right_children img
+	{
+	height: 80%;
+	margin-top: 10%;
+	}
+	
+.menu_top_right_children span
+	{	
+	position: absolute;
+	display: block;
+	left:0;
+	top: 10%;
+	width:100%;
+	color:#354e72;
+	text-align:center;
+	font-weight:bold;
+	}
+				
+#menu_top_right_company_status
+	{
+	position:absolute; 
+	top:30px; 
+	right:70px; 
+	display:none;
+	}
+
+#menu_top_right_user
+	{
+	margin-top:1%;
+	}
+	
+#DMenuTopRight_user_descrp .DMenuTopRightText
+	{
+	margin-right: -6px;
+	}
+/* [END] Menu Top Right Secretaria / Chats / user / lock  -------------------------------------------------------------------------- */
+
+
+/* Menu Actions Principal   -------------------------- */
+#menu_actions
+  	{
+  	position: relative;
+	float: left;
+  	top: 0px;
+  	left: 0px;
+	width:6%;
+  	/* min-width: 60px; */
+	height:100%;
+  	/* border-right: solid 1px #354e72; */
+	padding-top:30px;
+    transition: 0.3s all ease;
+    min-width:50px;
+  	}
+    
+.menu_actions_vanish {
+    opacity: 0;
+}
+
+
+
+
+
+
+/* itens do menu */
+#submenu
+	{
+	background-color:#d9d9d9 !important;
+	border:solid 1px #354e72 !important;
+	left:0.25% !important;
+	right:0.25% !important;
+	position:relative !important;
+	top:0px !important;
+	}
+
+.submenu
+	{
+	color: #666 !important;
+	}
+	
+.submenu_item
+	{
+	letter-spacing:0.05em;
+	font-weight:normal !important;
+	font-size:11px;
+	color:#333 !important;
+	}
+
+.submenu_item:hover
+	{
+	color:#fff !important;
+	background-color:#354e72 !important;
+	}
+	
+/* -----------------------------------------------------------------------------------------------------------------------------------
+	[INI] Menu Principal Done Icon + Float
+---------------------------------------------------------------------------------------------------------------------------------- */	
+/* icone done menu iniciar */
+#eye {
+	position:absolute;
+	z-index:106;
+	top:-32px;
+	left:-29px;
+	width:65px;
+	height:65px;
+	padding-top:2px;
+	padding-left:2px;
+	border-bottom-right-radius:100px;
+    /*
+	box-shadow: 1px 2px 6px rgba(0, 0, 0, 0.5);
+	-moz-box-shadow: 1px 2px 6px rgba(0, 0, 0, 0.5);
+	-webkit-box-shadow: 1px 2px 6px rgba(0, 0, 0, 0.5);
+    */
+	background: none;
+    transition: all 0.12s ease;
+    
+    /*
+    background: none repeat scroll 0% 0% #fff;
+    border: 1px solid #354e72;
+    */
+    
+    border : 0px;
+}
+#eye img {
+    width : 80px;
+    cursor : pointer;
+}
+
+.eye_down {
+	top  : 5px !important;
+	left : 5px !important;
+}
+.eye_down img {
+    width : 120px !important;
+}
+
+
+/* blackout to hide system behind */	
+#lightsoff
+	{
+	background-color: #fff;
+	position: absolute; 
+	top: 0px; 
+	left: 0px; 
+	width: 100%;
+	height: 100%; 
+	z-index: 101; 
+	opacity: 0.75;
+	}
+/* [END] Menu Principal Done Icon + Float  ---------------------------------------------------------------------------------------- */	
+
+#menu_text
+  {
+  position: relative;
+  top: 3px;
+  }
+ 
+#menu div div
+  {
+  width: 250px;	  
+  }
+
+ 
+.menu_selected
+  {
+  background-color: #FFFFFF;
+  color: #31517b;
+  cursor: pointer;
+  font-weight:bolder;
+  }
+
+.menu_selected:hover
+  {
+  background-color: #FFFFFF !important;
+  color: #31517b !important;
+  cursor: pointer;
+  }
+
+
+
+
+#menu_options:hover
+  	{
+	border-top-left-radius:0px;
+	border-top-right-radius:0px;
+  	background-color: #354e72;
+	color: #fff;
+  	}
+
+#menu_options
+  {
+  border-top-left-radius:0px;
+  border-top-right-radius:0px;
+  font-family: Tahoma, sans-serif;
+  font-size: 12px;
+  font-weight: bold;
+  position: relative;
+  margin-left: 0px;
+  margin-right: 1px;
+  width: 130px;
+  height: 21px;
+  float: left;
+  margin-top: 0px;
+  }
+
+.menu_selected
+	{
+	background: #d9d9d9 url(/img/ui/menu_close.png) top right no-repeat;
+	/* background-position: 0px 0px 0px 4px; */
+	color: #354e72;
+	font-weight:bolder;
+	}
+
+.menu_selected:hover
+	{
+	background-color: #FFFFFF;
+	color: #354e72;
+	}
+	
+	
+	
+	
+
+/* Sub Menu Principal   -------------------------- */
+#submenu
+  {
+  background-color: #fff;
+  position: absolute;
+  left: 0.5%;
+  right: 0.5%;
+  top: 78px;
+  height: 300px;
+  }
+  
+.submenu_selected
+  {
+  cursor: pointer;
+  color: #31517b;
+  background-color: #b9cae1;
+  }
+  
+ul
+  {
+  padding: 0px 6px;
+  margin-left: 0px;
+  list-style: none;
+  }
+
+li.submenu
+  {
+  font-family: Tahoma, sans-serif;
+  font-size: 14px;
+  font-weight: bold; 
+  color: #999999;
+  text-align: left;
+  text-transform: uppercase;
+  border-bottom: solid 1px #999999;
+  margin-bottom: 6px;
+  }
+
+li a
+  {
+  font-family: Tahoma, sans-serif;
+  font-size: 12px;
+  font-weight: bold; 
+  /* color: black; */
+  text-align: left;
+  /* margin-left: 5px; */
+  text-decoration: none;
+  text-transform: none;
+  display:block;
+  /* width:80%; */
+  padding-left:3px;
+  margin-top:2px;
+  }
+
+li a:hover
+  {
+  color: #31517b;
+  background-color: #ffffdd;
+  margin-right: 0px;
+  display:block;
+  border-radius:0px;
+  }
+
+/* Div de saudacao   -------------------------- */
+#bemvindo
+  {
+  position: absolute;
+  top: 0px;
+  /* right: 5%; */
+  text-align:left;
+  background:#ccc;
+  padding-right:1%;
+  padding-left:1%;
+  border-bottom-right-radius:0px;
+  border-bottom-left-radius:0px;  
+  }
+
+#bemvindo_titulo
+  {
+  font-family: Tahoma, sans-serif;
+  font-size: 12px;
+  font-weight: bold;
+  color: #808080;
+  }
+
+#bemvindo_campo
+  {
+  font-family: Tahoma, sans-serif;
+  font-size: 12px;
+  font-weight: bold;
+  color: #575971;
+  }
+
+
+/*  [INI] Botoes do menu de acoes ------------------------------------------------------------------------------------ */
+.menu_btn_container 
+	{
+	display:table-cell;
+	vertical-align:bottom;
+	width: 50px;
+	height: 46px;
+	}
+
+
+/* btns menu actions */
+.menu_btn  {
+	min-width      : 50px;
+    width          : 85%;
+	height         : 40px;
+    cursor         : pointer;
+    background     : #4A6A8C;
+    color          : #fff;
+    position       : relative;
+    margin-bottom  : 10px;
+    left: -7.5%;
+}
+.menu_btn:hover {
+	color:#FFFBEB;
+	text-shadow: none;
+}
+.menu_btn_title {
+	font-size:12px;
+
+	width     : 90%;
+    overflow  : hidden;
+    white-space   : nowrap;
+    text-overflow : ellipsis;
+
+    position : absolute;
+    bottom   : 2px;
+    right     : 0px;
+    padding-right : 4%;
+
+    text-align : right;
+}
+
+.menu_btn_title_sub {
+	font-size : 10px;
+	letter-spacing : 0px;
+
+	width     : 90%;
+    overflow  : hidden;
+    white-space   : nowrap;
+    text-overflow : ellipsis;
+    border-bottom  : 1px solid #fff;    
+
+    position : absolute;
+    top      : 2px;
+    right    : 0px;
+    padding-right : 4%;
+
+    text-align : right;
+}
+
+
+	
+    
+.menu_btn_separator 
+	{
+	width: 45px;
+	height: 10px;
+	}
+
+
+
+/* Cor 2 ------------------------ */
+.menu_btn_color2 
+	{
+	background-color: #808080;
+	}
+	
+.menu_btn_color2:hover 
+	{
+	background-color:#cc;
+	background-image: linear-gradient(bottom, rgb(95,95,95) 65%, rgb(130,130,130) 98%);
+	background-image: -o-linear-gradient(bottom, rgb(95,95,95) 65%, rgb(130,130,130) 98%);
+	background-image: -moz-linear-gradient(bottom, rgb(95,95,95) 65%, rgb(130,130,130) 98%);
+	background-image: -webkit-linear-gradient(bottom, rgb(95,95,95) 65%, rgb(130,130,130) 98%);
+	background-image: -ms-linear-gradient(bottom, rgb(95,95,95) 65%, rgb(130,130,130) 98%);
+
+	background-image: -webkit-gradient(
+		linear,
+		left bottom,
+		left top,
+		color-stop(0.65, rgb(95,95,95)),
+		color-stop(0.98, rgb(130,130,130))
+	);
+	}
+    
+    
+.DMenu_action_super {
+    position : absolute;
+    z-index  : 1;
+    top      : 10%;
+    left     : 0px;
+    width    : 65px;
+}
+.DMenu_action_super div {
+    text-align:center;
+}
+
+.DMenu_action_super .menu_btn_title_sub{
+    margin-left: 2px;
+}
+
+/*  [END] Botoes do menu de acoes ------------------------------------------------------------------------------------ */
+
+/* ----------------------------------------------------------------------------------------------------------------------------------
+	[INI] Dgrid
+---------------------------------------------------------------------------------------------------------------------------------- */
+#grid_filter_field
+	{
+	width:100px; 
+	font-size:8px; 
+	border:0px; 
+	padding:0px; 
+	margin-left:5px; 
+	margin-right:5px;
+	}
+/*  [END] Dgrid  ----------------------------------------------------------------------------------------------------------------- */
+
+/* ----------------------------------------------------------------------------------------------------------------------------------
+	[INI] Menu Top Right Float dbox_menu
+---------------------------------------------------------------------------------------------------------------------------------- */
+.dbox_menu
+	{
+	width:150px; 
+	height:200px; 
+	background:#fff; 
+	border:1px solid #354e72; 
+	z-index:100;
+	}
+		
+.dbox_menu_cont
+	{
+	padding:3%;
+	overflow-y:auto;
+	height: 80%;
+	width:94%;
+	}
+
+.dbox_menu_title
+	{
+	width:100%;
+	padding-bottom:3px;
+	padding-top:3px;
+	color:#fff;
+	font-weight:bold;
+	background-color:#354e72;
+	}
+
+.dbox_menu_title img
+	{
+	height:12px; 
+	float:left; 
+	margin-left:15px; 
+	margin-right:25px;
+	}
+		
+.dbox_menu_cont p
+	{
+	padding:0px;
+	margin:0px;
+	border-bottom:1px solid #ddd; 
+	margin-bottom:5px; 
+	padding-bottom:3px;
+	font-weight:bold;
+	cursor:pointer;
+	}
+
+/*  [END]  Menu Top Right Float dbox_menu  -------------------------------------------------------------------------------------- */
+
+
+/**
+ *  User Menu Float  (bottom)
+ */
+#user_menu_float {
+	border-top : 1px solid #245189;
+	position   : absolute;
+	z-index    : 102;
+	bottom     : 0px;
+	left       : 0px;
+	margin     : 0px;
+	display    : none;
+	width      : 100%;
+    min-width  : 1000px;
+	height     : 100px;
+    background : #3167b3;
+    color      : #fff;
+}
+
+#user_menu_float_user { /* container user id */
+    width    : 50%;
+    height   : 100px;
+    float    : left;
+    position : relative;
+}
+
+#user_menu_float_company_container {  /* container company id */
+    width    : 50%;
+    height   : 100px;
+    float    : right;
+    position : relative;
+}
+#user_menu_float_avatar_company { /* avatar company */
+	width      : 180px;
+	height     : 100px;
+	cursor     : pointer;
+	position   : relative;
+    background : orange;
+    float      : right;
+}
+#user_menu_float_avatar_company img { /* avatar company */
+	width  : 180px;
+	height : 100px;
+}
+#user_menu_float_company_nome { /* nome empresa */
+    font-weight : bold;
+    font-size   : 1.7em;
+    margin-top  : 5px;
+    margin-right : 10px;
+    cursor      : pointer;
+    float       : right;
+    position    : relative;
+    width       : 50%;
+    text-align  : right;
+}
+#user_menu_float_company_descrp { /* descrp empresa */
+	position   : relative;
+    margin-right : 10px;
+	cursor     : pointer;
+    float      : right;
+    width      : 50%;
+    text-align : right;
+}
+#user_menu_float_company_opt { /* opcoes empresa */
+	position   : relative;
+	margin-top : 35px;
+    margin-right : 10px;
+	cursor     : pointer;
+    float      : right;
+    width      : 50%;
+    text-align : right;
+}
+
+#user_menu_float_avatar { /* avatar usuario */
+	width      : 95px;
+	height     : 100px;
+	cursor     : pointer;
+	position   : relative;
+    background : orange;
+    float      : left;
+}
+#user_menu_float_avatar img { /* avatar usuario */
+	width  : 95px;
+	height : 100px;
+}
+
+#user_menu_float_nome { /* nome usuario */
+    font-weight : bold;
+    font-size   : 1.7em;
+    margin-top  : 5px;
+	margin-left : 10px;
+	cursor      : pointer;
+    position    : relative;
+    float       : left;
+    width       : 50%;
+}
+
+#user_menu_float_login { /* login usuario */
+	margin-left : 10px;
+	cursor      : pointer;
+    position    : relative;
+    float       : left;
+    width       : 50%;
+}
+	
+#user_menu_float_opt {
+    margin-top  : 20px;
+	margin-left : 10px;
+	cursor      : pointer;
+    position    : relative;
+    float       : left;
+    width       : 50%;
+}
+
+
+
+
+
+	
+
+
+
+
+
+
+
+
+
+.menu_pai_column {
+	width : 24% !important;
+	float : right; 
+	margin-left : 1%;
+}
+		
+
+
+
+
+
+
+.body_central
+	{
+	background: url("/img/login/eos_background.png") no-repeat #fff;
+	background-position:center 80px;
+	width:100%;
+	height:100%;
+	position:absolute;
+	top:0px;
+	left:0px;
+	z-index:110;
+	}
+	
+/* ---------------------------------------------------------------------------------------------------------------------------------
+		new concept EOS V1.5 
+		new menu concept 
+		novo conceito menu eos v2 v1.5
+---------------------------------------------------------------------------------------------------------------------------------- */
+
+/* */
+#menu_float 
+	{
+    position: absolute;
+    z-index: 105;
+    top:-300%;
+    width: 100%;
+    min-width:1000px;
+    min-height:344px;
+	background-color: rgb(49, 103, 179);
+    /* height: 350px; */
+    left: 0px;
+    padding: 0px;
+    box-shadow: none;
+    border-radius: 0px;
+	/* 
+    border-bottom:1px solid #fff; 
+	display:none; 
+	box-shadow: 0px 0px 6px 4px rgba(0, 0, 0, 0.5);
+    */
+    border-bottom:1px solid #245189;
+    transition: all 0.3s ease;
+	}	
+.menu_float_down {
+    top:0% !important;
+}	
+
+#menu ul.ui-tabs-nav {
+    padding-left: 75px;
+}
+
+#menu li a 
+	{
+    color: #fff;
+	}
+
+.menu_pai
+	{
+	color:#fff;
+	}
+.menu_icone_pai
+	{
+	border:none;
+	}
+
+#menu ul.ui-tabs-nav 
+	{
+    background-color: #fff !important;
+	border-radius: 0px;
+	padding-top:0px;
+	}
+#menu .ui-tabs-nav li a
+	{
+	font-size: 1.5em !important;
+	}
+#menu .ui-tabs-nav li
+	{
+	border-radius: 0;
+	float: right;
+	}
+#menu .ui-tabs-nav li a
+	{
+	color:#354e72;
+	}
+#menu .ui-tabs-nav li a:hover
+	{
+	color:#fff;
+	}
+#menu li.ui-state-hover
+	{
+	border-color:transparent;
+	background-color: #3167b3;
+	}
+    
+#menu li.ui-state-active {
+    border-color: transparent !important;
+	background-color: #3167b3;
+}
+
+#menu li.ui-state-active a
+	{
+	color:#fff !important;
+	}
+#menu .ui-tabs .ui-tabs-nav li 
+	{
+    margin-right: 20px;
+	}
+
+
+
+
+/* EOS fullscreen */
+.main_container_fullscreen
+	{
+	width:100% !important;
+	height:100% !important;
+	}
+
+.main_fullscreen
+	{
+	width:100% !important;
+	height:100% !important;
+	}
+	
+    
+    
+    
+#deagle_ {
+    background-image : url(/img/dashboard/deagle.svg);
+    background-size : 100% 100%;
+    width  : 100px;
+    height : 100px;
+    position : absolute;
+    top   : -20%;
+    right : -20%;
+    z-index: 100;
+    display: none;
+    
+    transform: scaleX(-1);
+    -webkit-transform: scaleX(-1);
+}
+
+.deagle_down {
+    display: inline !important;
+    
+    animation : deagle_first 3s, deagle_last 1s;
+    animation-delay : 0s, 3s;
+    animation-fill-mode: forwards;
+    
+    -webkit-animation : deagle_first 3s, deagle_last 1s;
+    -webkit-animation-delay : 0s, 3s;
+    -webkit-animation-fill-mode: forwards;
+}
+
+
+@keyframes deagle_first {
+    0% {
+        width  : 100px;
+        height : 100px;
+        top   : -20%;
+        right : -20%;
+    }
+    
+    80% {
+        top    : 80%;
+        right  : 150%;
+        width  : 200px;
+        height : 200px;
+    } 
+    
+    100% {
+        top    : 80%;
+        right  : 200%;
+        width  : 200px;
+        height : 200px;
+    }   
+}
+
+@keyframes deagle_last {
+    0% {
+        top    : 80%;
+        right  : 200%;
+        width  : 200px;
+        height : 200px;
+    }
+     
+    100% {
+        top    : 79% ;
+        right  : 90% ;
+        width  : 150px;
+        height : 150px;
+        transform: scaleX(1);
+    }
+}
+
+@-webkit-keyframes deagle_first {
+    0% {
+        width  : 100px;
+        height : 100px;
+        top   : -20%;
+        right : -20%;
+    }
+    
+    80% {
+        top    : 80%;
+        right  : 150%;
+        width  : 200px;
+        height : 200px;
+    } 
+    
+    100% {
+        top    : 80%;
+        right  : 200%;
+        width  : 200px;
+        height : 200px;
+    }   
+}
+@-webkit-keyframes deagle_last {
+    0% {
+        top    : 80%;
+        right  : 200%;
+        width  : 200px;
+        height : 200px;
+    }
+     
+    100% {
+        top    : 79% ;
+        right  : 90% ;
+        width  : 150px;
+        height : 150px;
+        -webkit-transform: scaleX(1);
+    }
+}
+
+#deagle_talk {
+    position : absolute;
+    top   : 20px;
+    right : 0px;
+    z-index: 99999999;
+    opacity : 0;
+    transition: all 1s ease;
+    background : #FF9700;
+    border-radius : 5px;
+    
+    width: 100px;
+    height: 60px;
+    border-radius: 15px;
+}
+
+#deagle_talk_content {
+    position : absolute;
+    top   : 0px;
+    left : 0px;
+    z-index: 99999999;
+    
+    width: 80px;
+    height: 60px;
+    
+    margin-left: 10px;
+    color: #fff;
+    font-weight: bold;
+    overflow : auto;
+    display:none;
+}
+
+.deagle_talks {
+    animation : deagle_talkss 1s;
+    animation-delay : 4s;
+    animation-fill-mode: forwards;
+    
+    -webkit-animation : deagle_talkss 1s;
+    -webkit-animation-delay : 4s;
+    -webkit-animation-fill-mode: forwards;
+}
+
+@keyframes deagle_talkss {    
+    100% {
+        opacity : 1;
+    } 
+}
+
+@-webkit-keyframes deagle_talkss {    
+    100% {
+        opacity : 1;
+    } 
+}
+
+#deagle_talk:after {
+    content: '';
+    position: absolute;
+    border-style: solid;
+    border-width: 20px 20px 0;
+    border-color: #FF9700 transparent;
+    display: block;
+    width: 0;
+    z-index: 1;
+    bottom: -10px;
+    left: 50px;
+}
+
+#deagle_close {
+    position : absolute;
+    top   : -5px;
+    right : -5px;
+    z-index: 999999999;
+    background-image: url("/img/ui/close.svg");
+    background-size : 18px 18px;
+    background-position : center center;
+    background-repeat : no-repeat;
+    width: 20px;
+    height: 20px;
+    cursor : pointer;
+}
+
+	

@@ -1,0 +1,34 @@
+#BODYEOS {
+	min-width  : 0;
+    min-height : 0;
+}
+
+#menu_float {
+	min-width  : 0;
+    min-height : 0;    
+}
+
+#corpo {
+	min-width  : 0;
+    min-height : 0;    
+}
+
+#menu_top_right {
+    width : 40%;
+}
+
+#main_container {
+    width:89%;
+}
+
+#menu_actions {
+    width:9%;
+}
+
+.menu_btn {
+    width: 91.5%;
+}
+
+#loading_container {
+    left: 15%;
+}

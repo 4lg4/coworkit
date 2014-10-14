@@ -1,0 +1,35 @@
+/* formulario CAD do modulo */
+.chamado_relatorio_prod_form {
+    
+}
+
+/* container direita */
+.chamado_relatorio_prod_form #right_container {
+    width : 50%;
+    float : left;    
+}
+
+/* container esquerda */
+.chamado_relatorio_prod_form #left_container {
+    width        : 49%;
+    float        : left;    
+    margin-right : 1%;
+}
+
+/* radio de periodo */
+.chamado_relatorio_prod_form #chamado_rel_periodo {
+    width        : 49%;
+    float        : left;
+    margin-right : 1%; 
+}
+
+/* radio de cliente */
+.chamado_relatorio_prod_form #chamado_rel_cliente {
+    width : 50%;
+    float : left;    
+}
+
+.chamado_relatorio_prod_form .filter_period_dates:first-child {
+    margin-bottom : 1%;
+    margin-top    : 1%;
+}

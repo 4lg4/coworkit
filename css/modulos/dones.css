@@ -1,0 +1,107 @@
+input[type=text], input[type=password], textarea,select
+	{
+	border:none;
+	}
+#empresas_list
+	{
+	height:80%;
+	overflow-y:auto;
+	}
+	
+#endereco_list
+	{
+	height:80%;
+	overflow-y:auto;
+	}
+#dones_list
+	{
+	height:80%;
+	overflow-y:auto;
+	}
+	
+#search_empresas
+	{
+	margin-bottom:2px;
+	width:65%;
+	}
+#search_endereco
+	{
+	margin-bottom:3px;
+	width:65%;
+	}
+#search_dones
+	{
+	margin-bottom:3px;
+	width:65%;
+	}
+	
+#bloco_empresas
+	{
+	padding:10px;
+	min-width:45%;
+	height:200px;
+	position: relative !important;
+	}
+	
+#bloco_endereco
+	{
+	padding:10px;
+	min-width:45%;
+	height:200px;
+	position: relative !important;
+	}
+#bloco_dones
+	{
+	padding:10px;
+	width:45%;
+	height:200px;
+	position: relative !important;
+	display:none;
+	}
+	
+#bloco_form
+	{
+	padding:10px;
+	min-width:45%;
+	height:200px;
+	position: relative !important;
+	display:none;
+	}
+#bloco_form input[type=text], input[type=password]
+	{
+	text-transform: lowercase;
+	max-width:40%;
+	border:none;
+	}
+#obs_user
+	{
+	resize:none;
+	height:80px;
+	}
+/* Configurações do DTouchRadio ------------------------------------------------------------------------------------------ */
+.DTouchRadio_descrp
+	{
+	text-align:left !important;
+	margin-left:3px !important;
+	width:90% !important;
+	}
+.DTouchRadio_vertical
+	{
+	cursor: pointer;
+	background: #e9e9e9;
+	color:#333;
+	margin:1px;
+	}
+	
+.DTouchRadio_selected
+	{
+	background:#5D91D9;
+	color: #FFF !important;
+	}
+.DTouchRadio_vertical:hover>.DTouchRadio_descrp
+	{
+	cursor: pointer;
+	color:#FFF !important;
+	width:90% !important;
+	}
+/* Configurações do DTouchRadio ------------------------------------------------------------------------------------------ */

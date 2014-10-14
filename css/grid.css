@@ -1,0 +1,199 @@
+html
+  {
+  overflow: hidden;
+  height: 100%;
+  }
+
+body 
+	{
+	width:99%;
+	}
+
+body, table, th, td
+  {
+  font-family: Tahoma, sans-serif;
+  font-size: 11px;
+  }
+
+.title
+  {
+  font-family: Tahoma, sans-serif;
+  font-size: 12px;
+  color: #354e72;
+  margin-left: 3px;
+  font-weight: bold;
+  }
+
+table
+  {
+  border: none 0px;
+  }
+  
+th
+  {
+  background-color: #354e72;
+  color: white;
+  }
+
+.thor:hover
+  {
+  cursor: pointer;
+  text-decoration: underline;
+  }
+
+.asc
+  {
+  background: url(/img/sort_asc.png) no-repeat #354e72 99% 20%;
+  }
+
+.asc:hover
+  {
+  background: url(/img/sort_asc.png) no-repeat #354e72 99% 20%;
+  cursor: pointer;
+  text-decoration: underline;
+  }
+
+.desc
+  {
+  background: url(/img/sort_desc.png) no-repeat #354e72 99% 20%;
+  }
+
+.desc:hover
+  {
+  background: url(/img/sort_desc.png) no-repeat #354e72 99% 20%;
+  cursor: pointer;
+  text-decoration: underline;
+  }
+
+.selected td
+  {
+  background-color: #99aec9;
+  }
+  
+.selected .tdgrupo1, .selected .tdgrupo2
+  {
+  background-color: #778ba7;
+  }
+  
+.tdgrupo1
+  {
+  background-color: #99aec9;
+  }
+
+.tdgrupo2
+  {
+  background-color: #b9cae1;
+  }
+
+#grid_pesq
+  	{
+  	width:100%;
+	}
+	
+#grid_pesq table
+  {
+  width: 100%;
+  float: right;
+  color: white;
+  background-color: #354e72;
+  }
+  
+#grid_pesq table a
+  {
+  color: white;
+  margin-left: 4px;
+  font-size: 12px;
+  font-weight: bold;
+  text-decoration: none;
+  }
+  
+#print_pesq table
+  {
+  width: 500px;
+  float: float;
+  margin-bottom: 10px;
+  color: white;
+  background-color: #354e72;
+  }
+  
+#print_pesq table a
+  {
+  color: white;
+  margin-left: 4px;
+  font-size: 12px;
+  font-weight: bold;
+  text-decoration: none;
+  }
+ 
+input[type="text"], input[type="file"], select, textarea
+  {
+  font-family: Tahoma, sans-serif;
+  font-size: 12px;
+  width: 170px;
+  border: solid 1px #aaaaaa;
+  margin-bottom: 2px;
+  padding: 2px;
+  }
+
+.select
+  {
+  padding: 2px;
+  width: auto;
+  }
+
+.textarea
+  {
+  font-family: Tahoma, sans-serif;
+  font-size: 12px;
+  width: 100%;
+  border: solid 1px #aaaaaa;
+  margin-bottom: 5px;
+  margin-left: 10px;
+  padding: 2px;
+  padding-left: 5px;
+  }
+
+button[disabled], input[disabled], optgroup[disabled], option[disabled], select[disabled], textarea[disabled]
+  {
+  color: black;
+  background-color: #cdcdcd;
+  }
+  
+#grid_scroll
+  {
+  position: relative;
+  overflow: hidden;
+  }
+
+#nav
+  {
+  /* float: right; */
+  font-family: Tahoma, sans-serif;
+  font-size: 11px;
+  /* color: #354e72; */
+  color: #333;
+  text-align:right;
+  width:100%;
+  border: 1px solid #354e72;
+  background-color:#d9d9d9;
+  border-top-left-radius:5px;
+  border-top-right-radius:5px;
+  }
+
+#grid #codigo, #grid #usuario, #grid #login
+  {
+  -moz-border-radius: 5px 0 0 0;
+  -webkit-border-top-left-radius: 5px;
+  border-top-left-radius: 5px;
+  }
+
+.agrupo
+  {
+  background-color: #51719a;
+  color: white;
+  font-weight: bold;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  }
+
+

@@ -1,0 +1,83 @@
+.file-wrapper
+	{ 
+	cursor: pointer; 
+	display: inline-block; 
+	overflow: hidden; 
+	position: relative; 
+	}
+.file-wrapper input 
+	{ 
+	cursor: pointer;
+	font-size: 100px;
+	height: 100%;
+	filter: alpha(opacity=1);
+	-moz-opacity: 0.01;
+	opacity: 0.01;
+	position: absolute;
+	right: 0;
+	top: 0;
+	}
+.file-wrapper .button 
+	{ 
+	background: #1B8EE0;
+	color: #fff;
+	cursor: pointer;
+	display: inline-block;
+	font-size: 11px;
+	font-weight: bold;
+	margin-left: 5px;
+	padding: 4px 18px;
+	text-transform: uppercase;
+	}
+progress
+	{ 
+	width:80%;
+	margin:5px;
+	display:none;
+	}
+#progress
+	{
+	display:none;
+	margin-top:-2px;
+	}
+#fieldUploadDescrp > input
+	{
+	width:30%;
+	}
+#fieldUploadList
+	{
+	overflow-y: auto;
+	height:100px;
+	}
+
+#fieldUploadList
+	{
+	overflow-y: auto;
+	height:100%;
+	}
+.fieldUploadItems
+	{
+	height:auto;
+	background:#418BCC;
+	padding:2px;
+	padding-bottom:4px;
+	margin-top:1px;
+	cursor:pointer;
+	}
+.fieldUploadItems img
+	{
+	float:left;
+	margin-right:2px;
+	width:60px;
+	height:45px;
+	}
+.FieldUploadDelItem 
+	{
+	width: 18px;
+	height: 18px;
+	background: url("/img/ui/del.svg") repeat scroll 0% 0% / 100% auto transparent;
+	cursor: pointer;
+	margin-top: -2%;
+	display: table-row;
+	float: right;
+	}

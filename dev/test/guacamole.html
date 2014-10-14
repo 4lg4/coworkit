@@ -1,0 +1,100 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1">
+		
+		<title>Done TI - EOS - $emp_nome</title>
+		<link rel="shortcut icon" href="/done.ico">
+		<link href="/css/ui.css" rel="stylesheet" type="text/css" />
+		<script type="text/javascript" src="/comum/jquery/jquery-1.8.3.js"></script>
+		<script type="text/javascript" src="/comum/jquery/jquery-ui-1.9.2.custom.min.js"></script>
+		
+		<!-- mantem para o login -->
+		<link href="/css/login.css" rel="stylesheet" type="text/css" />
+		
+		<link href="/css/login_round.css" rel="stylesheet" type="text/css" />
+		
+		<!-- mantem para o login -->
+		
+		
+		<script language="JavaScript">
+		$(document).ready(function() 
+			{ // alert(navigator.userAgent+" - "+window.innerWidth);
+			// if(mobileDetect() && "$nomobileme" == "")
+			//	document.location = "/m/";
+			/*
+			if(isMobile() === true || isTablet() === true)
+				{
+				window.addEventListener("resize", function() 
+					{ 
+					loginResize();
+					}, false);
+				
+				loginResize();
+				}
+			*/
+			document.forms[0].elements[0].focus();
+			});
+			
+		</script>
+	</head>
+
+<body>
+	<form name="logon" id="logon" method="post" action="/guacamole/client.xhtml" target="temp" onSubmit="valida(); return false;">
+
+		<div id="login_" align="center">
+			
+		<div id="login_form_container">
+			<div id="login_logo" align="center">
+				<img src="$logo" alt="$emp_nome" title="$emp_nome" border="0" onError="this.src='/img/logos/1.png'" />
+			</div>
+			<div id="login_form" align="left">
+				<select name="protocol" class="login fieldPassword" style="width: 100% !important; margin-bottom: 3px; border-color: #aaa; height: 35px;">
+					<option value="rdp">RDP</option>
+					<option value="ssh">SSH</option>
+					<option value="vnc">VNC</option>
+				</select>
+				<input type="text" placeholder="Hostname" name="host" class="login fieldUser" tabindex=1 autocomplete="off" style="margin-bottom:3px;"><br>
+				<input type="text" placeholder="Porta" name="port" class="login fieldUser" tabindex=1 autocomplete="off" style="margin-bottom:3px;"><br>
+				<input type="text" placeholder="Usuário" name="username" class="login fieldUser" tabindex=1 autocomplete="off" style="margin-bottom:3px;"><br>
+				<input type="password" placeholder="Senha" name="password" class="login fieldPassword" tabindex=2 onFocus="clearTimeout(timeout)" autocomplete="off"><br>
+				<div align="right">
+					<input type="submit" value="Conectar" id="btn_login_round" style="width:100%;">
+				</div>
+			</div>
+			
+	
+	</form>
+
+
+<div class="toplinha"></div>
+<div class="bottomlinha"></div>
+
+<div id="logo_eos">
+	<a href="http://eos.done.com.br" target="_blank"><img src="/img/login/eos.png"></a>
+</div>
+
+<div id="login_footer">
+</div>
+
+<style>
+.toplinha
+	{
+	left:0px;
+	width:100%;
+	}
+html, body 
+	{
+	width:100%;
+	height:100%;
+	}
+#login_
+	{
+		width:100%;
+		height:100%;
+	}
+</style>
+
+</body>
+</html>

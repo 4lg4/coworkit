@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 15.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="61.44px" height="61.44px" viewBox="0 0 61.44 61.44" enable-background="new 0 0 61.44 61.44" xml:space="preserve">
+<rect id="bg" fill="#354E72" width="61.44" height="61.44"/>
+<g id="chart">
+	<g id="retangulo_externo_chart">
+		<path fill="#FFFFFF" d="M57.022,50.045c0,0.55-0.45,1-1,1H5.144c-0.55,0-1-0.45-1-1v-39.6c0-0.55,0.45-1,1-1h50.878
+			c0.55,0,1,0.45,1,1V50.045z"/>
+	</g>
+	<rect id="retangulo_interno_chart" x="4.839" y="10.165" fill="#354E72" width="51.394" height="40.09"/>
+	<circle id="chart_1_" fill="#FFFFFF" cx="32.696" cy="21.156" r="2.608"/>
+</g>
+<g>
+	<g id="button_1">
+		<g id="retangulo_externo_chart_1_">
+			<path fill="#FFFFFF" d="M20.506,46.037c0,0.55-0.45,1-1,1h-4.387c-0.55,0-1-0.45-1-1V41.93c0-0.55,0.45-1,1-1h4.387
+				c0.55,0,1,0.45,1,1V46.037z"/>
+		</g>
+		<rect id="retangulo_interno_chart_1_" x="14.839" y="41.648" fill="#354E72" width="4.947" height="4.67"/>
+	</g>
+	<g id="button_2">
+		<g id="retangulo_externo_chart_2_">
+			<path fill="#FFFFFF" d="M28.08,46.037c0,0.55-0.45,1-1,1h-4.387c-0.55,0-1-0.45-1-1V41.93c0-0.55,0.45-1,1-1h4.387
+				c0.55,0,1,0.45,1,1V46.037z"/>
+		</g>
+		<rect id="retangulo_interno_chart_2_" x="22.413" y="41.648" fill="#354E72" width="4.947" height="4.67"/>
+	</g>
+</g>
+<g>
+	<g id="button_1_1_">
+		<g id="retangulo_externo_chart_6_">
+			<path fill="#FFFFFF" d="M35.506,46.037c0,0.55-0.45,1-1,1h-4.387c-0.55,0-1-0.45-1-1V41.93c0-0.55,0.45-1,1-1h4.387
+				c0.55,0,1,0.45,1,1V46.037z"/>
+		</g>
+		<rect id="retangulo_interno_chart_4_" x="29.839" y="41.648" fill="#354E72" width="4.947" height="4.67"/>
+	</g>
+	<g id="button_2_1_">
+		<g id="retangulo_externo_chart_5_">
+			<path fill="#FFFFFF" d="M43.08,46.037c0,0.55-0.45,1-1,1h-4.387c-0.55,0-1-0.45-1-1V41.93c0-0.55,0.45-1,1-1h4.387
+				c0.55,0,1,0.45,1,1V46.037z"/>
+		</g>
+		<rect id="retangulo_interno_chart_3_" x="37.413" y="41.648" fill="#354E72" width="4.947" height="4.67"/>
+	</g>
+</g>
+<g>
+	<g id="button_1_2_">
+		<g id="retangulo_externo_chart_4_">
+			<path fill="#FFFFFF" d="M41.909,33.472c0.55,0,1,0.45,1,1v4.387c0,0.55-0.45,1-1,1h-4.107c-0.55,0-1-0.45-1-1v-4.387
+				c0-0.55,0.45-1,1-1H41.909z"/>
+		</g>
+		<rect id="retangulo_interno_chart_6_" x="37.521" y="34.191" fill="#354E72" width="4.67" height="4.947"/>
+	</g>
+	<g id="button_2_2_">
+		<g id="retangulo_externo_chart_3_">
+			<path fill="#FFFFFF" d="M41.909,26.267c0.55,0,1,0.45,1,1v4.387c0,0.55-0.45,1-1,1h-4.107c-0.55,0-1-0.45-1-1v-4.387
+				c0-0.55,0.45-1,1-1H41.909z"/>
+		</g>
+		<rect id="retangulo_interno_chart_5_" x="37.521" y="26.986" fill="#354E72" width="4.67" height="4.947"/>
+	</g>
+</g>
+<g>
+	<g id="button_3_2_">
+		<g id="retangulo_externo_chart_7_">
+			<path fill="#FFFFFF" d="M34.946,26.267c0.55,0,1,0.45,1,1v4.387c0,0.55-0.45,1-1,1h-4.107c-0.55,0-1-0.45-1-1v-4.387
+				c0-0.55,0.45-1,1-1H34.946z"/>
+		</g>
+	</g>
+</g>
+</svg>

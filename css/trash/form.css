@@ -1,0 +1,10 @@
+/* 
+
+  importa arquivo de estilo padrao unificado UI.CSS
+   
+  este css foi mantido somente para manter compatibilidade
+
+*/
+
+@import "comum/ui.css";
+@import "ui.css";

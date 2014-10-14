@@ -1,0 +1,658 @@
+#!/usr/bin/perl
+
+
+use Spreadsheet::WriteExcel;
+use utf8;
+
+$nacess = "901";
+require "../cfg/init.pl";
+$CODIGO = &get('COD');
+
+$TUSER = 0;
+$TCOMP = 0;
+$TTI = 0;
+
+$sth = $dbh->prepare("select * from usuario_direitos where usuario_direitos.usuario = '$LOGUSUARIO' and (usuario_direitos.menu = '204' or usuario_direitos.menu = '205') ");
+$sth->execute;
+if($dbh->err ne "")
+      {
+      print $query->header({charset=>utf8});
+      &erroDBH();
+      }
+$rv = $sth->rows;
+if($rv > 0)
+	{
+	while($row = $sth->fetchrow_hashref)
+		{
+		if($row->{'menu'} eq "204")
+			{
+			$nacess_ti = $row->{'tipo'};
+			$TTI = 1;
+			}
+		elsif($row->{'menu'} eq "205")
+			{
+			$nacess_user = $row->{'tipo'};
+			$TUSER = 1;
+			$TCOMP = 1;
+			}
+		}
+	}
+
+# Inicializa
+print $query->header(-type=>"application/excel", -attachment=>"dados_empresa_$CODIGO.xls");
+
+# Create a new workbook called simple.xls and add a worksheet
+my $workbook  = Spreadsheet::WriteExcel->new('-');
+
+# Definie cores
+my $done_verde = $workbook->set_custom_color(40, '#008080');
+my $done_cinza = $workbook->set_custom_color(41, '#808080');
+my $done_azul = $workbook->set_custom_color(42, '#000080');
+my $done_cinza_escuro = $workbook->set_custom_color(43, '#333333');
+
+
+# Definie fonte
+my $font  = $workbook->add_format(font => 'Arial Unicode MS');
+
+
+# Define padrões visuais
+my $format_title = $workbook->add_format();
+$format_title->set_border(1);
+$format_title->set_font($font);
+$format_title->set_color('white');
+$format_title->set_bold();
+$format_title->set_size(12);
+$format_title->set_align('center');
+$format_title->set_align('vcenter');
+$format_title->set_bg_color($done_verde);
+
+my $format_title2 = $workbook->add_format();
+$format_title2->set_border(1);
+$format_title2->set_font($font);
+$format_title2->set_color('white');
+$format_title2->set_bold();
+$format_title2->set_size(12);
+$format_title2->set_align('center');
+$format_title2->set_align('vcenter');
+$format_title2->set_bg_color($done_verde);
+
+my $format_stitle = $workbook->add_format();
+$format_stitle->set_border(1);
+$format_stitle->set_font($font);
+$format_stitle->set_color('white');
+$format_stitle->set_size(10);
+$format_stitle->set_align('center');
+$format_stitle->set_align('vcenter');
+$format_stitle->set_bg_color($done_cinza);
+
+my $format_stitle2 = $workbook->add_format();
+$format_stitle2->set_border(1);
+$format_stitle2->set_font($font);
+$format_stitle2->set_color('white');
+$format_stitle2->set_size(10);
+$format_stitle2->set_align('center');
+$format_stitle2->set_align('vcenter');
+$format_stitle2->set_bg_color($done_cinza_escuro);
+
+my $format_stitle3 = $workbook->add_format();
+$format_stitle3->set_border(1);
+$format_stitle3->set_font($font);
+$format_stitle3->set_color('white');
+$format_stitle3->set_size(10);
+$format_stitle3->set_align('center');
+$format_stitle3->set_align('vcenter');
+$format_stitle3->set_bg_color($done_cinza_escuro);
+
+my $format_txt = $workbook->add_format();
+$format_txt->set_border(1);
+$format_txt->set_font($font);
+$format_txt->set_color('black');
+$format_txt->set_size(10);
+$format_txt->set_align('left');
+$format_txt->set_align('vcenter');
+
+$rv = $dbh->do("SET CLIENT_ENCODING TO 'WIN1252'");
+
+# Pega o nome da empresa
+$SQL = "select *, empresa.tipo as tipo_emp, empresa.codigo as cod_emp, empresa.nome as nome_emp, ativo from empresa where empresa.codigo = '$CODIGO' order by nome limit 1";
+$sth = &select($SQL);
+while($row = $sth->fetchrow_hashref)
+	{
+	$cod_emp = $row->{'cod_emp'};
+	$nome_emp = $row->{'nome_emp'};
+	$apelido = $row->{'apelido'};
+	$obs = $row->{'obs'};
+	$tipo_emp = $row->{'tipo_emp'};
+	}
+
+$w = 0;
+my @wsheet = ();
+if($TTI == 1)
+	{
+	@tcol = ();
+	# Cria aba dos dados de ti
+
+	# Localiza os agrupamentos com dados
+	#$SQL = "select distinct agrupo.codigo, agrupo.descrp, grupo_empresa.empresa as empresa from agrupo ";
+	$SQL = "select distinct agrupo.codigo, agrupo.descrp from agrupo ";
+	$SQL .= " join agrupo_grupo on agrupo.codigo = agrupo_grupo.agrupo ";
+	$sth9 = &select("select * from pg_tables where tablename='parceiro_agrupo'");
+	$rv9 = $sth9->rows();
+	if($rv9 > 0)
+		{
+		$SQL .= " join parceiro_agrupo on agrupo.codigo = parceiro_agrupo.agrupo and parceiro_agrupo.parceiro = '$LOGEMPRESA' ";
+		}
+	$SQL .= " join grupo_empresa on agrupo_grupo.grupo = grupo_empresa.grupo ";
+	if($CODIGO > 0)
+		{
+		$SQL .= " and grupo_empresa.empresa = '$CODIGO' ";
+		}
+	$SQL .= "order by descrp";
+	$sth3 = &select($SQL);
+	while($row3 = $sth3->fetchrow_hashref)
+		{
+		$w++;
+		$wsheet[$w] = $workbook->add_worksheet($row3->{'descrp'});
+		$wsheet[$w]->set_row(0, 10);
+		$wsheet[$w]->set_column(0, 0,  2);
+
+
+		$AGRUPO = $row3->{'codigo'};
+		$SQL = "select distinct grupo.codigo, grupo.descrp, grupo_empresa.empresa from grupo join agrupo_grupo on grupo.codigo = agrupo_grupo.grupo ";
+		$sth91 = &select("select * from pg_tables where tablename='parceiro_grupo'");
+		$rv91 = $sth91->rows();
+		if($rv91 > 0)
+		      {
+		      $SQL .= " join parceiro_grupo on grupo.codigo = parceiro_grupo.grupo and parceiro_grupo.parceiro = '$LOGEMPRESA' ";
+		      }
+		$SQL .= " left join grupo_empresa on grupo.codigo = grupo_empresa.grupo ";
+		if($CODIGO > 0)
+		      {
+		      $SQL .= " and grupo_empresa.empresa = '$CODIGO' ";
+		      }
+		if($AGRUPO =~ /[0-9]/)
+		      {
+		      $SQL .= " where agrupo_grupo.agrupo = '$AGRUPO' ";
+		      }
+
+		$SQL .= "order by grupo.descrp";
+		$sth31 = &select($SQL);
+
+		$last = "";
+		$lin = 1;
+		while($row31 = $sth31->fetchrow_hashref)
+			{
+			if($last ne $row31->{'codigo'})
+				{
+				$col = 1;
+				$linini = $lin;
+				$GRUPO = $row31->{'codigo'};
+				$SQL = "select *, tipo_grupo_item.supervisor as hidden from grupo_item join tipo_grupo_item on grupo_item.tipo = tipo_grupo_item.codigo ";
+				$SQL .= " where grupo_item.grupo = '$GRUPO' ";
+				if($nacess_ti ne "s")
+					{
+					$SQL .= " and tipo_grupo_item.supervisor is false ";
+					}
+				$SQL .= "order by seq";
+
+				$sth32 = &select($SQL);
+				$ncol = 0;
+				while($row32 = $sth32->fetchrow_hashref)
+					{
+					$codcol[$ncol] = $row32->{'codigo'};
+					$nomecol[$ncol] = $row32->{'descrp'};
+					$hiddecol[$ncol] = $row32->{'hidden'};
+					$ncol++;
+					}
+	
+
+
+
+				$SQL = "select distinct grupo_empresa.linha, grupo_empresa.empresa, grupo_empresa.endereco from grupo_empresa ";
+				$SQL .= "where ";
+				if($CODIGO > 0)
+					{
+					$SQL .= "grupo_empresa.empresa = '$CODIGO' and ";
+					}
+				$SQL .= " grupo_empresa.linha is not null and ";
+				$SQL .= "grupo_empresa.grupo = '$GRUPO' ";
+				$SQL .= "order by grupo_empresa.endereco, grupo_empresa.linha";
+				$sth33 = &select($SQL);
+				$endereco = "";
+				while($row33 = $sth33->fetchrow_hashref)
+					{
+					$lin++;
+					$col=1;
+					if($endereco ne $row33->{'endereco'})
+						{
+						if($endereco ne "")
+							{
+							# Mostra linhas em branco
+							for($g=0; $g<2; $g++)
+								{
+								$wsheet[$w]->set_row($lin, 20);
+								for($e=1; $e<=$ncol; $e++)
+									{
+									$wsheet[$w]->set_row($lin, 18);
+									$wsheet[$w]->write($lin, $e,  "", $format_txt);
+									}
+								$lin++;
+								}
+							 }
+						$endereco = $row33->{'endereco'};
+						$wsheet[$w]->set_row($lin, 20);
+						if($ncol > 1)
+							{
+							$wsheet[$w]->merge_range($lin, 1, $lin, $ncol, &get_end($endereco), $format_stitle2);
+							}
+						else
+							{
+							$wsheet[$w]->write($lin, 1,  &get_end($endereco), $format_stitle3);
+							}
+						$lin++;
+						for($e=0; $e<$ncol; $e++)
+							{
+							# Mostra nome dos campos
+							$wsheet[$w]->set_row($lin, 20);
+							$wsheet[$w]->set_column($col, $col, 30);
+							$wsheet[$w]->write($lin, $col,  $nomecol[$e], $format_stitle);
+							$col++;
+							}
+						$lin++;
+						$col=1;
+						}
+					else
+						{
+						$endereco = $row33->{'endereco'};
+						}
+					for($e=0; $e<$ncol; $e++)
+						{
+						if($codcol[$e] ne "")
+							{
+							$SQL = "select * from grupo_empresa where grupo_item = '".$codcol[$e]."' and linha = '".$row33->{'linha'}."' and grupo_empresa.grupo = '$GRUPO' ";
+							if($CODIGO > 0)
+								{
+								$SQL .= "and grupo_empresa.empresa = '$CODIGO' ";
+								}
+							if($row33->{'endereco'} ne "")
+								{
+								$SQL .= "and grupo_empresa.endereco = '$row33->{'endereco'}' ";
+								}
+							$SQL .= "limit 1 ";
+							$sth21 = &select($SQL);
+							$rv21 = $sth21->rows();
+							if($rv21 < 1)
+								{
+								$wsheet[$w]->write($lin, $col,  "", $format_txt);
+								}
+							else
+								{
+								while($row21 = $sth21->fetchrow_hashref)
+									{
+									$wsheet[$w]->write($lin, $col,  $row21->{'valor'}, $format_txt);
+									}
+								}
+							$col++;
+							}
+						}
+					}
+
+				if($endereco ne "")
+					{
+					$lin++;
+					# Mostra linhas em branco
+					for($g=0; $g<2; $g++)
+						{
+						$wsheet[$w]->set_row($lin, 20);
+						for($e=1; $e<=$ncol; $e++)
+							{
+							$wsheet[$w]->set_row($lin, 18);
+							$wsheet[$w]->write($lin, $e,  "", $format_txt);
+							}
+						$lin++;
+						}
+
+					# Define Título
+					$wsheet[$w]->set_row($linini, 22);
+					if($ncol > 1)
+						{
+						$wsheet[$w]->merge_range($linini, 1, $linini, $ncol, $row31->{'descrp'}, $format_title);
+						}
+					else
+						{
+						$wsheet[$w]->write($linini, 1,  $row31->{'descrp'}, $format_title2);
+						}
+					$lin+=3;
+					}
+				}
+			$last = $row31->{'codigo'};
+			}  
+		}
+	}
+
+if($TUSER == 1)
+	{
+	$w++;
+	@tcol = ();
+	# Cria aba dos usuários
+	$wsheet[$w] = $workbook->add_worksheet('Usuários');
+
+	# Definie formatos a serem aplicados na aba
+	$wsheet[$w]->set_row(0, 10);
+	$wsheet[$w]->set_row(1, 21);
+	$wsheet[$w]->set_column(0, 0,  2);
+	#$wsheet[$w]->set_column('B:N', 20);
+
+	$SQL = "select distinct tipo_grupo_item.codigo, tipo_grupo_item.descrp, seq, tipo_grupo_item.supervisor as hidden from user_item join tipo_grupo_item on user_item.tipo = tipo_grupo_item.codigo ";
+	if($nacess_user ne "s")
+		{
+		$SQL .= " and tipo_grupo_item.supervisor is false ";
+		}
+	$SQL .= "order by seq";
+
+	$sth2 = &select($SQL);
+	$rv2 = $sth2->rows();
+	$ncol = 0;
+	if($rv2 > 0)
+		{
+		while($row2 = $sth2->fetchrow_hashref)
+			{
+			$codcol[$ncol] = $row2->{'codigo'};
+			$nomecol[$ncol] = $row2->{'descrp'};
+			$hiddecol[$ncol] = $row2->{'hidden'};
+			$ncol++;
+			}
+		}
+
+	$lin = 2;
+	$col = 1;
+	$wsheet[$w]->set_row($lin, 16);
+	$wsheet[$w]->write($lin, $col,  'Nome', $format_stitle);
+	$tcol[$col] = 30;
+	$col++;
+	for($e=0; $e<$ncol; $e++)
+		{
+		$wsheet[$w]->write($lin, $col,  $nomecol[$e], $format_stitle);
+		$weight = length($nomecol[$e]);
+		if($weight > 20)
+			{
+			$tcol[$col] = $weight;
+			}
+		else
+	      		{
+	      		$tcol[$col] = 20;
+	      		}
+		$col++;
+		}
+	# Define Título
+	$wsheet[$w]->merge_range(1, 1, 1, $col-1, "Dados dos Usuários", $format_title);
+
+	# Mostra os dados
+	$lin++;
+	$col = 1;
+	$SQL = "select * from empresa_user where empresa_user.empresa = '$CODIGO' ";
+	$sth8 = &select($SQL);
+	$rv8 = $sth8->rows();
+	if($rv8 > 0)
+		{
+		while($row8 = $sth8->fetchrow_hashref)
+			{
+			$wsheet[$w]->set_row($lin, 16);
+			$wsheet[$w]->write($lin, $col,  $row8->{'nome'}, $format_txt);
+			if($tcol[$col] < length($row8->{'nome'}))
+				{
+				$tcol[$col] = length($row8->{'nome'});
+				}
+			for($e=0; $e<$ncol; $e++)
+				{
+				$sth4 = &select("select * from empresa_user_adicional where user_item = '$codcol[$e]' and empresa_user_adicional.user = '$row8->{'codigo'}' limit 1 ");
+				$col++;
+				$wsheet[$w]->write($lin, $col,  "", $format_txt);
+				while($row4 = $sth4->fetchrow_hashref)
+					{
+					$wsheet[$w]->write($lin, $col,  $row4->{'valor'}, $format_txt);
+					if($tcol[$col] < length($row4->{'valor'}))
+						{
+						$tcol[$col] = length($row4->{'valor'});
+						}
+					}
+				}
+			$lin++;
+			$col = 1;
+			}
+		}
+	$col = 1;
+	for($e=1; $e<@tcol; $e++)
+		{
+		$wsheet[$w]->set_column($col, $col,  $tcol[$e]*1.1);
+		$col++;
+		}
+	for($g=0; $g<10; $g++)
+		{
+		$wsheet[$w]->set_row($lin, 18);
+		for($e=1; $e<@tcol; $e++)
+			{
+			$wsheet[$w]->write($lin, $e,  "", $format_txt);
+			}
+		$lin++;
+		}
+	}
+
+if($TCOMP == 1)
+	{
+	$w++;
+	@tcol = ();
+
+	# Cria aba dos computadores
+	$wsheet[$w] = $workbook->add_worksheet('Computadores');
+
+	# Definie formatos a serem aplicados na aba
+	$wsheet[$w]->set_row(0, 10);
+	$wsheet[$w]->set_row(1, 22);
+	$wsheet[$w]->set_column(0, 0,  2);
+
+	$SQL = "select distinct tipo_grupo_item.codigo, tipo_grupo_item.descrp, seq, tipo_grupo_item.supervisor as hidden from comp_item join tipo_grupo_item on comp_item.tipo = tipo_grupo_item.codigo ";
+	if($nacess_user ne "s")
+		{
+		$SQL .= " and tipo_grupo_item.supervisor is false ";
+		}
+	$SQL .= "order by seq";
+	$sth2 = &select($SQL);
+	$rv2 = $sth2->rows();
+	$ncol = 0;
+	if($rv2 > 0)
+		{
+		while($row2 = $sth2->fetchrow_hashref)
+			{
+			$codcol[$ncol] = $row2->{'codigo'};
+			$nomecol[$ncol] = $row2->{'descrp'};
+			$hiddecol[$ncol] = $row2->{'hidden'};
+			$ncol++;
+			}
+		}
+
+	$lin = 2;
+	$col = 1;
+	$wsheet[$w]->set_row($lin, 20);
+	$wsheet[$w]->write($lin, $col,  'DTAG', $format_stitle);
+	$tcol[$col] = 20;
+	$col++;
+	$wsheet[$w]->write($lin, $col,  'Nome', $format_stitle);
+	$tcol[$col] = 30;
+	$col++;
+	$wsheet[$w]->write($lin, $col,  'Endereço', $format_stitle);
+	$tcol[$col] = 40;
+	$col++;
+	$wsheet[$w]->write($lin, $col,  'Descrição', $format_stitle);
+	$tcol[$col] = 30;
+	$col++;
+	for($e=0; $e<$ncol; $e++)
+		{
+		$wsheet[$w]->write($lin, $col,  $nomecol[$e], $format_stitle);
+		$weight = length($nomecol[$e]);
+		if($weight > 20)
+			{
+	      		$tcol[$col] = $weight;
+	      		}
+		else
+	      		{
+	      		$tcol[$col] = 20;
+	      		}
+		$col++;
+		}
+	$wsheet[$w]->write($lin, $col,  'Auditoria', $format_stitle);
+	$tcol[$col] = 30;
+	$col++;
+	# Define Título
+	$wsheet[$w]->merge_range(1, 1, 1, $col-1, "Dados dos Computadores", $format_title);
+	# Mostra dados adicionais
+	$lin++;
+	$col = 1;
+	$SQL = "select *, to_char(dtag, '000000') as dtag_format, empresa_endereco.endereco as rua from empresa_comp left join empresa_endereco on empresa_comp.endereco = empresa_endereco.codigo where empresa_comp.empresa = '$CODIGO' ";
+	$sth8 = &select($SQL);
+	$rv8 = $sth8->rows();
+	if($rv8 > 0)
+		{
+		while($row8 = $sth8->fetchrow_hashref)
+			{
+			$wsheet[$w]->set_row($lin, 20);
+			$wsheet[$w]->write($lin, $col,  $row8->{'dtag_format'}, $format_txt);
+			if($tcol[$col] < length($row8->{'dtag_format'}))
+				{
+				$tcol[$col] = length($row8->{'dtag_format'});
+				}
+			$col++;
+			$wsheet[$w]->write($lin, $col,  $row8->{'nome'}, $format_txt);
+			if($tcol[$col] < length($row8->{'nome'}))
+				{
+				$tcol[$col] = length($row8->{'nome'});
+				}
+			$col++;
+			if($row8->{'rua'} ne "")
+				{
+				$endereco = $row8->{'rua'};
+				}
+			if($row8->{'cidade'} ne "")
+				{
+				if($endereco ne "")
+					{
+					$endereco .= " - ";
+					}
+				$endereco .= $row8->{'cidade'};
+				}
+			if($row8->{'uf'} =~ /[a-z]/i)
+				{
+				if($endereco ne "")
+					{
+					$endereco .= " / ";
+					}
+				$endereco .= $row8->{'uf'};
+				}
+			$wsheet[$w]->write($lin, $col,  $endereco, $format_txt);
+			if($tcol[$col] < length($endereco))
+				{
+				$tcol[$col] = length($endereco);
+				}
+			$col++;
+			$wsheet[$w]->write($lin, $col,  $row8->{'descrp'}, $format_txt);
+			if($tcol[$col] < length($row8->{'descrp'}))
+				{
+				$tcol[$col] = length($row8->{'descrp'});
+				}
+			for($e=0; $e<$ncol; $e++)
+				{
+				$sth4 = &select("select * from empresa_comp_adicional where comp_item = '$codcol[$e]' and empresa_comp_adicional.comp_item = '$row8->{'codigo'}' limit 1 ");
+				$col++;
+				$wsheet[$w]->write($lin, $col,  "", $format_txt);
+				while($row4 = $sth4->fetchrow_hashref)
+					{
+					$wsheet[$w]->write($lin, $col,  $row4->{'valor'}, $format_txt);
+					if($tcol[$col] < length($row8->{'valor'}))
+						{
+						$tcol[$col] = length($row8->{'valor'});
+						}
+					}
+				}
+			$col++;
+			$wsheet[$w]->write($lin, $col,  "", $format_txt);
+			$wsheet[$w]->write($lin, $col,  $row8->{'obs'}, $format_txt);
+			if($tcol[$col] < length($row8->{'obs'}))
+				{
+				$tcol[$col] = length($row8->{'obs'});
+				}
+			$lin++;
+			$col = 1;
+			}
+		}
+	$col = 1;
+	for($e=1; $e<@tcol; $e++)
+		{
+		$wsheet[$w]->set_column($col, $col,  $tcol[$e]*1.1);
+		$col++;
+		}
+	for($g=0; $g<10; $g++)
+		{
+		$wsheet[$w]->set_row($lin, 20);
+		for($e=1; $e<@tcol; $e++)
+			{
+			$wsheet[$w]->write($lin, $e,  "", $format_txt);
+			}
+		$lin++;
+		}
+	}
+
+
+foreach $worksheet($workbook->sheets())
+	{
+	$worksheet->set_landscape();
+	$worksheet->hide_gridlines(2);
+	$worksheet->set_paper(9);
+	$worksheet->set_margins(0.5);
+	$worksheet->fit_to_pages(1);
+
+	# Configura o cabeçalho de impressão
+	$worksheet->set_start_page(1);
+	$worksheet->set_header('&L&A', 0.25);
+	$worksheet->set_footer('&L'.$nome_emp.' ('.$CODIGO.')&RPágina &P de &N', 0.25);
+	}
+
+
+$workbook->close();
+
+
+
+
+sub get_end
+	{
+	my ($end_cod) = @_;
+	my $endereco = "";
+
+	if($end_cod ne "")
+		{
+		my $sth8 = &select("select *, empresa_endereco.endereco as rua from empresa_endereco where empresa_endereco.codigo = '$end_cod' ");
+		while(my $row8 = $sth8->fetchrow_hashref)
+			{
+			if($row8->{'rua'} ne "")
+				{
+				$endereco = $row8->{'rua'};
+				}
+			if($row8->{'cidade'} ne "")
+				{
+				if($endereco ne "")
+					{
+					$endereco .= " - ";
+					}
+				$endereco .= $row8->{'cidade'};
+				}
+			if($row8->{'uf'} =~ /[a-z]/i)
+				{
+				if($endereco ne "")
+					{
+					$endereco .= " / ";
+					}
+				$endereco .= $row8->{'uf'};
+				}
+			}
+		}
+	return $endereco;
+	}

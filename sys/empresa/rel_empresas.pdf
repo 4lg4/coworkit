@@ -1,0 +1,394 @@
+#!/usr/bin/perl
+
+
+use PDF::Reuse;
+
+$nacess = "201";
+require "../cfg/init.pl";
+$SHOW = &get('SHOW');
+$CODIGO = &get('COD');
+$ID = &get('ID');
+
+# print $query->header({charset=>iso-8859-1});
+# debug($ID);
+# exit;
+
+$rv = $dbh->do("SET CLIENT_ENCODING TO 'WINDOWS-1254'");
+if($dbh->err ne "")
+	  {
+	  	 print $query->header({charset=>iso-8859-1});
+print<<END;
+	<html><body style='margin-top: 40%'>
+		<center>Falha no acesso ao banco de dados!!!<br><br>Erro número : $dbh->err<br>Descrição: $dbh->errstr</center>
+	</body></html>
+END
+	  exit;
+	  }
+	  
+require "./rel_empresas_sql.pl";
+
+
+
+if($rv > 0)
+	{
+	# print $query->header('application/pdf');
+	print "Content-type: application/octet-stream\n"; 
+	print "Content-Disposition:attachment;filename=empresa.pdf\n\n";
+    
+	prFile( {
+			FitWindow  => 1,
+			CenterWindow => 1
+			} );
+	prCompress(1);
+
+	#prForm( {
+	#		file => 'listagem_modelo.pdf',
+	#		page => 1
+	#		} );
+
+	$page = 1;
+	$L = 785;
+	$C = 43;
+	$fc = "";
+
+
+	while($row = $sth->fetchrow_hashref)
+		{
+		prFont("HB");
+		
+		&pgHead();
+
+		# Letra inicial
+		if($fc ne $row->{'letra_inicial'})
+			{
+			if($fc ne "")
+				{
+				$L -= 20;
+				}
+			$fc = $row->{'letra_inicial'};
+			prColor(23, 54, 93);
+			prFontSize(14);
+			prText($C, $L, $fc, "left");
+			
+			$L -= 4;
+			prColor(0, 0, 0);
+			prAdd("q\n$C $L 240 1 re\n0.5 0 0 rg\nf\nQ\n");
+			}
+
+		# Nome da Empresa
+		$L -= 20;
+		prFontSize(12);
+		prColor(23, 54, 93);
+		#prText($C, $L, "· $row->{'emp_nome'}", "left");
+
+		if($L < 70)
+			{
+			&pgBreak;
+			}
+
+		prFont("HB");
+		prFontSize(12);
+		prColor(23, 54, 93);
+
+		prAdd("q\n$C ".($L+2)." 4 4 re\n0 0 0.5 rg\nf\nQ\n");
+
+		&left("\\s\\s$row->{'emp_nome'}", $C, "HB", 12, 250);
+		prColor(0, 0, 0);
+		prFontSize(10);
+		$L += 4;
+		
+		# Apelido (se tiver)
+		#if($row->{'emp_apelido'} ne "")
+		#	{
+		#	&left($row->{'emp_apelido'}, $C, "HB", 10, 250);
+		#	}
+
+
+		prFont("H");
+		prFontSize(8);
+		
+		# Documentos
+		$sth2 = &select("select *, tipo_doc.descrp as doc_descr, empresa_doc.descrp as doc_valor from empresa_doc join tipo_doc on empresa_doc.doc = tipo_doc.codigo where empresa_doc.empresa = '$row->{'emp_codigo'}' ");
+		$rv2 = $sth2->rows();
+		if($rv2 > 0)
+			{
+			$docs = "";
+			while($row2 = $sth2->fetchrow_hashref)
+				{
+				$ndoc = $row2->{'doc_descr'};
+				$ndoc =~ s/ /\\s/gm;
+				$docs .= "$ndoc:\\s$row2->{'doc_valor'}\\t "
+				}
+			&left($docs, $C, "H", 8, 250);
+			}
+
+		
+		#Endereços
+		$n=0;
+		$qt_end=0;
+		@contatos = ();
+		$sth3 = &select("select *, empresa_endereco.codigo as end_codigo, tipo_endereco.descrp as end_tipo_descr from empresa_endereco join tipo_endereco on empresa_endereco.tipo = tipo_endereco.codigo where empresa_endereco.empresa = '$row->{'emp_codigo'}' ");
+		$rv3 = $sth3->rows();
+		if($rv3 > 0)
+			{
+			$L -= 10;
+			while($row3 = $sth3->fetchrow_hashref)
+				{
+				# Contatos
+				$sth4 = &select("select *, initcap(tipo_contato.descrp) as fone_tipo_descr from endereco_contato join tipo_contato on endereco_contato.tipo = tipo_contato.codigo where endereco_contato.endereco = '$row3->{'end_codigo'}' ");
+				$rv4 = $sth4->rows();
+				if($rv4 > 0)
+					{
+					$contatos[$n] = "";
+					$contatos[$n+1] = "Contatos $row3->{'end_tipo_descr'}:";
+					$n+=2;
+					while($row4 = $sth4->fetchrow_hashref)
+						{
+						$contatos[$n] = "\\t$row4->{'fone_tipo_descr'}: $row4->{'valor'}";
+						if($row4->{'nome'} ne "")
+							{
+							$contatos[$n] .= " - ".$row4->{'nome'};
+							}
+						$n++;
+						}
+					}
+
+				if($row3->{'endereco'} ne "" || $row3->{'cep'} ne "" || $row3->{'cidade'} ne "")
+					{
+					$qt_end++;
+					$string = "End. $row3->{'end_tipo_descr'}: $row3->{'endereco'}";
+					if($row3->{'complemento'} ne "")
+						{
+						$string .= " - $row3->{'complemento'}";
+						}
+					&left($string, $C, "H", 8, 250);
+					&left("Bairro: $row3->{'bairro'}", $C, "H", 8, 250);
+					prText($C, $L, "CEP: $row3->{'cep'}", "left");
+					if($row3->{'uf'} =~ /[A-Za-z]/)
+						  {
+						  $string = "Cidade:\\s$row3->{'cidade'} / $row3->{'uf'}";
+						  }
+					else
+						  {
+						  $string = "Cidade:\\s$row3->{'cidade'}";
+						  }
+					&left($string, $C+70, "H", 8, 250);
+				
+					$L -= 10;
+					}
+				}
+			}
+
+		if($L < 70)
+			{
+			&pgBreak;
+			}
+
+		# Se tiver contatos, imprime
+		if($n > 0)
+			{
+			if($qt_end > 0)
+				{
+				for($fg=1; $fg<$n; $fg++)
+					{
+					&left($contatos[$fg], $C, "H", 8, 250);
+					}
+				}
+			else
+				{
+				$L+=10;
+				for($fg=2; $fg<$n; $fg++)
+					{
+					&left($contatos[$fg], $C-22, "H", 8, 250);
+					}
+				}
+			}
+
+# Dados Bancarios  -----------------------------------------------------------------------------------------------------
+		&left("", $C, "H", 8, 250); # set new line
+		&left("Dados Bancários:", $C, "H", 8, 250);
+		$SQL = "select *, bancos.descrp as banco_desc from empresa_banco join bancos on empresa_banco.banco = bancos.codigo where empresa = '$row->{'emp_codigo'}'";
+		$sth_banco = &select($SQL);
+		$rv_banco = $sth_banco->rows();
+		if($rv_banco > 0)
+			{
+			# $banco = "";
+			while($row_banco = $sth_banco->fetchrow_hashref)
+				{
+				# $banco =~ s/ /\\s/gm;
+				&left("$row_banco->{'banco_desc'} - Ag: $row_banco->{'agencia'} - CC: $row_banco->{'conta'}", $C+22, "H", 8, 250);
+				&left("\\t Obs: $row_banco->{'obs'}", $C+22, "H", 8, 250);
+				}
+			}
+			
+# Grupos Relacionados  -------------------------------------------------------------------------------------------------
+		&left("", $C, "H", 8, 250); # set new line
+		&left("Grupos Relacionados:", $C, "H", 8, 250);
+		$SQL = "select *, tipo_relacionamento.descrp as descrp from empresa_relacionamento join tipo_relacionamento on empresa_relacionamento.relacionamento = tipo_relacionamento.codigo where empresa = '$row->{'emp_codigo'}'";
+		$sth_grupo = &select($SQL);
+		$rv_grupo = $sth_grupo->rows();
+		if($rv_grupo > 0)
+			{
+			$grupo = "";
+			while($row_grupo = $sth_grupo->fetchrow_hashref)
+				{
+				# $banco =~ s/ /\\s/gm;
+				$grupo .= "$row_grupo->{'descrp'}, ";
+				}
+			&left($grupo, $C+22, "H", 8, 250);
+			}			
+
+		if($L < 50)
+			{
+			&pgBreak;
+			}
+		}
+		
+	$L = 32;
+	prFontSize(8);
+	prText(555, $L, "Página $page", "right");
+	prPage();
+	prEnd();
+	}
+
+
+sub pgHead
+	{
+	# Cabeçalho
+	if($L == 785 && $C == 43)
+		{
+		prFontSize(14);
+		prColor(23, 54, 93);
+		prText($C, $L, "Listagem dos Contatos", "left");
+		$L -= 35;
+		}
+
+	prFont("H");
+	prFontSize(8);
+	prColor(0, 0, 0);
+
+	}
+
+sub pgBreak
+	{
+	if($C == 43)
+		{
+		$L = 750;
+		$C = 315;
+		}
+	else
+		{
+		$L = 32;
+		prFontSize(8);
+		prText(555, $L, "Página $page", "right");
+		prPage();
+
+		$page++;
+		$L = 785;
+		$C = 43;
+
+		&pgHead;
+		}
+	}
+
+
+sub prColor
+	{
+	my($intRed, $intGreen, $intBlue) = @_;
+	$intSaveR = $intRed;
+	$intSaveG = $intGreen;
+	$intSaveB = $intBlue;
+	prAdd(($intRed/256)." ".($intGreen/256)." ".($intBlue/256)." rg");
+	}
+
+sub left
+	{
+	my $string = shift;
+	my $x = shift || 25;
+	my $fnt = shift || "H";
+	my $tam = shift || 8;
+	my $r = shift || 250;
+	my @WM;
+	my @WM2;
+	@WM = split(' ',$string);
+	my $t = 0;
+	my $t2=0;
+	$WM2[0] = "";
+	while($t < @WM)
+		{
+		if($L < 50)
+			{
+			&pgBreak;
+			$x = $C;
+			}
+		$WM[$t] =~ s/\\t/          /gm;
+		$WM[$t] =~ s/\\s/ /gm;
+		if(prStrWidth($WM2[$t2].$WM[$t], $fnt, $tam) > $r)
+			{
+			$t2++;
+			}
+		$WM2[$t2] .= $WM[$t]." ";
+		$t++;
+		}
+	for($f=0; $f < @WM2; $f++)
+		{
+		prText($x, $L, @WM2[$f]);
+		$L-=($tam+1);
+		}
+	}
+
+sub justify
+	{
+	my $string = shift;
+	my $x = shift || 25;
+	my $fnt = shift || "H";
+	my $rend = shift || 570;
+	my $r = $rend - $x;
+	my @WM;
+	my @WM2;
+	@WM = split(' ',$string);
+	my $t=0;
+	my $t2=0;
+	$WM2[0] = "";
+	while($t < @WM)
+		{
+		if(prStrWidth($WM2[$t2].$WM[$t], $fnt, 8) > $r)
+			{
+			$t2++;
+			}
+		$WM2[$t2] .= $WM[$t]." ";
+		$t++;
+		}
+	for($f=0; $f < @WM2-1; $f++)
+		{
+		$WM2[$f] = substr($WM2[$f],0,-1);
+		$t=length($WM2[$f])-2;
+		while(prStrWidth(@WM2[$f], $fnt, 8) < $r)
+			{
+			if(substr($WM2[$f], $t, 1) eq " ")
+				{
+				$WM2[$f] = substr($WM2[$f], 0, $t)." ".substr($WM2[$f], $t);
+				}
+			if($t < 1)
+				{
+				$t = length($WM2[$f])-2;
+				}
+			else
+				{
+				$t--;
+				}
+			}
+		my $p = rindex($WM2[$f], " ");
+		$WM2[$f] =~ s/[#]/  /gm;
+		prText($x, $L, substr($WM2[$f], 0, $p));
+		prText($rend-1, $L, substr($WM2[$f], $p), 'right');
+		$L-=9;
+		}
+	prText($x, $L, @WM2[$f]);
+	if($L < 75)
+		{
+		&fimR;
+		&headR;
+		}
+	}
+

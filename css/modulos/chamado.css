@@ -1,0 +1,707 @@
+/* formulario */
+.chamado_form {
+	width:100%;
+	height:100%;
+}
+
+/* 
+*   Place holder colors 
+*       cor do texto temporario
+*/
+.chamado_form ::-webkit-input-placeholder {
+	color: #0075CA;
+}
+
+.chamado_form :-moz-placeholder /* Firefox 18- */ { 
+	color: #0075CA;
+}
+
+.chamado_form ::-moz-placeholder /* Firefox 19+ */ {  
+	color: #0075CA;
+}
+
+.chamado_form :-ms-input-placeholder {  
+	color: #0075CA;
+}
+
+
+
+
+
+
+/* container dados principais  */
+.chamado_form #dados_container
+	{
+	width:30%;
+	margin-right:2%;
+	margin-top:1%;
+	/* border:1px solid blue; */
+	float:right;
+	}
+	
+/* ajuste visual dtouchbox para funcionamento em colunas */
+.chamado_form #dados_container .DTouchBoxes
+	{
+	margin:2%;
+	margin-left:0px;
+	margin-right:0px;
+	margin-bottom: 3%;
+	}
+	
+	
+/* container acoes  */
+.chamado_form #acoes_container
+	{
+	width:65%;
+	margin-right:3%;
+	margin-top:1%;
+	/* border:1px solid red; */
+	float:right;
+    position: relative;
+	}
+
+	
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+/* 
+*   acoes container 
+*       template demais acoes 
+*/
+.chamado_form .acao_item_container {
+	width      : 90%;
+	height     : auto;
+	position   : relative;
+	float      : right;
+    margin-top : 2%;
+    /* transition: all 0.3s ease; 
+    height: 165px; */
+}
+/* item data */
+.chamado_form .acao_item_container .acao_item_data_container{
+    margin-bottom:1%;
+}
+/* item data */
+
+
+/* item tempo */
+.chamado_form .acao_item_container .acao_item_tempo {
+    float: left;
+    width: 19%;
+    position: relative;
+    margin-left:1%;
+}
+
+/* item cfg */
+.chamado_form .acao_item_container .acao_item_cfg {
+    float: left;
+    width: 19%;
+    position: relative;
+    margin-left:1%;
+    height: 100%;
+}
+/* 
+* V2 alpha 1
+.chamado_form .acao_item_container .acao_item_cfg .acao_item_cfg_interno {
+    margin-bottom: 2%;
+    height: 99%;
+}
+*/
+.chamado_form .acao_item_container .acao_item_cfg .acao_item_cfg_sigiloso {
+    height: 100%;
+}
+/* 
+* V2 alpha 1
+.chamado_form .acao_item_container .acao_item_cfg .acao_item_cfg_interno div, 
+*/
+.chamado_form .acao_item_container .acao_item_cfg .acao_item_cfg_sigiloso div{
+    font-size: 14px;
+    line-height: 2;
+}
+
+/* item descrp */
+.chamado_form .acao_item_container .acao_item_descrp_container{
+    /* margin-top:1%; */
+}
+.chamado_form .acao_item_container .acao_item_descrp {
+    float:left;
+    margin-right:1%;
+    width:35%;
+}
+.acao_item_descrp_full {
+    width:100% !important;
+}
+
+.chamado_form .acao_item_container .acao_item_executor_descrp{
+    float:left;
+    width:64%;
+}
+
+/* item protocolo */
+.chamado_form .acao_item_container .acao_item_protocolo {
+    float:left;
+    width:23%;
+    margin-right:1%;
+    height:100%;
+    white-space: nowrap;
+    font-weight:bold;
+    text-align:center;
+}
+.chamado_form .acao_item_container .acao_item_usuario {
+    float:left;
+    width:35%;
+    height:100%;
+    margin-right:1%;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.chamado_form .acao_item_container .acao_item_data {
+    float:right;
+    width:29%;
+    height:100%;
+    text-align:center;
+    white-space: nowrap;
+}
+.chamado_form .acao_item_container .acao_item_data_execucao {
+    float:right;
+    width:29%;
+    height:100%;
+    text-align:right;
+    white-space: nowrap;
+}
+/* anexos */
+.chamado_form .acao_item_container .acao_item_anexos {
+    /*
+    width:30%;
+    float:left;
+    height:90px;
+    */
+    display:none;
+}
+.chamado_form .acao_item_container .acao_item_executor {
+    /* margin-bottom:1%; */
+    width:60%;
+    float:left;
+    height:100%;
+}
+.chamado_form .acao_item_container .acao_item_encaminhar {
+    width      : 19%;
+    float      : left;
+    height     : 100%;    
+    text-align : center;
+    cursor     : pointer;
+    background : #d0d0d0;
+    color      : #666;
+}
+.chamado_form .acao_item_container .acao_item_encaminhar span, .chamado_form .acao_item_container .acao_item_executar span {
+    display    : block;
+    height: 100%;
+    line-height: 3;
+}
+.chamado_form .acao_item_container .acao_item_encaminhar:hover, .chamado_form .acao_item_container .acao_item_executar:hover {
+    background : #c8d9f2;
+    color      : #333;
+}
+
+.chamado_form .acao_item_container .acao_item_executar {
+    width      : 19%;
+    float      : left;
+    height     : 100%;    
+    text-align : center;
+    cursor     : pointer;
+    background : #d0d0d0;
+    color      : #666;
+    margin-right : 1%;
+}
+
+.chamado_form .acao_item_container .acao_item_tipo{
+    width:40%;
+    float:left;
+    margin-left:1%;
+    height:100%;
+}
+
+.chamado_form .descrp_show {
+    display          : block;
+    width            : 98%;
+    height           : 100%;
+    overflow         : auto;
+    color            : #333;
+    padding-left     : 1%;
+    padding-right    : 1%;
+    background-color : #fff;
+}
+
+.chamado_form .input_show {
+    display          : block;
+    width            : 98%;
+    height           : 100%;
+    overflow         : auto;
+    color            : #333;
+    padding-left     : 1%;
+    padding-right    : 1%;
+    background-color : #fff;
+    font-size        : 14px;
+    line-height      : 2;
+}
+
+
+.acao_item_encaminhar_editar {
+    width:60% !important;
+    margin-left:0px !important;
+}
+.acao_item_executar_editar {
+    /* width:49% !important; */
+    width: 80% !important;
+}
+.acao_item_tipo_editar {
+    width:30% !important;
+}
+
+/* 
+*   acoes first container 
+*       primeiro container com a primeira acao
+*/
+.chamado_form #acoes_first_container {
+	width    : 90%;
+	height   : auto;
+	position : relative;
+	float    : left;
+    left     : 1%;
+    top      : 7px;
+    transition : all 0.2s ease;
+    z-index  : 5;
+}
+
+/* dados protocolo */
+.chamado_form #acoes_first_container #protocolo_container {
+}
+
+/* data_previsao */
+.chamado_form #acoes_first_container #data_previsao_container {
+}
+.chamado_form #acoes_first_container #data_previsao_container_datetime {
+	float:left;
+    width: 65%;
+    position:relative;
+}
+.chamado_form #acoes_first_container #data_previsao_container_time {
+	float:right;
+    width:34%;
+    position:relative;
+    margin-left:1%;
+}
+    
+    
+/* solicitante e solicitacao */
+.chamado_form #acoes_first_container #solicitante_solicitacao_container {
+}
+	
+.chamado_form #acoes_first_container #solicitante_solicitacao_container_solicitante {
+	width: 100%;
+    position:relative;
+}
+	
+.chamado_form #acoes_first_container #solicitante_solicitacao_container_solicitacao {
+	width: 100%;
+    position:relative;
+    margin-top: 1%;
+    margin-bottom: 1%;
+}    
+    
+/* responsavel */
+.chamado_form #acoes_first_container #responsavel_container {
+    float:left;
+    width:35%;
+    height:100%;
+    margin-right:1%;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+
+/* protocolo */
+.chamado_form #acoes_first_container #protocolo {
+    white-space: nowrap;
+    font-weight:bold;
+}
+.chamado_form #acoes_first_container #protocolo_protocolo {
+    float:left;
+    width:23%;
+    margin-right:1%;
+    height:100%;
+    white-space: nowrap;
+    font-weight:bold;
+    text-align:center;
+}
+.chamado_form #acoes_first_container #protocolo_data {
+    float:right;
+    width:35%;
+    height:100%;
+    text-align:right;
+    white-space: nowrap;
+}
+      
+/* 
+*   chamado acoes
+*       container das demais acoes do chamados
+*/
+.chamado_form #chamado_acoes {
+	width          : 90%;
+	height         : auto;
+	position       : relative;
+	float          : right;
+    padding-bottom : 30px;
+    margin-top     : 1%;
+}
+
+
+
+
+
+/* 
+*   DTouchRadio 
+*       lista, de chamados 
+*       overrides para 
+*/
+#chamados_list_container {
+    margin-top   : 1%;
+    margin-right : 1%;
+    width        : 99%;
+    min-height   : 98%;
+    height       : auto !important;
+}
+
+#chamados_list_container .DTouchRadio_title div, #chamados_list_container .chamado_list_line div {
+    display: inline-block;
+}
+
+/* teste new look */
+#chamados_list_container .DTouchRadio_title {
+    /* background: #f0f0f0; */
+    border-bottom: 2px solid #3167b3;
+    height: 25px;
+    /* font-size: 14px; */
+    font-weight: bold;
+}
+
+#chamados_list_container .DTouchRadio_title div {
+    /* font-size: 14px; */
+    font-weight: bold;
+}
+
+#chamados_list_container .DTouchRadio_items {
+    color: #333;
+    text-align: center;
+}
+
+
+#chamados_list_container .icon_search {
+    background-image: url("/img/field/field_search.png");
+}
+
+/*
+*   search form
+*/
+.eos_template_chamado_filter {
+    /*
+    width  : 100%;
+    height : 100%;
+    */
+}
+
+.filter_date_ini {
+    float        : left;
+    width        : 49%;
+    margin-right : 1%;
+}
+
+.filter_date_end {
+    float : left;
+    width : 50%;
+}
+/*
+.filter_empresa {
+    clear : both;
+    width  : 100%;
+    height : 30px;
+}
+*/
+
+/* lista de chamados */
+.chamado_form .tkt_list_line {
+    min-width:930px;
+    width:100%;
+}
+
+.chamado_form .tkt_list_line div {
+    display     : inline-block;
+    overflow    : hidden;
+    /* white-space : nowrap; */
+    text-align  : left;
+    text-overflow: ellipsis;
+    height: 18px;
+}
+
+.chamado_form .tkt_list_line div:nth-child(7) {
+    text-align : center;
+}
+
+.chamado_form #chamados_list_container .DTouchRadio_items:hover .DTouchRadio_descrp .tkt_list_line div {
+    font-weight:bold;
+}
+
+.chamado_form .tkt_list_title {
+    min-width:930px;
+    width:100%;
+}
+
+.chamado_form .tkt_list_line_icon {
+    background-image    : url("/img/ui/table_sub.png");
+    background-position : top center;
+    background-size     : 20px 20px;
+    background-repeat   : no-repeat;
+    height              : 20px;
+}
+
+.chamado_form .tkt_list_title div {
+    display     : inline-block;
+    overflow    : hidden;
+    white-space : nowrap;
+    text-align  : center;
+}
+
+.chamado_form .tkt_list_title_sub {
+    min-width:930px;
+    width:100%;
+    /* border-bottom:1px solid #D8D8D8; */
+}
+.chamado_form .tkt_list_title_sub div {
+    display     : inline-block;
+    overflow    : hidden;
+    white-space : nowrap;
+    text-align  : center;
+    font-weight : bold;
+    color       : #929292;
+    background-color  : #EAEAEA;
+}
+.chamado_form .tkt_list_title_sub div:first-child {
+    background-color : transparent;
+}
+
+.chamado_form .tkt_list_line_sub {
+    min-width:930px;
+    width:100%;
+    border-bottom:1px dotted #D8D8D8;
+}
+
+.chamado_form .tkt_list_line_sub div {
+    display     : inline-block;
+    overflow    : hidden;
+    white-space : nowrap;
+    text-align  : left;
+    text-overflow: ellipsis;
+}
+
+.chamado_form #chamados_list_container .DTouchRadio_descrp .tkt_list_line_sub:last-child {
+    border-bottom:none;
+}
+
+.chamado_form .DTouchPages_right {
+    overflow: auto;    
+}
+
+
+/**
+ *  Cliente do Parceiro
+ */
+.chamado_form .hidden {
+    display:none;
+}
+.chamado_form .cliente_parceiro_descrp {
+    width : 100% !important;
+}
+.chamado_form #tkt_all_tab {
+    display:none;
+}
+
+/*
+    Core V3 tests
+
+.chamado_form #chamados_list_container div.DTouchRadio_items:nth-child(5) {
+    margin-top:40px;
+}
+
+.chamado_form #chamados_list_container .DTouchRadio_title {
+    position:fixed;
+    background-color: #f0f0f0;
+    width: 92%;
+}
+*/
+
+
+/*
+.acao_last_line {
+    transition : all 0.3s ease;
+}
+
+.acao_last_line_none {
+    height  : 0px;
+    opacity : 1;
+}
+
+.acao_last_line_none div {
+    height  : 0px;
+    opacity : 1;
+}
+*/
+
+
+
+/* Status */
+.chamado_form #tkt_status {
+    width: 30px;
+    height: 150px;
+    position: relative;
+    float: left;
+    margin-top: 1%;
+    background-color : #FF9700;
+    opacity : 0;
+    /* transition: all 0.3s ease; */
+}
+.chamado_form .tkt_status_show {
+    opacity : 0.8 !important;
+}
+.chamado_form #tkt_status span {
+    
+    display : block;
+    width : 140px;
+    text-align : center;
+    margin-top: 61px;
+    margin-left: -58px;
+    transform: rotate(-90deg);
+    font-size: 16px;
+    letter-spacing: 4px;
+    color : #fff;
+    
+    /* Safari */
+    -webkit-transform: rotate(-90deg);
+
+    /* Firefox */
+    -moz-transform: rotate(-90deg);
+
+    /* IE */
+    -ms-transform: rotate(-90deg);
+
+    /* Opera */
+    -o-transform: rotate(-90deg);
+
+    /* Internet Explorer */
+    filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
+}
+
+
+/* action icons teste 1 */
+.icon_tkt_action {
+    background : #BF7002;
+}
+
+.icon_tkt_end {
+    background : #9E3323;
+}
+
+/* cancelar chamado */
+.chamado_form textarea[name=cancelar]{
+    width: 200px;
+    height: 100px;
+    border: 1px solid #3167b3;
+    margin-top: 8px;
+    margin-right: 13px;
+}
+.chamado_form #cancelado_container {
+    display : none;
+}
+
+
+.chamado_form #email {
+    padding-right: 26px;
+}
+.chamado_form #email_add_btn {
+    position : absolute;
+    top : 9px;
+    right : 5px;
+    color : #333;
+    z-index: 1;
+    cursor : pointer;
+    width: 18px;
+    height: 18px;
+    background-image : url(/img/ui/add.svg);
+    background-size  : 100% 100%;
+}
+
+#tkt_recorrente {
+    width    : 80%;
+    position : absolute;
+    z-index  : 2;
+    top      : 10px;
+    left     : 6%;
+    transition : all 0.3s ease;
+}
+#tkt_recorrente_line_a {
+    height      : 30px;
+}
+#tkt_recorrente_line_b {
+    height        : 30px;
+    margin-top    : 1%;
+    margin-bottom : 1%;
+}
+
+#tkt_recorrente_line_a div,
+#tkt_recorrente_line_b div {
+    float       : left;
+    height      : 30px;
+    line-height : 30px;
+}
+
+#tkt_recorrente_line_a_a {
+    width : 29%;
+    margin-right : 1%;
+} 
+
+#tkt_recorrente_line_a_b {
+    width : 50%;
+} 
+#tkt_recorrente_line_a_c {
+    width : 20%;
+} 
+
+#tkt_recorrente_line_b_a {
+    width : 29%;
+    margin-right : 1%;
+} 
+
+#tkt_recorrente_line_b_b {
+    width : 50%;
+} 
+#tkt_recorrente_line_b_c {
+    width : 19%;
+    margin-left : 1%;
+} 
+
+.chamado_form .acoes_first_container_recorrente {
+    box-shadow: 0px 3px 5px rgba(0,0,0,0.7) !important;
+}
+.chamado_form .tkt_recorrente_show {
+    top      : 210px !important;
+}

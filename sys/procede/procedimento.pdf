@@ -1,0 +1,128 @@
+#!/usr/bin/perl
+
+$nacess = "207";
+use utf8;
+use HTML::HTMLDoc;
+use Encode qw(decode encode);
+
+require "../cfg/init.pl";
+
+$COD = &get('codigo');
+
+
+$htmldoc = new HTML::HTMLDoc();
+
+# carrega valores do banco de dados
+require "./edit_db.pl";
+
+$empresa=decode("utf8",$empresa);
+$endereco=decode("utf8",$endereco);
+$titulo=decode("utf8",$titulo);
+$procedimento=decode("utf8",$procedimento);
+$procedimento =~ s/big//gm;
+$procedimento =~ s/pre//gm;
+
+if($n>0)
+	{
+$anexos=<<END;
+		<tr>
+			<td>
+			<br><br><hr size=1></hr><br>$n Arquivos anexados:
+			</td>
+		</tr>
+END
+	for($f=0; $f<$n; $f++)
+		{
+$anexos.=<<END;
+		<tr>
+			<td>
+				$arq_nome[$f] 
+			</td>
+		</tr>
+END
+		}
+	}
+
+if($empresa ne "")
+	{
+$cab=<<END;
+			<b>Empresa:</b> $empresa <br>
+			<b>Endereço:</b> $endereco
+END
+	}
+else
+	{
+	$cab = "";
+	}
+
+if($tags_wlist ne "")
+	{
+$tags_wlist=<<HTML;
+		<tr>
+			<td>
+			<b>TAGs: </b>$tags_wlist
+			</td>
+		</tr>
+HTML
+	}
+
+$htmldoc->set_html_content('
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1">
+	</head>
+<body>
+	<table width="100%" border=0>
+		<tr>
+			<td>
+			<img src="../../img/logos/1.png" width=170 height=60>
+			</td>
+			<td>
+			'.$cab.'
+			</td>
+		</tr>
+	</table>
+	<br>
+	<table width=100% style="margin:20px;" border=0>
+		<tr>
+			<td>
+			<center><font size="20">Procedimento</font></center>
+			</td>
+		</tr>
+		<tr>
+			<td>
+			<br>
+			<b>Título:</b> '.$titulo.'
+			</td>
+		</tr>
+		'.$tags_wlist.'
+		<tr>
+			<td>
+			<hr width=100% size=1></hr>
+			</td>
+		</tr>
+		<tr>
+			<td>
+			<left>'.$procedimento.'</left>
+			</td>
+		</tr>
+		'.$anexos.'
+	</table>	
+</body>
+</html>');
+
+print $query->header('application/pdf');
+
+# $htmldoc->set_input_file($filename); # alternative to use a present file from your fs
+$htmldoc->set_right_margin(5,'mm');
+$htmldoc->set_left_margin(5,'mm');
+$htmldoc->set_top_margin(1,'mm');
+$htmldoc->set_bodyfont('Helvetica');
+$htmldoc->links();
+#Se quiser pagina modo paisagem
+# $htmldoc->landscape();
+$pdf = $htmldoc->generate_pdf();
+
+print $pdf->to_string();

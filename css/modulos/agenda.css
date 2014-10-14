@@ -1,0 +1,111 @@
+/* formulario */
+#CAD
+	{
+	width:100%;
+	height:100%;
+	overflow:hidden;
+	}
+
+/* [INI] dashboard calendar  ----------------------------------------------------------------------------------------------------
+ * 
+ *  Dashboard Calendar calendario
+ *
+---------------------------------------------------------------------------------------------------------------------------*/
+#dashboard_calendar_container
+	{
+	width:99%;
+	height:96%;
+	/* border:1px solid red; */
+	margin:1%;
+	margin-left:0px;
+	}
+	
+/* day cell, day container */
+#dashboard_calendar
+	{
+	height:100%;
+	width:100%;	
+	}
+	
+/* header do calendario */
+#dashboard_calendar .fc-header
+	{
+	background-color: #3167b3;
+	}
+	
+/* titulo do calendario */
+#dashboard_calendar .fc-header-title
+	{
+	color:#fff;
+	font-weight:bold;
+	}
+
+#dashboard_calendar .fc-header .fc-button 
+	{
+	margin-bottom: 0px;
+	vertical-align: middle;
+	}
+	
+/* botoes calendario semana / mes / dia */
+#dashboard_calendar .fc-state-default.fc-corner-left 
+	{
+    border-radius: 0px;
+	}
+
+#dashboard_calendar .fc-state-default.fc-corner-right 
+	{
+    border-radius: 0px;
+	}
+
+#dashboard_calendar .fc-state-default 
+	{
+    background-image: none;
+    border: none;
+    color: rgb(51, 51, 51);
+    text-shadow: auto;
+    box-shadow: auto;
+	}
+	
+	
+	
+/* evento config */
+.agenda_event_ativo_prioridade_3
+	{
+	background-color: #3167b3 !important;
+	color: #fff !important;
+	}
+	
+.agenda_event_ativo_vencido
+	{
+	background-color: #EB9494 !important;
+	border:0px !important;
+	}
+.agenda_event_inativo
+	{
+	background-color:#ccc !important;
+	border:0px !important;
+	}
+	
+	
+/* tooltip agenda */
+.agenda_tooltip
+	{
+	width:100%;
+	}
+
+.agenda_tooltip_title
+	{
+	width:100%;
+	}
+
+.agenda_tooltip_time
+	{
+	width:100%;
+	}
+
+.agenda_tooltip_time span
+	{
+	display:inline-block;
+	}	
+	
+/* [END] dashboard calendar --------------------------------------------------------------------------------------------- */

@@ -1,0 +1,20 @@
+/*
+	DPAC for Tablets
+*/
+
+/* Mostra qual pagina esta ativa em modulos touch DTouchPage_bird_view */
+#DTouchPages_bird_view 
+	{
+    width: 60px;
+	}
+	
+#DTouchPages_bird_view div
+	{
+	width:18px;
+	}
+
+	
+.DTouchPages_bird_view_selected
+	{
+	}
+	

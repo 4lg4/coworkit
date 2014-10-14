@@ -1,0 +1,841 @@
+/* importa css usado pelo jquery como base, e apos aplica os overrides */
+@import "/css/jquery.css";
+
+/* ------------------------------------------------
+ [INI]   CSS Base
+------------------------------------------------ */
+
+*
+	{
+	outline:none; /* remove linha se selecao de objetos feita pelo browser */
+	
+	/* padrao de fonte usado pela ui */
+	font-family: Tahoma, sans-serif;
+	font-size: 11px;
+	font-weight: normal;
+	font-style: normal;
+	letter-spacing: 1px;
+	}
+	
+/* Place holde colors 
+::-webkit-input-placeholder 
+	{
+	color: #0075CA;
+	}
+
+:-moz-placeholder / Firefox 18- /
+	{ 
+	color: #0075CA;
+	}
+
+::-moz-placeholder / Firefox 19+ /
+	{  
+	color: #0075CA;
+	}
+
+:-ms-input-placeholder 
+	{  
+	color: #0075CA;
+	}
+*/
+
+/* padrao de fonte usado 
+body, tr, td, input[type="text"], input[type="date"], input[type="datetime"], input[type="time"], input[type="email"], input[type="number"], input[type="file"], input[type="password"], select, textarea, input[type="button"], input[type="submit"], input[type="reset"], .ui-widget, .ui-widget input, .ui-widget select, .ui-widget textarea, .ui-widget button
+	{
+	font-family: Tahoma, sans-serif;
+	font-size: 11px;
+	font-weight: normal;
+	font-style: normal;
+	letter-spacing: 0.02em;
+	}
+*/
+    
+html, body {
+  	width: 100%;
+  	height: 100%;
+	padding: 0px;
+	margin: 0px;
+	overflow-y:hidden !important;
+}
+
+body
+	{
+	/* min-width: 950px; */
+	padding: 0px;
+	}
+	
+#BODYEOS {
+	min-width  : 1000px;
+    min-height : 480px;
+    background-color: #f0f0f0;
+    /*
+    background-image: url("/img/ui/bg.jpg");
+    background-image: url("/img/ui/bg2.jpg");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    */
+}
+    
+/* formulario padrao usado em todo sistema */    
+#CAD{
+    width  : 100%;
+    height : 100%;
+}
+
+#CAD_full_container{
+    width  : 99%;
+    height : 98%;
+    margin : 1%;
+    margin-left : 0px;
+}
+
+table
+	{
+	width:100%;
+	}
+
+/* padrao inputs */
+input[type="text"], input[type="date"], input[type="datetime"], input[type="datetime-local"], input[type="time"], input[type="number"], input[type="email"], input[type="file"], input[type="password"], select, textarea
+	{
+	width: 100%;
+	min-height: 15px;
+	border: solid 1px #aaaaaa;
+	margin: 0px;
+	margin-bottom: 2px;
+	padding: 2px;
+	border-radius: 0px;
+	padding-left: 8px;
+	}
+/*
+input[type="text"]
+	{ 
+	background:#fff url("/img/field/field_text.png") no-repeat; 
+	background-position: 1px -2px;
+	background-size: 18px;
+	padding-left: 20px;
+	} 
+*/
+input[type="button"], input[type="submit"], input[type="reset"]
+	{
+	border-style:none;
+	padding: 0px;
+	background: transparent;
+	width: 70px;
+	height: 18px;
+	cursor: pointer;
+	}
+	
+textarea
+	{
+	padding-left: 2px;
+	border-radius: 0px;
+    resize: none;
+	}	
+	
+
+	
+select
+	{
+	padding: 2px;
+	margin: 0px;
+	width: auto;
+	background-color: white;
+	}
+
+button[disabled], input[disabled], optgroup[disabled], option[disabled], select[disabled], textarea[disabled], password[disabled]
+	{
+	color: #999;
+	/* background-color: #cdcdcd; */
+	}
+
+/* ------------------------------------------------
+ [INI]   Tool Tip (balao de ajuda)
+------------------------------------------------ */
+/* 
+    .ui-tooltip{padding:8px;position:absolute;z-index:9999;max-width:300px;-webkit-box-shadow:0 0 5px #aaa;box-shadow:0 0 5px #aaa}* html .ui-tooltip{background-image:none}body .ui-tooltip{border-width:2px}
+*/
+.ui-tooltip
+	{
+	padding:8px;
+	position:absolute;
+	z-index:9999;
+	max-width:300px;
+	-webkit-box-shadow:0 0 5px #aaa;
+	box-shadow:0 0 5px #000;
+	
+	color      : #354e72;
+	font-weight: bold;
+	padding    : 10px;
+    background : #fff;
+    
+    /* border-radius : 100px; */
+	}
+
+* html .ui-tooltip
+	{
+	background-image : none;
+	background-color : #fff;
+	}
+	
+body .ui-tooltip
+	{
+	border-width : 2px;
+	}
+    
+/*
+*/
+/* ------------------------------------------------
+ [END]   Tool Tip (balao de ajuda)
+------------------------------------------------ */
+
+/* ------------------------------------------------
+ [INI]   Modal Alerts
+------------------------------------------------ */
+.ui-widget-overlay 
+	{
+	opacity:0.65;
+	background:#fff;
+	}
+
+.ui-dialog
+	{
+	box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.3);
+	padding:0px !important;
+	/* background-color: rgb(112,36,45) !important; */
+	border:7px solid #3167b3 !important;
+	border-top:2px solid #3167b3 !important;
+	background-color:#fff;
+	}
+	
+.ui-dialog-titlebar
+	{
+	background:#3167b3;
+	color:#fff !important;
+	border:none !important;
+	}
+	
+.ui-dialog-titlebar-close 
+	{
+	visibility: hidden;
+	}
+	
+.ui-dialog-title-dialog
+	{
+	background-color: rgb(112,36,45) !important;
+	color:#fff !important;
+	}
+	
+.ui-dialog .ui-dialog-content 
+	{ 
+	float:right;
+	/*
+	min-width:75% !important;
+	width:100% !important;
+	max-height:95% !important;
+	overflow:auto;
+	*/
+	}
+.ui-icon-grip-diagonal-se 
+	{
+	background-image:none !important;
+	}
+.ui-dialog .ui-dialog-buttonpane 
+	{ 
+	width:20%;
+	padding-left:5px !important;
+	float:left;
+	border:0px;
+	max-width: 65px;
+	}
+	
+.ui-dialog .ui-dialog-buttonpane button 
+	{
+	cursor: pointer;
+	width: 50px;
+	height: 46px;
+	left: 2px;
+	margin-bottom: 4px;
+	background:#3167b3;
+	border-color:#3167b3;
+	}
+	
+.ui-dialog .ui-dialog-buttonpane .ui-dialog-buttonset 
+	{
+	margin-bottom: 3px;
+	}
+
+.ui-dialog .ui-dialog-buttonpane button span 
+	{
+    margin-top: 30px;
+    color: #fff;
+    padding: 0px;
+	}
+    
+.DDialog_box {
+    width  : 100%;
+    height : 100%;
+}
+
+.DDialog_box_img {
+    text-align:center;
+}
+.DDialog_box_img img{
+    height:200px;
+}
+.DDialog_box_middle {
+    text-align:center;    
+}
+.DDialog_box_bottom {
+    text-align:center;    
+}
+
+/* ------------------------------------------------
+ [END]   Modal Alerts
+------------------------------------------------ */
+
+/* ------------------------------------------------
+ [INI]   D GRID
+------------------------------------------------ */
+div.dataTables_scrollHead, div.dataTables_bottom
+	{
+	background-color:#354e72;
+	}
+	
+div.dataTables_wrapper
+	{
+	border: 1px solid #354e72;
+	max-height:100%;
+	}
+	
+.dataTables_filter label input[type=text]
+	{
+	width:80%;
+	}
+	
+.dataTables_scrollBody table thead
+	{
+	display:none;
+	}
+/*
+#grid_simple table thead
+	{
+	display:none;
+	}
+
+#grid_simple
+	{
+	width:100% !important;
+	}
+*/
+/* ------------------------------------------------
+ [END]   D GRID
+------------------------------------------------ */
+
+	
+/* ----------------------------------------------------------------------------------------------
+	[INI] Tabs 
+---------------------------------------------------------------------------------------------- */
+.ui-tabs
+	{		
+	background-color:#3167b3;
+	}
+	
+.ui-tabs .ui-tabs-nav
+	{
+	padding-left:0.4em;
+	border:none;
+	background:#fff;
+	padding-bottom:none !important;
+	padding-right: 0px;
+	margin-right: -2px;
+	}
+.ui-tabs .ui-tabs-nav li a 
+	{
+	padding: 0.4em 1em !important;
+	font-size: 0.8em !important;
+	}
+	
+.ui-tabs .ui-tabs-nav li
+	{
+	margin-top:0px;
+	float:right;
+	}
+		
+.ui-tabs .ui-tabs-nav ul
+	{
+	margin-bottom:-2px !important;
+	border-bottom:0px;
+	}
+
+.ui-widget-content 
+	{
+	padding:0px !important;
+	}
+
+.ui-slider-horizontal
+	{
+	background:#354e72;
+	height:4px;
+	}
+.ui-slider-horizontal .ui-slider-handle
+	{
+	margin-top:-2px;
+	border-radius:10px 10px 10px 10px !important;
+	}
+	
+
+.ui-tabs .ui-tabs-nav li a, .ui-tabs.ui-tabs-collapsible .ui-tabs-nav li.ui-tabs-selected a	
+	{
+	cursor:pointer;
+	border:none !important;
+	background:none !important;
+	}
+	
+.ui-tabs-panel
+	{
+	border:1px solid #354e72 !important;
+	overflow-y:auto;
+	}
+
+/* Botao de remover aba no cadastro de clientes */
+.tabs_btn_del 
+	{
+	float:left; 
+	margin-left:-6px; 
+	margin-top: -1px; 
+	}
+/* cor das abas das tabs ------------------------------------------------------ */
+
+/* quando ativo  */
+.ui-tabs .ui-tabs-nav li.ui-tabs-selected a, .ui-tabs .ui-tabs-nav li.ui-state-disabled a, .ui-tabs .ui-tabs-nav li.ui-state-processing a 
+	{ 
+	/* border-bottom: solid 4px !important; */
+	}  
+/* Google Chrome hack */
+@media screen and (-webkit-min-device-pixel-ratio:0){
+	.ui-tabs .ui-tabs-nav li.ui-tabs-selected a, .ui-tabs .ui-tabs-nav li.ui-state-disabled a, .ui-tabs .ui-tabs-nav li.ui-state-processing a { background-color:#31517b; border-bottom: solid 3px #31517b; } 
+	}
+
+/* quando inativo  */
+.ui-tabs .ui-tabs-nav li a, .ui-tabs.ui-tabs-collapsible .ui-tabs-nav li.ui-tabs-selected a 
+	{ 
+	/* border-bottom: solid 4px !important; */
+	}
+
+/* Google Chrome hack */
+@media screen and (-webkit-min-device-pixel-ratio:0){
+	.ui-tabs .ui-tabs-nav li a, .ui-tabs.ui-tabs-collapsible .ui-tabs-nav li.ui-tabs-selected a { border-bottom: solid 3px #ccc;}
+	}
+/* ----------------------------------------------------------------------------------------------
+	[END] Tabs 
+---------------------------------------------------------------------------------------------- */
+
+
+/* -----------------------------------------------------------------
+	[INI] Date Picker 
+----------------------------------------------------------------- */
+.ui-datepicker {
+	background: #ffffff;
+	border: 1px solid #808080 !important;
+	padding-left: 10px !important;
+	padding-right: 20px !important;
+	}
+.ui-datepicker-header 
+	{
+	padding-top:5px !important;
+	width:105%;
+	}
+.ui-datepicker-title 
+	{
+	border-radius:0px;
+	margin-left:2px;
+	margin-right:2px;
+	line-height:1.1em !important;
+	background:#ccc;
+	padding:1px;
+	}
+.ui-datepicker a.ui-state-default 
+	{
+	border-radius:0px;
+	}
+table.ui-datepicker-calendar tbody td.highlight > a 
+	{ 
+	border: 1px solid #354e72; 
+	background: #354e72 url(/img/jquery/ui-bg_highlight-soft_65_31517a_1x100.png) 50% 50% repeat-x; 
+	font-weight: bold; 
+	color: #ffffff; 
+	}
+/*
+{
+    background: #70242d; / url("/img/ui/ui-bg_inset-hard_55_ffeb80_1x100.png") repeat-x scroll 50% bottom #70242d; /
+    color: #fff;
+    border: 1px solid #500000;
+}
+*/
+.ui-datepicker td 
+	{
+	padding:2px !important;
+	}
+/* -----------------------------------------------------------------
+	[END] Date Picker 
+----------------------------------------------------------------- */
+
+/*-------------------------------------------------------------------------------------------------------------------------------------------
+	icons css redrawed
+-------------------------------------------------------------------------------------------------------------------------------------------*/
+.icon_add
+	{
+	height:11px;
+	width:11px;
+	background: url(/img/ui/add.svg) no-repeat;
+	background-size: 100%;
+	text-align:center;
+	cursor:pointer;
+	float:left;
+	}
+
+.icon_update
+	{
+	height:11px;
+	width:11px;
+	background: url(/img/ui/update.svg) no-repeat;
+	text-align:center;
+	cursor:pointer;
+	float:left;
+	}
+
+/* base externa */
+.icon_arrow_right, .icon_arrow_left, .icon_arrow_down, .icon_plus, .icon_minus
+	{
+	border-radius:100%;
+	background:#354e72;
+	height:16px;
+	width:16px;
+	text-align:center;
+	cursor:pointer;
+	}
+	
+/* seta direita */
+.icon_arrow_right:after
+	{
+	border-style:solid;
+	border-width: 4px 0 4px 5px;
+	border-color:transparent transparent transparent #fff;
+	position: absolute;
+	content: "";
+	margin-top:4px;
+	margin-left:-1px;
+	}
+
+/* seta esquerda */
+.icon_arrow_left:after
+	{
+	border-style:solid;
+	border-width: 4px 5px 4px 0;
+	border-color:transparent #fff transparent transparent;
+	position: absolute;
+	content: "";
+	margin-top:4px;
+	margin-left:-3px;
+	}
+
+/* seta para baixo */
+.icon_arrow_down:after
+	{
+	border-style:solid;
+	border-width: 5px 4px 0 4px;
+	border-color:#fff transparent transparent transparent;
+	position: absolute;
+	content: "";
+	margin-top:6px;
+	margin-left:-4px;
+	}
+	
+/* plus, add icon (- deitado) */
+.icon_plus:after
+	{
+	background:#fff;
+	width:8px;
+	height:2px;
+	position: absolute;
+	content: "";
+	margin-top:7px;
+	margin-left:-4px;
+	}
+
+/* plus, add icon (| em pe) */
+.icon_plus:before
+	{
+	background:#fff;
+	width:2px;
+	height:8px;
+	position: absolute;
+	content: "";
+	margin-top:3.5px;
+	margin-left:-0.9px;
+	}
+
+/* minus, remove icon */
+.icon_minus:after
+	{
+	background:#fff;
+	width:8px;
+	height:2px;
+	position: absolute;
+	content: "";
+	margin-top:6.9px;
+	margin-left:-3.6px;
+	}
+	
+/* limpa pesquisa */
+.icon_clear
+	{
+	height:16px;
+	width:16px;
+	background-image: url(/img/syscall/btn_limpar.png);
+	background-repeat: no-repeat;
+	background-size: 100%;
+	text-align:center;
+	cursor:pointer;
+	float:right;
+	}
+	
+/* icon pesquisa */
+.icon_search 
+	{
+	height:16px;
+	width:16px;
+	background-image: url(/img/ui/search.png);
+	background-repeat: no-repeat;
+	background-size: 100%;
+	text-align:center;
+	cursor:pointer;
+	float:right;
+	}
+
+/* -----------------------------------------------------------------------------------------------------------------------------------------------
+	 box for container and organize stuff on screen
+----------------------------------------------------------------------------------------------------------------------------------------------- */
+.dbox
+	{
+	border:1px solid #354e72;
+	background-color:#fff;
+	/* margin:10px; */
+	width:100%;
+	}
+.dbox_title
+	{
+	width:100%;
+	height:19px;
+	padding-top:1px;
+	color:#fff;
+	font-weight:bold;
+	background-color:#354e72;
+	/*
+	background-image:url(/img/ui/arrow_right.png);
+	background-position:3px 2px;
+	background-repeat:no-repeat;
+	 background-size:15px; */
+	cursor:pointer;
+	}
+.dbox_title span
+	{
+	margin-left:10px;
+	}
+.dbox_cont
+	{
+	background-color:#fff;
+	padding-top:2px;
+	padding-bottom:1px;
+	}
+	
+.dbox_min
+	{
+	height:20px !important;
+	overflow:hidden !important;
+	min-height:20px !important;
+	}
+.dbox_full
+	{
+	max-width:80% !important;	
+	width:80% !important;
+	height:80% !important;
+	max-height:80% !important;
+	z-index:999999999999 !important;
+	position:absolute !important;
+	}
+.dbox_title_form
+	{
+	color:#fff;
+	background-color:#aaa;
+	text-align:right;
+	padding-top:3px;
+	padding-bottom:1px;
+	padding-right:4px;
+	}
+
+
+.DDialog_img
+	{
+	/* width:70%; */
+	/* min-width:800px; */
+	/* overflow:auto; */
+	}
+		
+.DDialog_img img
+	{
+	width:100%;
+	}
+    
+    
+    
+/**
+ *  Disk
+ */
+#eos_disk { /* container */
+    position : relative;
+    width    : 47px;
+    height   : 22px;
+    background-color : #fff;
+    margin-top : 1%;
+    overflow : hidden;
+    cursor   : pointer;    
+    float    : right;
+    margin-right: 5%;
+}
+#eos_disk_stats { /* stats */
+    transition : all 0.3s ease;
+    position   : absolute;
+    z-index    : 3;
+    width      : 100%;
+    height     : 100%;
+    background : #ccc;
+    opacity    : 0;
+    border-radius : 3px;
+}
+.eos_disk_stats_show { /* stats */
+    opacity    : 1 !important;
+   /*  z-index    : 3 !important; */
+}
+#eos_disk_stats span { /* stats descrp */
+    font-size  : 10px;
+    display    : block;
+    width      : 100%;
+    text-align : center;
+    color      : #333;
+    height     : 100%;
+    line-height: 1;
+}
+#eos_disk_total { /* disk */
+    position   : absolute;
+    z-index    : 2;    
+    background-image: url("/img/ui/cloud.svg");
+    width: 100%;
+    height: 100%;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-position: 0px;
+}
+#eos_disk_total span { /* descrp */
+    font-size  : 10px;
+    margin-top : 5px;
+    display    : block;
+    width      : 100%;
+    text-align : center;
+    color      : #333;
+}
+#eos_disk_used { /* used */
+    position   : absolute;
+    z-index    : 1;
+    background-color : #ccc;
+    border-top-right-radius : 50px;
+    border-bottom-right-radius : 50px;
+    height : 100%;
+    width  : 0px;
+    transition: all 0.3s ease;
+}
+.eos_disk_used_mid { /* 30% - 80% */
+    background-color : #E3CC39 !important;
+}
+.eos_disk_used_heavy { /* 80% - 100% */
+    background-color : #D98080 !important;
+}
+
+
+
+
+/**
+ *  Resultado
+ *      container de retorno do ajax
+ */
+
+#resultado {
+    display : none;
+}
+
+
+
+/**
+ *  Circles v3
+ */
+#circle_container {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    top: 0px;
+    position: fixed;
+    z-index: -10;
+}
+
+#circle_one {
+    position: absolute;
+    z-index: -1;
+    bottom: -700px;
+    left: -200px;
+    background: none repeat scroll 0% 0% transparent;
+    border: 5px solid orange;
+    width: 1000px;
+    height: 1000px;
+    border-radius: 50% 50% 50% 50%;
+    opacity: 0.1;
+}
+
+#circle_two {
+    position: absolute;
+    z-index: -1;
+    bottom: -600px;
+    left: -500px;
+    background: none repeat scroll 0% 0% transparent;
+    border: 5px solid #3167b3;
+    width: 1000px;
+    height: 1000px;
+    border-radius: 50% 50% 50% 50%;
+    opacity: 0.1;
+}
+
+#circle_three {
+    position: absolute;
+    z-index: -1;
+    bottom: -800px;
+    left: -200px;
+    background: none repeat scroll 0% 0% transparent;
+    border: 5px solid #3167b3;
+    width: 1000px;
+    height: 1000px;
+    border-radius: 50% 50% 50% 50%;
+    opacity: 0.1;
+}
+
+#circle_four {
+    position: absolute;
+    z-index: -1;
+    bottom: -900px;
+    left: -300px;
+    background: none repeat scroll 0% 0% transparent;
+    border: 5px solid orange;
+    width: 1000px;
+    height: 1000px;
+    border-radius: 50% 50% 50% 50%;
+    opacity: 0.1;
+}
+

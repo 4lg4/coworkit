@@ -1,0 +1,23 @@
+.default_form #DTouchPages_default {
+    margin-top: 1%;
+    padding-right: 1%;
+    padding-bottom: 1%;
+}
+
+.default_form #defaults_list_container {
+    height: auto;
+}
+
+.default_form #defaultmod_container_center {
+    width : 99%;
+}
+
+.default_form .DTouchRadio_list_title {
+    height : 27px;
+}
+
+.default_form #dados_container {
+    width   : 30%;
+    margin  : 2%;
+    padding : 3px;
+}

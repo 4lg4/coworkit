@@ -1,0 +1,398 @@
+#!/usr/bin/perl
+
+#
+#   relatorio.pdf
+#
+#       gera relatorio pdf para cliente
+#
+
+$nacess = "10";
+require "../cfg/init.pl";
+
+$ID          = &get('ID');    # sessao
+$COD         = &get('COD');   # codigo para edicao do item
+
+# print $query->header({charset=>utf8});
+# debug();
+# exit;
+
+# set encoding
+# $dbh->do("SET CLIENT_ENCODING TO 'ISO-8859-1'");
+$dbh->do("SET CLIENT_ENCODING TO 'WINDOWS-1254'");
+
+# libs para gera pdf
+# use HTML::Entities;
+use utf8;
+use PDF::Reuse;
+
+$filename .= "OS_$COD.pdf"; # nome do arquivo
+$page      = 1;         # numero pagina inicial
+	
+# linha
+# $LINI = 715;
+$LINI = 555;
+# $LMIN = 30;
+$LMIN = 60;
+$L    = $LINI;
+	
+$CINI = 43;
+$C    = $CINI;
+
+# default fonte
+$font{family}  = "Helvetica";
+$font{size}    = "10";
+$font{color_r} = "3";
+$font{color_g} = "3";
+$font{color_b} = "3";
+
+
+# header necessario para pdf files
+# print $query->header('application/pdf; charset="utf-8"');
+# print $query->header('application/pdf');
+print "Content-type: application/octet-stream\n"; 
+print "Content-Disposition:attachment;filename=$filename\n\n";
+          
+prFile({
+    file => $filename,
+    FitWindow  => 1,
+    effect => load,
+    CenterWindow => 1,
+    rotate => 'q1'
+});
+
+# prMbox(0, 0, 842, 595);
+prMbox(0, 0, 842, 595);
+prCompress(1);
+
+# usando modelo folha timbrada
+if($USER->{empresa} eq "1") {
+	prForm({
+		file => './os_modelo.pdf',
+		page => 1
+	});
+}
+
+#
+#   Dados
+# 
+
+# pega ultimo encaminhamento se nao houver pega o nome do criador do ticket
+$DBT = &DBE("
+    select
+        executor_nome
+    from
+        tkt_acao_tkt_full
+    where 
+        tkt   =  $COD and 
+        tempo is null
+    order by 
+        codigo
+    desc
+    limit
+        1
+");
+
+if($DBT->rows() > 0) {
+    $t = $DBT->fetchrow_hashref;
+    $tecnico = $t->{executor_nome};
+}
+
+
+# dados do ticket
+$DB = &DBE("
+    select
+        *
+    from
+        tkt_full
+    where 
+        codigo = $COD
+");
+
+
+#
+#   Print
+# 
+
+# print items
+$tkt = $DB->fetchrow_hashref;
+
+if(!$tecnico){
+    $tecnico = $tkt->{responsavel_nome};
+}
+
+&tkt();
+$C = 470;
+$L = $LINI;
+&tkt();
+
+# finaliza
+prPage();
+prEnd();
+
+# linha
+sub tkt {
+    $LREG = $L+1;
+    prColor($font{color_r}, $font{color_g}, $font{color_b});
+    
+    
+	# tkt numero
+	# font config
+	prFont($font{family}."-Bold");
+	prFontSize(18);
+    
+	prText($C+90, $L-17, "Ordem de Serviço ", "left");
+    prText($C+170, $L-39, "#".$tkt->{codigo}, "center");
+	prAdd("q\n".($C+70)." ".($L-22)." 200 0.5 re\n0 0.3 0.6 rg\nf\nQ\n"); # line horizontal 0
+        
+    # espelho --
+	# font config
+	prFont($font{family}."-Bold");
+	prFontSize(10);
+    
+    $C -= 20;
+    
+	# cliente
+	prText($C,$L-60, "Cliente: ");
+    
+	# solicitante
+	prText($C,$L-80, "Solicitante: ");
+    
+	# data
+	prText($C,$L-100, "Data: ");
+    
+    # descricao
+    prText($C,$L-130, "Descrição");
+            
+    # obs
+    prText($C,$L-290, "OBS");
+    
+    # suggestao
+    prText($C,$L-410, "Sugestão");
+    
+    # termino
+    prText($C,$L-490, "Término Data:                              Hora:");
+    
+    
+    $C += 50;
+    
+    # descritivo --
+	
+    # config padrao de fonte
+	prFont($font{family});
+	prFontSize(10);
+    
+	# cliente
+	prText($C,$L-60, substr($tkt->{cliente_nome}, 0, 60));
+    
+	# solicitante
+	prText($C+10,$L-80, $tkt->{solicitante});
+    
+	# data
+	prText($C,$L-100, &dateToShow($tkt->{data_previsao})."h");
+            
+    # obs
+    # prText($C,$L-300, "OBS");
+    prAdd("q\n".($C-50)." ".($L-300)." 350 0.5 re\n0 0.3 0.6 rg\nf\nQ\n"); # line horizontal 0
+    prAdd("q\n".($C-50)." ".($L-320)." 350 0.5 re\n0 0.3 0.6 rg\nf\nQ\n"); # line horizontal 0
+    prAdd("q\n".($C-50)." ".($L-340)." 350 0.5 re\n0 0.3 0.6 rg\nf\nQ\n"); # line horizontal 0
+    prAdd("q\n".($C-50)." ".($L-360)." 350 0.5 re\n0 0.3 0.6 rg\nf\nQ\n"); # line horizontal 0
+    prAdd("q\n".($C-50)." ".($L-380)." 350 0.5 re\n0 0.3 0.6 rg\nf\nQ\n"); # line horizontal 0
+    
+	
+    # suggestao
+    # prText($C,$L-450, "Sugestão");
+    prAdd("q\n".($C-50)." ".($L-420)." 350 0.5 re\n0 0.3 0.6 rg\nf\nQ\n"); # line horizontal 0
+    prAdd("q\n".($C-50)." ".($L-440)." 350 0.5 re\n0 0.3 0.6 rg\nf\nQ\n"); # line horizontal 0
+    prAdd("q\n".($C-50)." ".($L-460)." 350 0.5 re\n0 0.3 0.6 rg\nf\nQ\n"); # line horizontal 0
+    
+	# tecnico / responsavel
+    prAdd("q\n".($C-50)." ".($L-525)." 150 0.5 re\n0 0.3 0.6 rg\nf\nQ\n"); # line horizontal 0
+    prText($C+25,$L-535, substr($tecnico, 0, 30), "center");
+    prAdd("q\n".($C+150)." ".($L-525)." 150 0.5 re\n0 0.3 0.6 rg\nf\nQ\n"); # line horizontal 0
+	prText($C+160,$L-535, substr("Cliente", 0, 30));
+    
+    # descricao
+	$L -= 145;
+	&left($tkt->{problema}, $C-30, $font{family}, 9, $C+260);
+    
+}
+
+# header
+sub header {
+	# Cabeçalho
+	if($L eq $LINI && $C eq $CINI) {
+		# font config
+		prFont($font{family}."-Bold");
+		prFontSize(20);
+		prColor(23, 54, 93);
+		
+		# titulo
+		prText($C+102, $L-9, "Relatório de Horas", "left");
+		prAdd("q\n".($C+100)." ".($L-16)." 552 0.5 re\n0 0.3 0.6 rg\nf\nQ\n"); # line horizontal 0
+		
+		# empresa
+        $L -= 18;
+		prFont($font{family}."-BoldOblique"); 
+		prFontSize(12);
+		prText($C+100, $L-17, "  $cob_tkt->{'empresa_nome'}", "left");
+		
+		# periodo 
+        $L -= 18;
+		prFont($font{family}."-Oblique"); 
+		prFontSize(10);
+		prText($C+97, $L-13, "   Competência: $cob_tkt->{competencia}", "left");
+        
+        
+    	# header
+        $L -= 30;
+    	prFont($font{family}."-Bold"); 
+    	prFontSize(8);
+        prColor(128,128,128);
+        
+        # dados ticket
+        prText($C+40, $L, "Ticket", "left");
+        prText($C+70, $L, "Data", "left");
+        prText($C+140, $L, "Solicitante", "left");
+        prText($C+220, $L, "Problema", "left");
+        
+        # dados acoes
+        prText($C+320, $L, "Data ação", "left");
+    	prText($C+400, $L, "Técnico", "left");
+    	prText($C+490, $L, "Solução Aplicada", "left");
+    	prText($C+700, $L, "Exec.", "left");
+    	prText($C+735, $L, "Faturado", "left");
+    	
+		$L -= 15;
+	}
+}
+
+# 
+#   Functions
+#       Funcoes usadas para gerar pdf
+#
+#   ***** Criar um package para essas funcoes para uso generico
+
+# quebra de pagina
+sub pgBreak {			
+	$L = 32;
+	prFontSize(8);
+	prFont($font{family});
+	prText(40, $L, $DATA_SEMANA[&timestamp("week")].", ".&timestamp("day")." de ".$DATA_MES[&timestamp("month")]." de ".&timestamp("year") , "left");
+	prText(790, $L, "Página $page", "right");
+	prPage();
+
+	# usando modelo folha timbrada
+	if($USER->{empresa} eq "1") {
+		# usando modelo folha timbrada
+		prForm({
+			# file => './relatorio_modelo_folha_timbrada.pdf',
+			file => './folha_timbrada_landscape.pdf',
+			page => 1
+		});
+	}
+			
+	$page++;
+	$L = $LINI;
+	$C = $CINI;
+
+	&header;
+}
+
+# cor da fonte
+sub prColor {
+	my($intRed, $intGreen, $intBlue) = @_;
+	$intSaveR = $intRed;
+	$intSaveG = $intGreen;
+	$intSaveB = $intBlue;
+	prAdd(($intRed/256)." ".($intGreen/256)." ".($intBlue/256)." rg");
+}
+	
+# linha multipla com alinhamento a esquerda
+sub left {
+	my $string = shift;			# texto
+	my $x      = shift || 25;   # coluna inicial
+	my $fnt    = shift || "H";  # fonte
+	my $tam    = shift || 8;	# tamanho da fonte
+	my $rend   = shift || 570;	# coluna final
+	my $r      = $rend - $x;	# tamanho da linha
+	my $Lini   = $L;
+	my @WM;
+       @WM     = split(' ',$string);
+	my @WM2;
+       $WM2[0] = "";
+	my $t      = 0;
+	my $t2     = 0;
+	
+	while($t < @WM) {
+		$WM[$t] =~ s/\\t/        /gm;
+		$WM[$t] =~ s/\\s/ /gm;
+		if(prStrWidth($WM2[$t2].$WM[$t], $fnt, $tam) > $r) {
+			$t2++;
+		}
+		$WM2[$t2] .= $WM[$t]." ";
+		$t++;
+	}
+    
+	for($f=0; $f < @WM2; $f++) {
+		prText($x, $L, @WM2[$f]);
+		$L-=($tam+1);
+	}
+    
+	if($L < $LMIN) {
+		prAdd("q ".($C-20)." ".($Lini+22)." 800 -".($L+800)." re 1 1 1 rg f Q");
+		&pgBreak;
+		$old_cli = "";
+		&pgLine;
+	}
+}
+
+# linha justificada
+sub justify {
+	my $string = shift;  		# texto
+	my $x      = shift || 25;	# coluna inicial
+	my $fnt    = shift || "H";	# fonte
+	my $tam    = shift || 8;	# tamanho da fonte	
+	my $rend   = shift || 570;	# coluna final
+	my $r      = $rend - $x;    # tamanho
+	my @WM;
+       @WM     = split(' ',$string);
+	my @WM2;
+       $WM2[0] = "";
+	my $t      = 0;
+	my $t2     = 0;
+	
+	while($t < @WM) {
+		if(prStrWidth($WM2[$t2].$WM[$t], $fnt, $tam) > $r) {
+			$t2++;
+		}
+		$WM2[$t2] .= $WM[$t]." ";
+		$t++;
+	}
+    
+	for($f=0; $f < @WM2-1; $f++) {
+		$WM2[$f] = substr($WM2[$f],0,-1);
+		$t       = length($WM2[$f]) - 2;
+        
+		while(prStrWidth(@WM2[$f], $fnt, $tam) < $r) {
+            
+			if(substr($WM2[$f], $t, 1) eq " ") {
+				$WM2[$f] = substr($WM2[$f], 0, $t)." ".substr($WM2[$f], $t);
+            }
+			if($t < 1) {
+				$t = length($WM2[$f])-2;
+			} else {
+				$t--;
+			}
+		}
+		my $p = rindex($WM2[$f], " ");
+		$WM2[$f] =~ s/[#]/  /gm;
+		prText($x, $L, substr($WM2[$f], 0, $p));
+		prText($rend-1, $L, substr($WM2[$f], $p), 'right');
+		$L-=9;
+	}
+    
+	prText($x, $L, @WM2[$f]);
+	if($L < $LMIN) {
+		&pgBreak;
+	}
+}

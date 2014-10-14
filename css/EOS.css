@@ -1,0 +1,429 @@
+/*
+*   EOS app
+*       objeto EOS
+*/
+
+/* ui overrides para eos core v3 */
+input[type="text"], input[type="date"], 
+input[type="datetime"], input[type="datetime-local"], 
+input[type="time"], input[type="number"], input[type="email"], 
+input[type="file"], input[type="password"], select, textarea {
+	width            : 100%;
+	height           : 100%;
+	border           : none;
+	margin           : 0px;
+	padding          : 0px;
+    overflow         : hidden;
+    background-color : #fff;
+    text-overflow    : ellipsis;
+}
+input[type="text"], select {
+    font-size:14px;
+}
+select {
+    line-height: 1;
+    -webkit-appearance: none;
+}
+input[type=checkbox] {
+    padding: 0px;
+    margin: 0px;
+}
+
+
+/* 
+* Templates 
+*/
+
+/* field container */
+.EOS_template_field {
+    width:100%;
+    height:30px;
+    background:#fff; 
+    position:relative;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+/* field content */
+.EOS_template_field div{
+    position:relative;
+    height:100%;
+    display: inline-block;
+    vertical-align: top;
+}
+
+/* EOS_template_field_img */
+.EOS_template_field_img, EOS_template_field_img_right {
+    width:30px;
+    cursor:pointer;
+}
+.EOS_template_field_field {
+    width:92%;
+}
+
+.EOS_template_field_field_right {
+    /*    width:86%; */
+}
+
+/* field locked */
+.EOS_template_field_img_lock {
+    background-image: url("/img/field/lock.png") !important;
+	background-size: 24px !important;
+    background-position: 3px 2px !important;
+    cursor:default !important;
+}
+/* field locked */
+.EOS_template_field_lock {
+    color:#999 !important;
+}
+
+/* field autocomplete */
+.EOS_template_field_autocomplete {
+    /* min-width: 120px; */
+}
+.EOS_template_field_autocomplete input {
+	background:no-repeat; 
+	background-image: url("/img/field/field_search.png");
+	background-size: 28px;
+    background-position: 2px -3px;
+    
+    padding-left: 32px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.EOS_template_field_autocomplete div:last-child {
+ 
+}
+
+/* field date */
+.EOS_template_field_date {
+}
+.EOS_template_field_date input {
+	background:no-repeat; 
+	background-image: url("/img/field/field_date.svg");
+	
+    padding-left: 32px;
+    background-size: 24px 24px;
+    background-position: 3px center;
+    
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+/* field datetime */
+.EOS_template_field_datetime {
+    /* width: 170px; 
+    min-width: 130px; */
+}
+.EOS_template_field_datetime input {
+	background:no-repeat; 
+	background-image: url("/img/field/field_datetime.png");
+	background-size: 26px;
+    background-position: 2px -1px;
+    
+    padding-left: 30px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+/* field time */
+.EOS_template_field_time {
+    /* width: 170px; 
+    min-width: 100px; */
+}
+/*
+.EOS_template_field_time div:last-child {
+ 
+}
+*/
+.EOS_template_field_time input {
+	background:no-repeat; 
+	background-image: url("/img/field/field_time.png");
+	background-size: 26px;
+    background-position: 2px -2px;
+    
+    padding-left: 30px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+/*
+    Core V3 implementacao inputs
+
+    width: 100%;
+    padding-left: 30px;
+    background: url("/img/field/field_time.png") no-repeat scroll 2px -2px / 26px auto orange;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box; * Safari/Chrome, other WebKit *
+    -moz-box-sizing: border-box;    * Firefox, other Gecko *
+    box-sizing: border-box;         * Opera/IE 8+ *
+*/
+
+/* field email */
+.EOS_template_field_email {
+    /* min-width: 100px; */
+}
+.EOS_template_field_email input {
+	background:no-repeat; 
+	background-image: url("/img/field/field_email.png");
+	background-size: 26px;
+    background-position: 3px -2px;
+    
+    padding-left: 26px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+/* field text */
+.EOS_template_field_text {
+    /* min-width: 100px; */
+}
+/*
+.EOS_template_field_text div:last-child {
+
+}
+*/
+.EOS_template_field_text input {
+	background:no-repeat; 
+	background-image: url("/img/field/field_text.png");
+	background-size: 26px;
+    background-position: 2px -1px;
+    
+    padding-left: 25px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+
+/* field password */
+.EOS_template_field_password {
+}
+.EOS_template_field_password input {
+	background:no-repeat; 
+	background-image: url("/img/field/field_password.png");
+	background-size: 26px;
+    background-position: 2px -1px;
+    
+    padding-left: 25px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+/* field Number */
+.EOS_template_field_number {
+}
+.EOS_template_field_number input {
+	background:no-repeat; 
+	background-image: url("/img/field/field_number.png");
+	background-size: 26px;
+    background-position: 2px -1px;
+    
+    padding-left: 25px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+
+/* field Money */
+.EOS_template_field_money {
+}
+.EOS_template_field_money input {
+	background:no-repeat; 
+	background-image: url("/img/field/field_money.png");
+	background-size: 28px;
+    background-position: 2px -1px;
+    
+    padding-left: 33px;
+    padding-right: 10px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    
+    text-align : right;
+}
+
+
+/* field select */
+.EOS_template_field_select div:first-child {
+	background:no-repeat; 
+	background-image: url("/img/field/field_select.png");
+	background-size: 24px;
+    background-position: 4px 3px;
+}
+
+
+/* field select */
+.EOS_template_field_search .EOS_template_field_img {
+	background:no-repeat; 
+	background-image: url("/img/field/field_search.png");
+	background-size: 28px;
+    background-position: 2px -3px;
+}
+
+.EOS_template_field_search input {
+	background:no-repeat; 
+	background-image: url("/img/field/field_search.png");
+	background-size: 28px;
+    background-position: 2px -3px;
+    
+    padding-left: 32px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.EOS_template_field_search_right_padding {
+    padding-right: 32px !important
+}
+
+.EOS_template_field_search_right {
+    position       : absolute;
+    /* height      :20px; */
+    display        : inline-block;
+    vertical-align : top;
+    width          : 30px;
+    right          : 0px;
+    position       : absolute !important;
+}
+
+
+
+.EOS_template_field_file {
+    min-width : 190px;
+}
+.EOS_template_field_file_upload {
+    position : absolute !important;
+    z-index  : 1;
+    left     : 0px;
+    width    : 30px;
+    cursor   : pointer;
+}
+.EOS_template_field_file_mimetype_pdf {
+    background-image    : url("/img/field/upload/pdf.png") !important;
+}
+.EOS_template_field_file_mimetype_video {
+    background-image    : url("/img/field/upload/video.png") !important;
+}
+.EOS_template_field_file_mimetype_audio {
+    background-image    : url("/img/field/upload/audio.png") !important;
+}
+.EOS_template_field_file_mimetype_image {
+    background-image    : url("/img/field/upload/image.png") !important;
+}
+.EOS_template_field_file_mimetype_excel {
+    background-image    : url("/img/field/upload/excel.png") !important;
+}
+.EOS_template_field_file_mimetype_word {
+    background-image    : url("/img/field/upload/word.png") !important;
+}
+.EOS_template_field_file_mimetype_oo {
+    background-image    : url("/img/field/upload/oo.png") !important;
+}
+.EOS_template_field_file_mimetype_code {
+    background-image    : url("/img/field/upload/code.png") !important;
+}
+.EOS_template_field_file_mimetype_vector {
+    background-image    : url("/img/field/upload/vector.png") !important;
+}
+.EOS_template_field_file_mimetype_text {
+    background-image    : url("/img/field/upload/text.png") !important;
+}
+.EOS_template_field_file_mimetype_default {
+    background-image    : url("/img/field/upload/default.png") !important;
+}
+.EOS_template_field_file_mimetype_photoshop {
+    background-image    : url("/img/field/upload/photoshop.png") !important;
+}
+.EOS_template_field_file_mimetype_zip {
+    background-image    : url("/img/field/upload/zip.png") !important;
+}
+
+
+.EOS_template_field_file_name {
+    position : absolute !important;
+    z-index  : 1;
+    right    : 50px;
+    width    : 100px;
+    overflow : hidden;
+    text-overflow : ellipsis;
+    cursor   : pointer;
+    border-left  : 1px dotted #ccc;
+    padding-left : 5px;
+    line-height  : 2.8;
+    color        : #666;
+    background   : #fff;
+    opacity      : 0;
+    transition   : all 0.3s ease;
+    text-align   : left;
+}
+.EOS_template_field_file_name_populated {
+    opacity    : 1 !important;
+}
+.EOS_template_field_file_name_open {
+    width      : 80% !important;
+    box-shadow : -4px 0px 17px rgba(0, 0, 0, 0.5);
+}
+
+.EOS_template_field_file_progress {
+    position : absolute !important;
+    z-index  : 2;
+    right    : 0px;
+    width    : 50px;
+    overflow : hidden;
+    text-overflow : ellipsis;
+    border-left  : 1px dotted #ccc;
+    background   : #fff;
+    opacity      : 0;
+    transition   : all 0.3s ease;
+    cursor       : pointer;
+}
+.EOS_template_field_file_progress_open {
+    width      : 80% !important;
+    box-shadow : -4px 0px 17px rgba(0, 0, 0, 0.5);
+}
+.EOS_template_field_file_progress_populated {
+    opacity    : 1 !important;
+}
+.EOS_template_field_file_progress_descrp {
+    position      : absolute !important;
+    left          : 0px;
+    z-index       : 1;
+    overflow      : hidden;
+    text-overflow : ellipsis;
+    line-height   : 2.8;
+    color         : #ccc;
+    text-align    : center;
+    width         : 100%;
+    height        : 100%;
+    padding-left  : 5px;
+    /* text-shadow   : -1px 0 #fff, 0 1px #fff, 1px 0 #fff, 0 -1px #fff; */
+}
+.EOS_template_field_file_progress_bar {
+    position      : absolute !important;
+    left          : 0px;
+    z-index       : 0;
+    width         : 0px;
+    height        : 100%;
+    background    : #3167b3;
+    transition    : all 0.3s ease;
+}
+.EOS_template_field_file input[type=text] {
+	background          : no-repeat; 
+	background-image    : url("/img/field/field_upload.png");
+	background-size     : 30px;
+    background-position : 0px 0px;
+    
+    padding-left  : 32px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.EOS_template_field_file_populated {
+    padding-right : 150px;
+}

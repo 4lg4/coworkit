@@ -1,0 +1,50 @@
+.servicos_form {
+    overflow : auto;
+}
+
+.servicos_form .servicos_page_line {
+    width    : 100%;
+    clear    : both;
+    overflow : hidden;
+    padding-bottom : 1%;
+}
+.servicos_form .servicos_page_line:first-child {
+    margin-top: 0.5%;
+}
+
+.servicos_form #servicos_container_center {
+    margin-top   : 1%;
+    margin-right : 1%;
+    height       : auto;
+    width        : 99%;
+    overflow-y   : auto;
+}
+
+.servicos_form #dados_container {
+    width  : 40%;
+    margin : 0.5%;
+    float  : left;
+}
+
+.servicos_form #status_container {
+    width  : 19.5%;
+    margin : 0.5%;
+    float  : left;
+}
+
+.servicos_form #descrp_container {
+    width  : 98%;
+    margin : 1%;
+}
+.servicos_form #valor_container {
+    width  : 98%;
+    margin : 1%;
+    margin-top : 0px;
+}
+
+
+.servicos_form #dados_last_line {
+    width  : 100%;
+    margin : 1%;
+    height : 30px;
+}

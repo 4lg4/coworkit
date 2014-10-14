@@ -1,0 +1,252 @@
+#!/usr/bin/perl
+
+$nacess = "81";
+use utf8;
+use URI;
+use HTML::HTMLDoc;
+use Encode qw(decode encode);
+
+require "../cfg/init.pl";
+
+$ID  = &get('ID');
+$COD = &get('COD');
+
+$pdf = "true";
+require "./edit.cgi";
+
+# header necessario para pdf files
+# print $query->header('application/pdf; charset="utf-8"');
+# print $query->header('application/pdf');
+print "Content-type: application/octet-stream\n"; 
+print "Content-Disposition:attachment;filename=orcamento_".$COD.".pdf\n\n";
+
+# avatar
+$DB = DBE("select arquivo as codigo from empresa_avatar_arquivo where empresa_avatar = $USER->{empresa} order by arquivo desc limit 1");
+if($DB->rows() > 0) {
+    $avatar = $DB->fetchrow_hashref;
+    $avatar->{codigo};
+    
+    # monta path do arquivo 
+    if(length($avatar->{codigo}) == 1) {
+    	$dir = substr($avatar->{codigo},0,1);
+    	$dir .= 0;
+    } else {
+    	$dir = substr($avatar->{codigo},0,2);
+    }	
+    $avatar = $dirUpload.''.$dir.'/'.$avatar->{codigo};
+}
+
+# empresa 
+$empresa_nome = decode("utf8",$USER->{empresa_nome});
+$DB = DBE("
+    select 
+        ee.endereco,
+        ee.complemento,
+        ee.bairro,
+        ee.cidade,
+        ee.uf
+    from 
+        empresa_endereco as ee
+    where 
+        ee.empresa = $USER->{empresa} 
+    limit 1
+");
+if($DB->rows() > 0) {
+    $empresa_endereco = $DB->fetchrow_hashref;
+    $cidade = $empresa_endereco->{cidade};
+    $empresa_endereco = decode("utf8","$empresa_endereco->{endereco}, $empresa_endereco->{complemento} - $empresa_endereco->{bairro} / $empresa_endereco->{cidade} - $empresa_endereco->{uf}");
+}
+
+
+# $avatar = "//sys/cfg/DPAC/view_avatar.cgi?COD=$a->{arquivo}&ID=$ID";
+# $avatar = scalar(`cat /var/anexos/eos/60/60`);
+# $avatar =~ s/\s+|\n|\r//gm;
+# debug(scalar(`cat /var/anexos/eos/60/60.jpg`))
+# $u = URI->new("data:");
+# $u->media_type("image/jpeg");
+# $u->data(scalar(`cat /var/anexos/eos/60/60.jpg`));
+# print "$u\n";
+# open(XV, "|xv -") and print XV $u->data;
+# $u = URI->new("data:");
+# $u->media_type("image/jpg");
+# $u->data(scalar(`cat /var/anexos/eos/60/60`));
+# $avatar = "$u\n";
+# $avatar = $u;
+# open(XV, "|xv -") and print XV $u->data;
+# carrega valores do banco de dados
+# require "./edit_db.pl";
+
+
+$procedimento =~ s/(big|pre)/span/gm;
+
+
+# dados do pai
+$DBT = &DBE("
+    select
+        *,
+        (select sum(quantidade * valor) from orc_item where orc = $COD) as total
+    from
+        orc
+    where 
+        codigo = $COD
+");
+$orc = $DBT->fetchrow_hashref;
+$orc->{data}     = &dateToShow($orc->{data},"date");
+$orc->{validade} = &dateToShow($orc->{validade},"date");
+
+# dados filhos
+$DB = &DBE("
+    select
+        oi.*,
+        (select sum(quantidade * valor) from orc_item where codigo = oi.codigo) as total
+    from
+        orc_item as oi
+    where 
+        oi.orc = $COD
+    order by
+        oi.codigo asc
+");
+while($item = $DBT->fetchrow_hashref) {
+    $itens .= $item->{valor}." <hr>";
+}
+
+# $itens_pdf = encode($itens_pdf,"utf-8");
+
+
+$body =<<HTML;
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1">
+	</head>
+<body>
+    
+    <!-- descrp -->
+	<table width=100% border="0">
+		<tr>
+			<td colspan="2">
+			    <hr width="100%" size="1" noshade="noshade"></hr>
+			</td>
+		</tr>
+		<tr>
+			<td align="center" width="70%">
+                <font size="20">orçamento $COD </font>
+			</td>
+			<td align="right">
+                $cidade, $orc->{data}
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2">
+			    <br><br>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2"> 
+                <b>À</b> <br>
+			    $pdf_orc->{empresa_nome} <br>
+                $pdf_orc->{endereco_descrp}
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2">
+			    <br><br>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2">
+                <b>Descrição da solicitação</b> <br>
+                &nbsp;&nbsp;&nbsp;&nbsp; 
+			    $orc->{descrp}
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2">
+			    <br><br>
+			</td>
+		</tr>
+		<tr>
+            <td  colspan="2">
+                
+                <table width="100%" border="0" bgcolor="#DBDBDB" cellspancing="0">
+                    <thead>
+                        <tr>
+                            <th width="50%">Descrição</th>
+                            <th width="10%">Quantidade</th>
+                            <th width="20%">Valor</th>
+                            <th width="20%">Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        $pdf_itens
+                        $pdf_itens_total
+                    </tbody>
+                </table>
+                
+            </td>
+        </tr>
+		<tr>
+			<td colspan="2">
+			    <br><br>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2">
+                <b>Observações</b> <br>
+			    &nbsp;&nbsp;&nbsp;&nbsp; 
+                $orc->{obs}
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2">
+			    <br><br>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2">
+			    <b>Orçamento válido até $orc->{validade}</b>
+			</td>
+		</tr>
+	</table>	
+</body>
+</html>
+HTML
+$body =~ s/\n|\r//gm;
+
+# header
+$header =<<HTML;
+    <table width="100%" border="0">
+    	<tr>
+    		<td>
+    		    <img src="$avatar" height="60">
+    		</td>
+    		<td>
+                <span size="6"><b>$empresa_nome</b></font> <br>
+                <span size="3">$empresa_endereco</font>
+    		</td>
+    	</tr>
+    </table>
+HTML
+$header =~ s/\n|\r//gm;
+
+$htmldoc = new HTML::HTMLDoc();
+
+$htmldoc->set_charset("iso-8859-1");
+$htmldoc->embed_fonts();
+$htmldoc->set_right_margin(3,'mm');
+$htmldoc->set_left_margin(10,'mm');
+$htmldoc->set_top_margin(1,'mm');
+$htmldoc->set_bodyfont('Helvetica');
+$htmldoc->links();
+
+$htmldoc->set_bodyimage($SYS{pdf_bg_image});
+
+# $htmldoc->set_header('t',$avatar,':');
+$htmldoc->set_footer('.','.','1');
+$htmldoc->set_html_content($header.$body);
+# $htmldoc->landscape();
+$pdf = $htmldoc->generate_pdf();
+
+print $query->header('application/pdf');
+print $pdf->to_string();

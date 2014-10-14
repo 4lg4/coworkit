@@ -1,0 +1,11 @@
+
+#verify_container {
+    width      : 90%;
+    margin     : 1%;
+    margin-top : 2.5%;
+}
+
+#verify_container .EOS_template_field {
+    margin : 0.5% !important;
+    width  : 99% !important;
+}

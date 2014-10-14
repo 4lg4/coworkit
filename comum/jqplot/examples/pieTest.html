@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+
+    <title>Pie Charts and Options</title>
+
+    <link class="include" rel="stylesheet" type="text/css" href="/comum/jqplot/jquery.jqplot.min.css" />
+	
+	
+	<script>
+	function include(file)
+		{
+		var xhrObj = new XMLHttpRequest();
+
+		// open and send a synchronous request
+		xhrObj.open('GET', file, false);
+		xhrObj.send('');
+
+		// add the returned content to a newly created script tag
+		var se = document.createElement('script');
+		se.type = "text/javascript";
+		se.text = xhrObj.responseText;
+		document.getElementsByTagName('head')[0].appendChild(se);
+		}
+		function loadCSS(file)
+			{
+			var fileref=document.createElement("link")
+				fileref.setAttribute("rel", "stylesheet")
+			  	fileref.setAttribute("type", "text/css")
+			  	fileref.setAttribute("href", file)
+
+			document.getElementsByTagName("head")[0].appendChild(fileref);
+			}
+			
+		include("/comum/DPAC/DLoad.js");
+			
+	
+			include("/comum/jquery/jquery-1.8.3.js");
+			// include("/comum/jquery/jquery-1.9.0.min.js");
+			include("/comum/jquery/jquery-ui-1.9.2.custom.min.js");
+			// include("/comum/jquery/jquery-ui-1.10.0.custom.min.js");
+			// include("/comum/jquery/jquery.mobile-1.3.0.js");
+			include("/comum/jquery/jquery.ui.touch-punch.js"); // ajusta objetos html para touch
+			include("/comum/fastclick/lib/fastclick.js"); // carrega biblioteca para remover delay em touchs
+			include("/comum/touch/TouchSwipe/jquery.touchSwipe.min.js"); // swipe on pages
+
+			include("/comum/jquery/jquery.meiomask.js");
+			
+	include("/comum/DPAC/fieldOpt.js"); // carrega opcoes dos campos
+	include("/comum/DPAC/fieldOpt2.js"); // carrega opcoes dos campos
+	include("/comum/DPAC/translate.js");
+	include("/comum/DPAC/fieldSelect.js");
+	include("/comum/DPAC/grid.js");
+	include("/comum/DPAC/DSwipePages.js");
+	include("/comum/DPAC/DGrid.js");
+	include("/comum/DPAC/DDebug.js");
+	include("/comum/DPAC/DLoad.js");
+	
+	include("/comum/jquery/jquery-1.8.3.js");
+	// include("/comum/jquery/jquery-1.9.0.min.js");
+	include("/comum/jquery/jquery-ui-1.9.2.custom.min.js");
+	// include("/comum/jquery/jquery-ui-1.10.0.custom.min.js");
+	// include("/comum/jquery/jquery.mobile-1.3.0.js");
+	include("/comum/jquery/jquery.ui.touch-punch.js"); // ajusta objetos html para touch
+	include("/comum/fastclick/lib/fastclick.js"); // carrega biblioteca para remover delay em touchs
+	include("/comum/touch/TouchSwipe/jquery.touchSwipe.min.js"); // swipe on pages
+
+	include("/comum/jquery/jquery.meiomask.js"); // mascaramento de campos
+	
+	include("/comum/DPAC/fieldOpt.js"); // carrega opcoes dos campos
+	include("/comum/DPAC/fieldOpt2.js"); // carrega opcoes dos campos
+	include("/comum/DPAC/translate.js");
+	include("/comum/DPAC/fieldSelect.js");
+	include("/comum/DPAC/grid.js");
+	include("/comum/DPAC/DSwipePages.js");
+	include("/comum/DPAC/DGrid.js");
+	include("/comum/DPAC/DDebug.js"); // modulo para degub do sistema
+
+
+
+	// carrega funcoes somente no TOP
+	if(window.name != "main") 
+		{
+		include("/comum/DPAC/menu.js");
+		include("/comum/DPAC/Call.js"); //funcoes call / callgrid / callregrid
+		include("/comum/ui.js");
+		loadCSS("/css/menu.css");
+
+		// include("/comum/DPAC/DTouch.js");
+		// include("/comum/DPAC/DSwipePages.js");
+		}
+
+	loadCSS("/css/ui.css");
+	loadCSS("/css/loader.css");
+	loadCSS("/css/DPAC/DPAC.css"); // css das funcoes dpac
+	loadCSS("/css/DPAC/DTouchSlider.css"); // css do modulo de slider
+	loadCSS("/css/DPAC/field.css"); // css dos campos
+
+
+	// if(window.name == "main") // carrega funcoes se for formulario
+	//	{
+		include("/comum/DPAC/fieldNumber.js"); // jquery plugin
+		include("/comum/DPAC/fieldEmail.js"); // jquery plugin
+		include("/comum/DPAC/fieldDateTime.js"); // jquery plugin
+		include("/comum/DPAC/fieldAutoComplete.js"); // jquery plugin
+		include("/comum/DPAC/fieldTextEditor.js"); // jquery plugin
+
+
+
+		include("/comum/DPAC/fieldCheck.js");
+		// include("/comum/DPAC/fieldDateTime.js");
+		include("/comum/DPAC/fieldMoney.js");
+		include("/comum/DPAC/fieldPassword.js");
+		include("/comum/DPAC/fieldUpload.js");
+		include("/comum/DPAC/fieldUser.js");
+		include("/comum/DPAC/dbox.js");
+	 //	}
+
+
+	// carregamento do core Touch do EOS
+	include("/comum/DPAC/DTouchPages.js");
+	include("/comum/DPAC/DTouchBoxes.js");
+	include("/comum/DPAC/DTouchRadio.js");
+	include("/comum/DPAC/DTouchList.js");
+	include("/comum/DPAC/DTouchSlider.js");
+	
+	include("/comum/jqplot/jquery.jqplot.min.js");
+	include("/comum/jqplot/plugins/jqplot.pieRenderer.min.js");
+	</script>
+	
+	<!--
+	<script class="include" type="text/javascript" src="/comum/jqplot/jquery.jqplot.min.js"></script>
+	<script class="include" type="text/javascript" src="/comum/jqplot/plugins/jqplot.pieRenderer.min.js"></script>
+	-->
+   	<script class="code" type="text/javascript">
+
+$(document).ready(function(){
+	    var plot1 = $.jqplot('aaa', [[['a',25],['b',14],['c',7]]], {
+	        gridPadding: {top:0, bottom:38, left:0, right:0},
+	        seriesDefaults:{
+	            renderer:$.jqplot.PieRenderer, 
+	            trendline:{ show:false }, 
+	            rendererOptions: { padding: 8, showDataLabels: true }
+	        },
+	        legend:{
+	            show:true, 
+	            placement: 'outside', 
+	            rendererOptions: {
+	                numberRows: 1
+	            }, 
+	            location:'s',
+	            marginTop: '15px'
+	        }       
+	    });
+	});
+	
+	</script>
+	
+</head>
+<body>
+
+  
+<!-- Example scripts go here -->
+
+
+    <div id="aaa" style="margin-top:20px; margin-left:20px; width:200px; height:200px;"></div>
+
+ 
+
+</body>
+
+
+</html>

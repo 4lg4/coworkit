@@ -1,0 +1,1195 @@
+/* importa css usado pelo jquery como base, e apos aplica os overrides */
+@import "jquery.css";
+
+/* ------------------------------------------------
+ [INI]   CSS Base
+------------------------------------------------ */
+body
+	{
+	font-family: Tahoma, sans-serif;
+	font-size: 12px;
+	font-weight: normal;
+	font-style: normal;
+	letter-spacing: 0.02em;
+	}
+	
+tr, td
+	{
+	}
+
+/*  Titulo padrao de todas as tabelas */
+table thead tr th
+	{
+	background-color: #31517a;
+	color:#fff;
+	padding:4px;
+	}
+
+	
+/* commented backslash hack for mac-ie5 \ */
+dt
+	{
+	clear: both;
+	}
+	
+textarea
+	{
+	padding-left: 8px;
+	padding-right: 2px;
+	border-radius: 5px;
+	}	
+	
+select
+	{
+	padding: 2px;
+	margin: 0px;
+	width: auto;
+	background-color: white;
+	}
+
+button[disabled], input[disabled], optgroup[disabled], option[disabled], select[disabled], textarea[disabled], password[disabled]
+	{
+	color: #000;
+	background-color: #cdcdcd;
+	}
+
+/* ------------------------------------------------
+ [INI]   Modal Alerts
+------------------------------------------------ */
+	
+.ui_sys_title
+	{
+	width:40%;
+	/* float:left; */
+	}	
+/* Bota Padrao modal UI --------------------------------------------------------------------- */
+.ui_btn_bar 
+	{
+	position: relative;  
+	top:0px; 
+	left: 0px;  
+	width: 60px; 
+	height: 100%;
+	float: left;
+	border:0px;   
+	border-right: solid 1px #555555;   
+	border-top: none 0px;   
+	background-color: #b2b2b2;  
+	z-index: 1;
+	min-height:130px;
+	}
+	
+.ui_btn_title 
+	{
+	font-size:12px;
+	padding-top:1px;
+	}
+	
+.ui_btn_container 
+	{
+	display:table-cell;
+	vertical-align:bottom;
+	width: 46px;
+	height: 46px;
+	}
+	
+.ui_btn {
+	margin-top:3px;
+	width: 46px;
+	height: 46px;
+	cursor: pointer;
+	border-radius:3px;
+	color:#fff;
+	margin-top:3px;
+	background:rgb(30,49,105);
+	text-shadow: 1px 1px 0px rgb(77,34,39);	
+	text-align:center;
+	}
+	
+.ui_btn:hover {
+	background-image: linear-gradient(bottom, rgb(30,49,105) 65%, rgb(90,98,176) 98%);
+	background-image: -o-linear-gradient(bottom, rgb(30,49,105) 65%, rgb(90,98,176) 98%);
+	background-image: -moz-linear-gradient(bottom, rgb(30,49,105) 65%, rgb(90,98,176) 98%);
+	background-image: -webkit-linear-gradient(bottom, rgb(30,49,105) 65%, rgb(90,98,176) 98%);
+	background-image: -ms-linear-gradient(bottom, rgb(30,49,105) 65%, rgb(90,98,176) 98%);
+	background-image: -webkit-gradient(
+		linear,
+		left bottom,
+		left top,
+		color-stop(0.65, rgb(30,49,105)),
+		color-stop(0.98, rgb(90,98,176))
+	);
+	color:#f0f0f0;
+	text-shadow: -1px -1px 0px #000;
+	}
+	
+/* ------------------------------------------------
+ [END]   Modal Alerts
+------------------------------------------------ */
+
+/* Definicao padrao de botoes **************************/
+#btn_default
+	{
+	background-image: url(/img/syscall/ui/btn_default.png);
+	background-repeat:no-repeat;
+	border-style: none;
+	width: 73px;
+	height: 21px;
+	padding: 0px;
+	cursor: pointer;
+	float: left;
+	position: relative;
+	left: 40%;
+	}
+
+
+/* [INI] Modal Jquery ------------------------------------- */
+.ui-widget-overlay 
+	{
+	opacity:0.65;
+	background:#000;
+	}
+	
+
+
+	
+	
+/* code view ----------------------------------------------------------------------------------- */
+.code-container
+	{
+	width:99.5%; 
+	height:100%; 
+	background:#fff;
+	}
+	
+.code-view 
+	{
+	width:100%; 
+	height:500px;
+	border:0px;
+	}
+
+
+/*  -------------------------------------------------------------------------------------------
+	D-tips  
+------------------------------------------------------------------------------------------- */
+#Dtips {
+	background: #EEE;
+    color: #000;
+    border: 1px solid #DDD;
+    padding: 5px;
+    /* width: 250px; */
+    text-align: left;
+	}
+
+/*  -------------------------------------------------------------------------------------------
+	Arredondar bordas padrao usado 
+-------------------------------------------------------------------------------------------  */ 
+.no_rounded 
+	{
+	border-radius: 0px;
+	}
+.rounded 
+	{
+	border-radius: 5px;
+	}
+.rounded_top_right 
+	{
+	border-top-right-radius: 5px;	
+	}
+.rounded_top_left 
+	{
+	border-top-left-radius: 5px;	
+	}
+.rounded_tr 
+	{
+	border-top-right-radius: 5px;	
+	}
+.rounded_tl 
+	{
+	border-top-left-radius: 5px;	
+	}
+.rounded_u 
+	{
+	border-bottom-left-radius: 5px;
+	border-bottom-right-radius: 5px;
+	}
+.rounded_n 
+	{
+	border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
+	}
+.rounded_ud 
+	{
+	border-top-right-radius: 5px;
+	border-bottom-left-radius: 5px;
+	border-bottom-right-radius: 5px;
+	}
+
+/*  -------------------------------------------------------------------------------------------
+  HighLight padrao
+-------------------------------------------------------------------------------------------  */ 
+.noglow { background-color:#ccc; }
+.glow { background-color: #99aec9 !important; }
+.glow2 { background-color: #99aec9 !important; }
+.glowa { background-color: #cabebf; }
+.glowb { background-color: #fff; }
+
+	
+/* ----------------------------------------------------------------------------------------------
+	[INI] Tabs 
+---------------------------------------------------------------------------------------------- */
+.ui-tabs-nav 
+	{
+	border:none !important;
+	background:none !important;
+	padding-bottom:none !important;
+	}
+	
+.ui-tabs-nav li a 
+	{
+	padding: 0.4em 1em !important;
+	font-size: 0.8em !important;
+	}
+	
+.ui-tabs-nav li
+	{
+	margin-top:0px !important;
+	}
+		
+.ui-tabs-nav ul
+	{
+	margin-bottom:-2px !important;
+	border-bottom:0px;
+	}
+.ui-tabs
+	{
+	border:none !important;
+	}
+
+.ui-widget-content 
+	{
+	padding:0px !important;
+	}
+	
+div.ui-tabs
+	{
+	border:none !important;
+	background:none !important;
+	}
+
+.ui-tabs .ui-tabs-nav li a, .ui-tabs.ui-tabs-collapsible .ui-tabs-nav li.ui-tabs-selected a	
+	{
+	cursor:pointer;
+	border:none !important;
+	background:none !important;
+	}
+	
+div.ui-tabs-panel
+	{
+	/* border:none !important; */
+	}
+
+/* Botao de remover aba no cadastro de clientes */
+.tabs_btn_del 
+	{
+	float:left; 
+	margin-left:-6px; 
+	margin-top: -1px; 
+	}
+/* cor das abas das tabs ------------------------------------------------------ */
+
+/* quando ativo  */
+.ui-tabs .ui-tabs-nav li.ui-tabs-selected a, .ui-tabs .ui-tabs-nav li.ui-state-disabled a, .ui-tabs .ui-tabs-nav li.ui-state-processing a 
+	{ 
+	/* border-bottom: solid 4px !important; */
+	}  
+/* Google Chrome hack */
+@media screen and (-webkit-min-device-pixel-ratio:0){
+	.ui-tabs .ui-tabs-nav li.ui-tabs-selected a, .ui-tabs .ui-tabs-nav li.ui-state-disabled a, .ui-tabs .ui-tabs-nav li.ui-state-processing a { background-color:#31517b; border-bottom: solid 3px #31517b; } 
+	}
+
+/* quando inativo  */
+.ui-tabs .ui-tabs-nav li a, .ui-tabs.ui-tabs-collapsible .ui-tabs-nav li.ui-tabs-selected a 
+	{ 
+	/* border-bottom: solid 4px !important; */
+	}
+
+/* Google Chrome hack */
+@media screen and (-webkit-min-device-pixel-ratio:0){
+	.ui-tabs .ui-tabs-nav li a, .ui-tabs.ui-tabs-collapsible .ui-tabs-nav li.ui-tabs-selected a { border-bottom: solid 3px #ccc;}
+	}
+
+/* ----------------------------------------------------------------------------------------------
+	[END] Tabs 
+---------------------------------------------------------------------------------------------- */
+
+
+/* -----------------------------------------------------------------
+	[INI] Date Picker 
+----------------------------------------------------------------- */
+.ui-datepicker {
+	background: #ffffff;
+	border: 1px solid #808080 !important;
+	padding-left: 2px !important;
+	padding-right: 2px !important;
+	z-index:999 !important;
+	}
+.ui-datepicker-title 
+	{
+	border-radius: 5px;
+	margin-left:2px;
+	margin-right:2px;
+	line-height:1.1em !important;
+	background:#ccc;
+	}
+.ui-datepicker a.ui-state-default 
+	{
+	border-radius: 5px;
+	}
+table.ui-datepicker-calendar tbody td.highlight > a 
+	{ 
+	border: 1px solid #31517a; 
+	background: #31517a url(/img/syscall/jquery/ui-bg_highlight-soft_65_31517a_1x100.png) 50% 50% repeat-x; 
+	font-weight: bold; 
+	color: #ffffff; 
+	}
+/*
+{
+    background: #70242d; / url("/img/syscall/ui/ui-bg_inset-hard_55_ffeb80_1x100.png") repeat-x scroll 50% bottom #70242d; /
+    color: #fff;
+    border: 1px solid #500000;
+}
+*/
+.ui-datepicker td 
+	{
+	padding:2px !important;
+	}
+	
+.ui-datepicker th
+	{
+	padding:2px !important;
+	}
+
+
+/* 
+	no arquivo DPACK e no iPAC serao removidos e traduzidos os elementos on the fly
+	<dt class="ui_tpicker_time_label" id="ui_tpicker_time_label_task_agenda">Time</dt> 
+	<dt class="ui_tpicker_hour_label" id="ui_tpicker_time_label_task_agenda">Time</dt> 
+	<dt class="ui_tpicker_minute_label" id="ui_tpicker_time_label_task_agenda">Time</dt> 
+*/
+.ui_tpicker_time_label, .ui_tpicker_hour_label, .ui_tpicker_minute_label
+	{
+	font-size:0.5em;
+	}
+	
+.ui_tpicker_time 
+	{
+    text-align: right;
+    font-weight: bold;
+	padding-right: 5px;
+	color:#31517b;
+	}
+
+.ui-timepicker-div
+	{
+	padding-left:5px;
+	padding-right:5px;
+	/* 
+	border-top:1px solid #ccc;
+	margin-top:5px;
+	*/
+	}
+	
+.ui-datepicker .ui-datepicker-buttonpane 
+	{
+	font-size: 0.5em;
+	}
+
+/* ------------------------------------------------------- 
+	Auto Complete Field
+		usado com classe fieldAutoComplete
+/* -------------------------------------------------------*/
+.search 
+	{ 
+	background:#fff url("/img/syscall/comum/field_search.png") top left 2px no-repeat; 
+	background-size: 16px;
+	padding-left: 18px !important;
+	}
+	
+.searchAdd
+	{ 
+	background:#fff url("/img/syscall/comum/field_search_add.png") top -0.5px left 2px no-repeat; 
+	background-size: 16px;
+	padding-left: 18px !important;
+	}	
+	
+.ui-autocomplete 
+	{ 
+	border: 1px solid #333;
+	border-top:0px !important;
+	padding:3px !important;
+	padding-right:4px !important;
+	border-top-left-radius: 0px !important;
+	border-top-right-radius: 0px !important;
+	border-bottom-left-radius: 5px !important;
+	border-bottom-right-radius: 5px !important;
+	width:20em !important;
+	}
+.ui-autocomplete a
+	{
+	font-size:0.8em;
+	}
+
+/* Auto select -------------------------------------------- */
+.acInput {
+	width: 200px;
+}
+.acResults {
+	padding: 0px;
+	border: 1px solid WindowFrame;
+	/* background-color: Window; */
+	background-color: #fff;
+	overflow: hidden;
+	-moz-border-radius: 0 0 5px 5px; 
+	-webkit-border-bottom-left-radius: 5px; 
+	-webkit-border-bottom-right-radius: 5px; 
+	border-bottom-left-radius: 5px;
+	border-bottom-right-radius: 5px;
+	
+}
+
+.acResults ul {
+	width: 100%;
+	list-style-position: outside;
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+.acResults li {
+	margin: 0px;
+	padding: 2px 5px;
+	cursor: pointer;
+	display: block;
+	width: 100%;
+	font: menu;
+	font-size: 12px;
+	overflow: hidden;
+}
+
+.acLoading {
+	background : url('indicator.gif') right center no-repeat;
+}
+
+.acSelect {
+	background-color: Highlight;
+	color: HighlightText;
+}
+
+/* ------------------------------------------------------- 
+	[INI] D-Fields (done fields)
+/* -------------------------------------------------------*/
+
+/* field Money (campos somente Money) */
+.fieldMoney
+	{ 
+	background:#fff url("/img/syscall/comum/field_money.png") top left 3px no-repeat; 
+	background-size: 18px;
+	width: 95px !important;
+	padding-left: 22px !important;
+	text-align:right;
+	}
+
+/* field Date Time (campos com Date / Time) */
+.fieldDate
+	{ 
+	background:#fff url("/img/syscall/comum/field_date.png") top -1px left 4px no-repeat; 
+	/* background-size: 16px; */
+	width: 90px !important;
+	padding-left: 22px !important;
+	}
+
+.fieldDateTime
+	{ 
+	background:#fff url("/img/syscall/comum/field_datetime.png") top -1.5px left 4px no-repeat; 
+	background-size: 18px;
+	width: 120px !important;
+	padding-left: 24px !important;
+	}
+	
+.fieldTime
+	{ 
+	background:#fff url("/img/syscall/comum/field_time.png") top left 3px no-repeat; 
+	background-size: 16px;
+	width: 50px !important;
+	padding-left: 20px !important;
+	}
+		
+.fieldMonthYear
+	{ 
+	background:#fff url("/img/syscall/comum/field_date.png") top -1px left 4px no-repeat; 
+	/* background-size: 18px; */
+	width: 60px !important;
+	padding-left: 24px !important;
+	}
+
+.fieldMonthYearIcon
+	{ 
+	background:none !important; 
+	width: 60px !important;
+	border: none !important;
+	color:#fff !important;
+	}
+	
+.fieldNumber
+	{ 
+	background:#fff url("/img/syscall/comum/field_number.png") top left 3px no-repeat; 
+	background-size: 15px;
+	padding-left: 20px !important;
+	}
+
+.fieldEmail
+	{ 
+	background:#fff url("/img/syscall/comum/field_email.png") top left 1px no-repeat; 
+	background-size: 16px;
+	padding-left: 20px !important;
+	}
+
+.fieldUser
+	{ 
+	background:#fff url("/img/syscall/comum/field_user.png") top left 1px no-repeat; 
+	background-size: 16px;
+	padding-left: 20px !important;
+	}
+
+.fieldPassword
+	{ 
+	background:#fff url("/img/syscall/comum/field_password.png") top left 3px no-repeat; 
+	background-size: 16px;
+	padding-left: 20px !important;
+	}
+
+.fieldDisable
+	{
+	background-color:#ccc;
+	}
+	
+.fieldContainer 
+	{
+	box-sizing: border-box;
+	}
+
+/* Checkbox ---------------------------------- 
+.fieldCheck, .ui-state-active
+	{
+	background:url("/img/syscall/field_check.png") center center no-repeat; 
+	background-size:15px 15px;
+	}
+
+
+.ui-state-active
+	{
+	border:none;
+	}
+	
+.ui-state-default
+	{
+	border:none;
+	}
+*/
+.fieldCheck
+	{
+	border:none;
+	}
+
+/* ----------------------------------------------------------------------------------------------------------------------------------
+	Selectmenu 
+---------------------------------------------------------------------------------------------------------------------------------- */
+.fieldSelect 
+	{
+	font-size: 0.8em !important;
+	}
+
+.ui-selectmenu 
+	{
+    cursor:pointer !important;
+	height:15px !important;
+	/* padding:3px !important; */
+	}
+
+/* .ui-selectmenu, li.ui-corner-bottom, li.ui-selectmenu-item-selected */
+
+.ui-selectmenu, ul.ui-selectmenu-menu li
+	{
+	font-size: 0.85em !important;
+	}
+
+/* .ui-selectmenu .ui-selectmenu-menu { width: 100px; } */
+.ui-selectmenu-menu li:hover { border:1px dotted transparent; } /* remove bordas quando mouse over no item */
+.ui-selectmenu-menu a:hover { color:#fff; } /* remove bordas quando mouse over no item */
+.ui-selectmenu { display: inline-block; position:relative; height:20px; text-decoration: none; overflow:hidden; vertical-align:bottom; margin-bottom:2px; background:#fff; border: 1px solid rgb(170, 170, 170)}
+.ui-selectmenu-icon { position:absolute; right:1px; margin-top:-8px; top: 50%; }
+.ui-selectmenu-menu { padding:0; margin:0; list-style:none; position:absolute; top: 0; visibility: hidden; overflow: auto; background:#fff; border:1px solid rgb(170, 170, 170)}
+.ui-selectmenu-open { visibility: visible; }
+.ui-selectmenu-menu-popup { margin-top: -1px; }
+
+ul.ui-selectmenu-dropdown
+	{
+	margin-top:100px !important;
+	}
+
+.ui-selectmenu-menu li { padding:0; margin:0; display: block; border-top: 1px dotted transparent; border-bottom: 1px dotted transparent; border-right-width: 0 !important; border-left-width: 0 !important; font-weight: normal !important; }
+.ui-selectmenu-menu li a,.ui-selectmenu-status { line-height: 1.4em; display:block; padding:.3em 1em; outline:none; text-decoration:none; }
+.ui-selectmenu-menu li.ui-selectmenu-hasIcon a,
+.ui-selectmenu-hasIcon .ui-selectmenu-status { padding-left: 20px; position: relative; margin-left: 5px; }
+.ui-selectmenu-menu li .ui-icon, .ui-selectmenu-status .ui-icon { position: absolute; top: 1em; margin-top: -8px; left: 0; }
+.ui-selectmenu-status { line-height: 1.4em; }
+.ui-selectmenu-open li.ui-selectmenu-item-focus a {  }
+.ui-selectmenu-open li.ui-selectmenu-item-selected { }
+.ui-selectmenu-menu li span,.ui-selectmenu-status span { display:block; margin-bottom: .2em; }
+.ui-selectmenu-menu li .ui-selectmenu-item-header { font-weight: bold; }
+.ui-selectmenu-menu li .ui-selectmenu-item-content {  }
+.ui-selectmenu-menu li .ui-selectmenu-item-footer { opacity: .8; }
+
+.ui-selectmenu-menu .ui-selectmenu-group { font-size: 0.8em; }
+.ui-selectmenu-menu .ui-selectmenu-group .ui-selectmenu-group-label { line-height: 1.4em; display:block; padding:.6em .5em 0; font-weight: bold; }
+.ui-selectmenu-menu .ui-selectmenu-group ul { margin: 0; padding: 0; }
+
+/* Upload fake  ---------------------------------------------------------  */
+.file-wrapper {
+  cursor: pointer;
+  display: inline-block;
+  overflow: hidden;
+  position: relative;
+}
+.file-wrapper input {
+  cursor: pointer;
+  font-size: 100px;
+  height: 100%;
+  filter: alpha(opacity=1);
+  -moz-opacity: 0.01;
+  opacity: 0.01;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+.file-wrapper .button {
+  background: #70242d;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+  color: #fff;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 11px;
+  font-weight: bold;
+  margin-right: 5px;
+  padding: 4px 18px;
+  text-transform: uppercase;
+}
+.upload_btn {
+  background: #70242d;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+  color: #fff;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 11px;
+  font-weight: bold;
+  margin-right: 5px;
+  padding: 4px 18px;
+  text-transform: uppercase;
+  margin-top:-2px; 
+ }
+
+
+/* [END] Fields ------------------------------------------------------------------------------------------------------- */
+
+
+
+/* -------------------------------------------------------------------------------------------------------------------
+  -------------------------------------------------------------------------------------------------------------------
+
+	CSS especifico (Classificar comentando)
+	
+-------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------- */
+
+.thor:hover
+	{
+	cursor: pointer;
+	text-decoration: underline;
+	}
+
+.asc
+	{
+	background: url(/img/syscall/sort_asc.png) no-repeat #31517a 99% 20%;
+	}
+
+.asc:hover
+	{
+	background: url(/img/syscall/sort_asc.png) no-repeat #31517a 99% 20%;
+	cursor: pointer;
+	text-decoration: underline;
+	}
+
+.desc
+	{
+	background: url(/img/syscall/sort_desc.png) no-repeat #31517a 99% 20%;
+	}
+
+.desc:hover
+	{
+	background: url(/img/syscall/sort_desc.png) no-repeat #31517a 99% 20%;
+	cursor: pointer;
+	text-decoration: underline;
+	}
+
+#mensagem
+	{
+	text-align: center;
+	font-size: 13px;
+	font-weight: bold;
+	color: red;
+	}
+
+.info
+	{
+	text-align: left;
+	font-size: 12px;
+	font-weight: normal;
+	color: #31517a;
+	}
+	
+.infobold
+	{
+	text-align: left;
+	font-size: 12px;
+	font-weight: bold;
+	color: #31517a;
+	}
+
+.grid
+	{
+	border: solid 1px #31517a;
+	background-color: white;
+	padding: 0px;
+	margin-top: 8px;
+	}
+
+.grid tr:first-child td
+	{
+	padding-top: 15px;
+	}
+
+.grid td:first-child
+	{
+	padding-left: 20px;
+	}
+
+.grid th
+	{
+	font-size: 12px;
+	text-align: left;
+	padding: 3px;
+	padding-left: 10px;
+	margin: 0px;
+	background-color: #31517a;
+	color: white;
+	}
+
+.grid td
+	{
+	padding: 2px;
+	padding-left: 10px;
+	padding-right: 10px;
+	}
+
+.grid tr[first]
+	{
+	padding-top: 20px;
+	}
+/* navegacao */
+.navigateable_box
+	{
+	/* border: solid 1px #808080; */
+	background-color: #fff; 
+	padding: 0px; 
+	/* padding-top:0px; */
+	overflow-y: auto;
+	/* border-radius: 5px; */
+	border-top-left-radius:0px;
+	border-top-right-radius:0px;
+	margin: 0px 5px 0px 5px;
+	}
+
+.navigateable table, th, td
+	{
+	font-size: 11px;
+	}
+
+/* header TH -> titulo das listas criadas nos formularios usando table */	
+.navigateable th
+	{
+	background-color: #31517a;
+	color: white;
+	}
+
+.navigateable_th
+	{
+	background-color: #555555;
+	color: white;
+	font-size: 12px;
+	padding: 2px;
+	font-weight: bold;
+	}	
+	
+.selected td
+	{
+	background-color: #99aec9;
+	}
+	
+.formtxt
+	{
+	font-weight: normal;
+	color: #fff;
+	}
+
+.txtbold
+	{
+	font-weight: bold;
+	color: #808080;
+	}
+
+dl.form
+	{
+	width: 96%;
+	margin: 7px 0;
+	padding: 0;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	padding-right: 0px;
+	}
+	
+dl.form dl
+	{
+ 	margin: 0px;
+	}
+
+.form dt
+	{
+	width: 15%;
+	float: left;
+	margin: 0 0 0 0;
+	padding: 3px;
+	font-weight: normal;
+	color: #333;
+	}
+
+td.form
+	{
+	font-size: 12px;
+	font-weight: bold;
+	color: #FFF;
+	}
+
+
+.form dd
+	{
+	float: left;
+	margin: 0 0 0 0;
+	padding: 1px;
+	font-weight: normal;
+	width: 70%;
+	}
+
+.separator
+	{
+	color: white;
+	background-color: #999999;
+	padding: 4px;
+	font-weight: bold;
+	}
+
+.separator_aba
+	{
+	font-size: 12px;
+	color: white;
+	background-color: #808080;
+	padding: 4px;
+	width: 94.6%;
+	font-weight: bold;
+	margin-left: 2.5%;
+	border-radius: 5px;	
+	}
+	
+.separator_titulo
+	{
+	font-size: 12px;
+	color: white;
+	background-color: #31517a;
+	padding: 4px;
+	width: 94.6%;
+	font-weight: bold;
+	margin-left: 2.5%;
+	border-radius: 5px;	
+	}
+	
+/* ------------------------------------------------------------------------------------------
+	Simula aba
+------------------------------------------------------------------------------------------ */
+.fake_aba
+	{
+	font-size: 12px;
+	color: white;
+	background: #3167b3;
+	padding: 4px;
+	width: 94.6%;
+	font-weight: bold;
+	border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
+	}
+.fake_aba_sub
+	{
+	background:#808080; 
+	padding-bottom:6px !important;
+	padding-top:8px !important; 
+	text-align:right; 
+	width:100%;
+	border-top-right-radius: 5px;
+	color:#fff;
+	}
+.fake_aba_azul
+	{
+	font-size: 12px;
+	color: white;
+	background-color: #31517a;
+	padding: 4px;
+	width: 94.6%;
+	font-weight: bold;
+	margin-left: 2.5%;
+	border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
+	}
+.fake_aba td
+	{
+	font-size: 11px;
+	color: white;
+	}
+
+.textarea
+	{
+	font-size: 12px;
+	width: 99%;
+	border: solid 1px #aaaaaa;
+	margin-bottom: 5px;
+	margin-left: 10px;
+	padding: 2px;
+	padding-left: 5px;
+	}
+	
+.box
+	{
+	color: white;
+	background-image: url(/img/syscall/menu_fundo_sel.png);
+	border: solid #000055 1px;
+	cursor: pointer;
+	padding: 4px;
+	font-weight: bold;
+	}
+  
+#grid_pesq table
+	{
+	width: 100%;
+	padding-bottom: 0px;
+	color: white;
+	background-color: #31517a;
+	}
+
+.grupo:link
+	{
+	text-decoration: none;
+	}
+
+.grupo:active, .grupo:visited 
+	{
+	text-decoration: underline;
+	}
+	
+#detalhes
+	{
+	background-color: ivory;
+	border: solid 1px gray;
+	text-align: left;
+	padding: 4px;
+	overflow: hidden;
+	border-radius: 5px;
+	}
+
+#detalhes .box
+	{
+	font-size: 12px;
+	text-align: left;
+	font-weight: bold;
+	color: white;
+	background-color: #31517a;
+	width: 210px;
+	padding: 6px 4px 6px 4px;
+	border-radius: 5px;
+	}
+
+.agrupo
+	{
+	background-color: #6282ab;
+	color: white;
+	font-weight: bold;
+	padding-top: 2px;
+	padding-bottom: 2px;
+	}
+
+.legenda_box
+	{
+	border: solid 1px #ccc;
+	background-color: #dcdcdc;
+	border-radius: 5px;
+	padding: 4px 20px 4px 20px;
+	color: black;
+	}
+
+.legenda_th
+	{
+	background-color: #575971;
+	border: solid 1px black;
+	}
+	
+.legenda_agrupo
+	{
+	background-color: #6282ab;
+	border: solid 1px black;
+	}
+
+
+/* simula botao - cursor mouse */
+.btn_img {
+	cursor:pointer;
+}
+
+
+/* -----------------------------------------------------------------------------------------------------------------------------------------------
+	tables sorter plugin 
+	
+	plugin para ordenar tabelas
+----------------------------------------------------------------------------------------------------------------------------------------------- */
+
+.tablesorter 
+	{
+	/* 
+	margin:10px 0pt 15px;
+	text-align: left;
+	*/
+	}
+/*	
+.tablesorter thead tr th, table.tablesorter tfoot tr th 
+	{
+	background-color: #31517a;
+	color:#fff;
+	padding:4px;
+	}
+*/
+.tablesorter tbody td 
+	{
+	padding: 4px;
+	/* color: #3D3D3D;
+	background-color: #FFF;
+	vertical-align: top;
+	*/
+	}
+
+/*
+table.tablesorter thead tr .headerSortDown, table.tablesorter thead tr .headerSortUp {
+background-color: #8dbdd8;
+}
+*/
+
+.tablesorter tbody tr.odd td 
+	{
+	background-color:#ccc;
+	}
+	
+.tablesorter tbody td:even
+	{
+	background-color: #fff;
+	}
+	
+.tablesorter tbody td:odd
+	{
+	background-color: #ccc;
+	}
+
+.tablesorter thead tr .header 
+	{
+	background-repeat: no-repeat;
+	background-position: center right;
+	cursor: pointer;
+	}
+	
+.tablesorter thead tr .header 
+	{
+	background-image: url(/img/syscall/comum/table/bg.gif);
+	}
+	
+.tablesorter thead tr .headerSortUp 
+	{
+	background-image: url(/img/syscall/comum/table/asc.gif);
+	}
+	
+.tablesorter thead tr .headerSortDown 
+	{
+	background-image: url(/img/syscall/comum/table/desc.gif);
+	}
+
+/* Table Sorter Pager */
+div.tablesorterPager {
+	padding: 10px 0 10px 0;
+	background-color: #D6D2C2;
+	text-align: center;
+}
+div.tablesorterPager span {
+	padding: 0 5px 0 5px;
+}
+div.tablesorterPager input.prev {
+	width: auto;
+	margin-right: 10px;
+}
+div.tablesorterPager input.next {
+	width: auto;
+	margin-left: 10px;
+}
+div.tablesorterPager input {
+	font-size: 8px;
+	width: 50px;
+	border: 1px solid #330000;
+	text-align: center;
+}
+
+
+/* 
+	DTouchBoxes Boxes touch sortables
+*/
+.DTouchBoxes
+	{
+	border:none;
+	border-radius:0px;
+	background:#3167b3;
+	color:#fff;
+	padding: 0px;
+	padding-bottom: 5px;
+	}
+	
+#PESQEMP, #PESQ
+	{
+	width:90%;
+	border:0px;
+	}

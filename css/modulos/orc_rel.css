@@ -1,0 +1,291 @@
+/** 
+ *  Formulario
+ */
+
+/* linha container */
+.orc_form .orcamento_page_line {
+    width    : 98%;
+    clear    : both;
+    overflow : hidden;
+    margin   : 1%;
+}
+
+.orc_form {
+    overflow : auto;
+}
+
+
+
+
+/** 
+ *  Solicitacao Box
+ */
+.orc_form #solicitacao_container {
+    width : 60%;
+}
+
+.orc_form #cliente_container {
+    width  : 60%;
+    margin : 1%;
+    float : left;
+}
+
+.orc_form #responsavel_container {
+    width  : 37%;
+    margin : 1%;
+    margin-left : 0px;
+    float : left;
+}
+
+.orc_form #descrp_container {
+    clear : both;
+    width  : 98%;
+    height : 65px;
+    margin : 1%;
+    margin-top : 0px;
+}
+
+
+
+/** 
+ *  Dados Box
+ */
+.orc_form #dados_container {
+    width  : 39%;
+    margin-left : 1%;
+    float  : left;
+}
+
+.orc_form #validade_container {
+    width  : 40%;
+    margin : 1.5%;
+    float  : left;
+}
+
+.orc_form #obs_container {
+    clear : both;
+    width  : 97%;
+    height : 65px;
+    margin : 1.5%;
+    margin-top : 0px;
+}
+
+/* total geral */
+.orc_form .totais_line_ { 
+    float  : left;
+    width: 55.5%;
+    margin-top: 1.5%;
+    height : 30px;
+}
+.orc_form .totais_line_ .totais_descrp {
+    width  : 18%;
+    float : left; 
+    color : #fff;
+    height: 30px;
+    /* line-height: 2.5; */
+    margin-left: 2%;
+}
+
+.orc_form .totais_line_ .totais_valor {
+    width : 80%;
+    float : left; 
+}
+
+
+
+
+/** 
+ *  Valores Box
+ */
+
+.orc_form #produto_list_container, 
+.orc_form #servico_list_container, 
+.orc_form #despesa_list_container {
+    background: #ddd;
+    margin-top: 0.5%;
+}
+
+.orc_form #produto_list,
+.orc_form #servico_list,
+.orc_form #despesa_list {
+    clear : both;
+}
+
+
+/* lista de itens */
+.orc_form #orcamento_page_center .DTouchRadio_list_line div {
+    /* color : #fff; */
+    font-size: 14px;
+}
+.orc_form #orcamento_page_center .DTouchRadio_list_line div:first-child span {
+    font-size: 8px;
+    display: inline;
+}
+.orc_form #orcamento_page_center .DTouchRadio_descrp div {
+    height : 30px;
+    line-height: 02;
+}
+
+.orc_form #orcamento_page_center .DTouchRadio_vertical {
+    border-bottom: 1px dotted #fff;
+}
+.orc_form #orcamento_page_center .DTouchRadio_vertical:last-child {
+    border-bottom: medium none;
+}
+
+/* tabs navigator */
+.orc_form #valores_tabs ul li span {
+    display : none;
+}
+.orc_form #valores_tabs ul {
+    background : transparent;
+    margin-right : 0.4%;
+}
+.orc_form #valores_tabs li {
+    margin-top: -2px;
+}
+.orc_form #valores_tabs .val_tabs {
+    width  : 99%;
+    margin : 0.5%;
+}
+.orc_form .ui-tabs-panel {
+    border : none !important;
+}
+
+.orc_form .ui-widget-content {
+    border: none;
+}
+
+
+/** 
+ *  Totais Tab 
+ */
+
+/* totais */
+.orc_form .totais_line {
+    clear : both;
+    width  : 100%;
+    margin-top : 0.5%;
+    height : 30px;
+}
+.orc_form .totais_line:first-child {
+    margin-top : 0px;
+}
+
+.orc_form .totais_line .totais_descrp {
+    width  : 18%;
+    float : left; 
+    color : #fff;
+    font-size : 14px;
+    height: 30px;
+    line-height: 2;
+    margin-left: 2%;
+}
+.orc_form .totais_line .totais_valor {
+    width : 80%;
+    float : left; 
+}
+
+
+
+.orc_form #produto_list_title,
+.orc_form #despesa_list_title,
+.orc_form #servico_list_title {
+    width : 100%;
+    border-bottom : 1px solid #fff;
+    height: 30px;
+}
+.orc_form #produto_list_title div:first-child,
+.orc_form #despesa_list_title div:first-child,
+.orc_form #servico_list_title div:first-child {
+    margin-left : 2%;
+}
+.orc_form #produto_list_title div,
+.orc_form #despesa_list_title div,
+.orc_form #servico_list_title div {
+    float  : left;
+    height : 30px;
+    line-height : 2.5;
+    font-weight : bold;
+    /* color : #fff; */
+}
+
+/**
+ *  Listagem
+ */
+.orc_form #orcamento_list_container {
+    width: 99%;
+    margin-top: 1%;    
+}
+
+
+
+/**
+ *  Icons groups
+ */
+.icon_orc_aproval {
+    background : #BF7002;
+}
+.icon_orc_aproval_ {
+    background : #9E3323;
+}
+
+
+/** 
+ *  Aprovar / Cancelar
+ */
+textarea[name=cancelar]{
+    width: 200px;
+    height: 100px;
+    border: 1px solid #3167b3;
+    margin-top: 8px;
+    margin-right: 13px;
+}
+#cancelado_container {
+    display : none;
+}
+
+
+
+#search_container {
+    width : 97%;
+    padding : 0.5%;
+    margin : 1%;
+}
+ 
+#list_container {
+    width : 97%;
+    padding : 0.5%;
+    margin : 1%;
+    margin-top : 0px;
+}
+
+#dt_ini_container {
+    float : right;
+    width : 20%;
+    margin-top : 0.5%;
+}
+
+#dt_end_container {
+    float : right;
+    width : 20%;
+    margin-top : 0.5%;
+    margin-left : 1%;
+}
+
+#filter_cat {
+    float : left;
+    margin-top : 0.5%;
+    margin-right : 1%;
+}
+
+#filter_cat .DTouchRadio_horizontal {
+    min-height : 30px;
+}
+
+#filter_cat .DTouchRadio_descrp {
+    line-height: 2.5;
+}
+
+
+

@@ -1,0 +1,274 @@
+html
+  {
+  overflow: hidden;
+  }
+
+body, table, th, td
+  {
+  font-family: Tahoma, sans-serif;
+  font-size: 11px;
+  }
+
+.title
+  {
+  font-family: Tahoma, sans-serif;
+  font-size: 12px;
+  color: #31517a;
+  margin-left: 3px;
+  font-weight: bold;
+  }
+  
+#grid_form
+  {
+  margin-top:5px;
+  height: 100%;
+  overflow: scroll;
+  }
+
+table
+  {
+  border: none 0px;
+  }
+  
+#grid_form th
+  {
+  border-bottom:2px solid #3167b3;
+  background: #F0F0F0;
+  }
+
+#grid_form th span
+  {
+  color: #333;
+  font-weight:bold;
+  background: #F0F0F0;
+  }
+
+.thor:hover
+  {
+  cursor: pointer;
+  text-decoration: underline;
+  }
+
+.asc
+  {
+  background: url(/img/syscall/sort_asc.png) no-repeat #F0F0F0 99% 20%;
+  }
+
+.asc:hover
+  {
+  cursor: pointer;
+  text-decoration: underline;
+  }
+
+.desc
+  {
+  background: url(/img/syscall/sort_desc.png) no-repeat #F0F0F0 99% 20%;
+  }
+
+.desc:hover
+  {
+  cursor: pointer;
+  text-decoration: underline;
+  }
+
+.selected td
+  {
+  background:#5D91D9 !important;
+  color:#fff !important;
+  }
+  
+.selected .tdgrupo1, .selected .tdgrupo2
+  {
+  background-color: #778ba7;
+  }
+ 
+#grid
+  {
+  /* background-color:#3167b3; */
+  }
+
+#grid tbody td div
+  {
+  width:100%;
+  overflow:hidden;
+  white-space:nowrap;
+  }	
+#grid tbody td
+  {
+  color : #333;  
+  border-bottom: 1px dotted #aaa;
+  }
+  
+.tdgrupo1
+  {
+  background-color:#3167b3 !important;
+  /* background-color: #99aec9; */
+  border-bottom: 1px dotted #aaa;
+  color:#fff !important;
+  }
+
+.tdgrupo2
+  {
+  /* background-color: #b9cae1; */
+  border-bottom: 1px dotted #aaa;
+  background-color:#3167b3 !important;
+  color:#fff !important;
+  }
+
+#grid_pesq table
+  {
+  width: 500px;
+  float: right;
+  margin-bottom: 10px;
+  color: #fff;
+  background-color: #3167b3;
+  margin-right: 1%;
+  margin-top: 0.5%;
+  padding-right: 5px;
+  padding-top: 2px;
+  }
+  
+#grid_pesq table a
+  {
+  color: white;
+  margin-left: 4px;
+  font-size: 12px;
+  font-weight: bold;
+  text-decoration: none;
+  }
+  
+ #print_pesq table
+  {
+  width: 500px;
+  float: float;
+  margin-bottom: 10px;
+  color: white;
+  background-color: #31517a;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+  }
+  
+#print_pesq table a
+  {
+  color: white;
+  margin-left: 4px;
+  font-size: 12px;
+  font-weight: bold;
+  text-decoration: none;
+  }
+ 
+input[type="text"], input[type="file"], select, textarea
+  {
+  font-family: Tahoma, sans-serif;
+  font-size: 12px;
+  width: 170px;
+  border: solid 1px #aaaaaa;
+  margin-bottom: 2px;
+  padding-left:20px !important;
+  }
+
+.select
+  {
+  padding: 2px;
+  width: auto;
+  }
+
+.textarea
+  {
+  font-family: Tahoma, sans-serif;
+  font-size: 12px;
+  width: 100%;
+  border: solid 1px #aaaaaa;
+  margin-bottom: 5px;
+  margin-left: 10px;
+  padding: 2px;
+  padding-left: 5px;
+  }
+
+button[disabled], input[disabled], optgroup[disabled], option[disabled], select[disabled], textarea[disabled]
+  {
+  color: black;
+  background-color: #cdcdcd;
+  padding-left:20px !important;
+  }
+  
+#grid_scroll
+  {
+  position: relative;
+  overflow: hidden;
+  min-height: 450px;
+  }
+
+#nav
+  {
+  float: right;
+  font-family: Tahoma, sans-serif;
+  font-size: 11px;
+  color: #333;
+  /* background: #3167b3; */
+  width:100%;
+  /*
+  border-bottom-right-radius:5px;
+  border-bottom-left-radius:5px;
+  */
+  text-align:right;
+  padding-top:3px;
+  position : absolute;
+  bottom : 0px;
+  border-top : 2px solid #3167b3;
+  }
+  
+#nav img
+  {
+  height:15px;
+  }
+  
+#nav span
+  {
+  top:-5px;
+  margin-right:5px;
+  margin-left:5px;
+  }
+  
+#container {
+    width  : 99.5%;
+    height : 88%;
+}
+  
+#grid #codigo, #grid #usuario, #grid #login
+  {
+  /*  
+  -moz-border-radius: 5px 0 0 0;
+  -webkit-border-top-left-radius: 5px;
+  border-top-left-radius: 5px;
+  */
+  }
+
+.agrupo
+  {
+  background-color: #3167b3;
+  color:#354e72;
+  font-weight: bold;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  border-top:1px solid #fff !important;
+  border-bottom:1px solid #fff !important;
+  }
+
+.tdgrupo1 a
+  {
+  color: white;
+  }
+  
+  
+  
+#limits {
+    float   : left;
+    width   : 230px;
+   /*  border-right  : 1px solid #fff; */
+    height  : 17px;
+    display : block;
+    text-align : left;
+    padding-right : 1px;
+}

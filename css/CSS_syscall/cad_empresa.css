@@ -1,0 +1,77 @@
+/* ********************************************************
+  Folha de Estilos do formulario de cadastro de empresas
+*********************************************************** */
+
+body {
+	min-width:1024px;
+	/* overflow-x: hidden; 
+	overflow-y: auto; */
+	overflow: auto;
+}
+/* estilo Grupo e Dados ----------------------------------------------- */
+.formtop dt{
+	width:50px;
+	float:left;
+}
+.formtop dd{
+	width:100px;
+	float:left;
+}
+.navigateable_box {
+	min-height: 20px; 
+	overflow-y: auto; 
+	background-color: white; padding: 10px; 
+	padding-top:0px;
+}
+#DVdados_grupos { 
+	width: 100%; 
+	/* margin-bottom:50px; */
+}
+#DVdados {
+	min-width:500px; 
+	width:100%;
+	margin-bottom:5px;
+	float:left;
+}
+#DVdadostitle {
+	/* min-width:500px; */
+	width:100%;
+	background:#808080; 
+	color:#fff;
+	-moz-border-radius: 0 5px 0 0; 
+	-webkit-border-top-right-radius: 5px; 
+	border-top-right-radius: 5px; 
+	/* padding:5px;
+	 padding-left:50px; 
+	padding-top:6px; 
+	padding:1px; 
+	padding-top:6px;
+	padding-bottom:5px; */
+}
+#DVgrupos {
+	min-width: 300px; 
+	width:100%;
+	margin-bottom:5px;
+	float:left;
+	margin-left:10px;
+}
+#DVgrupostitle {
+	min-width: 300px; 
+	width:100%;
+	background:#808080; 
+	color:#fff;
+	-moz-border-radius: 0 5px 0 0; 
+	-webkit-border-top-right-radius: 5px; 
+	border-top-right-radius: 5px;	
+	padding-top:6px;
+	padding-bottom:5px;
+	padding:1px;
+}
+.form .form dt
+	{
+	width: 5%;
+	}
+.form .form dd
+	{
+	width: 90%;
+	}

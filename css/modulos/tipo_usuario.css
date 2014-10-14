@@ -1,0 +1,56 @@
+.modulos
+	{
+	float:		left;
+	width:		17%;
+	position:	relative !important;
+	margin-top:	40px;
+	margin-right:	10px;
+	overflow: 	hidden;
+	background:	#2974C4;
+	}
+	
+.linha
+	{
+	width:		100%;
+	height:		3px;
+	margin-top:	2px;
+	float:		left;
+	border-right:	1px solid #333;
+	}
+	
+.title
+	{
+	background:	#2974C4;
+	padding:	6px;
+	font-weight:	bold;
+	color: 		#fff;
+	}
+	
+#descrp_container
+	{
+	width:90%;
+	padding:4px;
+	height:50px;
+	z-index:1;
+	}
+#descrp_container input
+	{
+	width:95%;
+	}
+	
+#menu_container
+	{
+	width:90%;
+	z-index:1;
+	margin-left:10px;
+	}
+.abas
+	{
+	padding-left:10px !important;
+	padding-bottom:5px !important;
+	overflow:hidden;
+	background:rgb(238, 238, 238) !important;
+	border-color:#367AC2 !important;
+	}
+
+/* ABAS CSS	------------------------------------------------------------------------------------------------------------------------------ */

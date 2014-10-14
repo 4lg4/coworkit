@@ -1,0 +1,11 @@
+.contatos_form {
+    overflow : auto;
+}
+
+.contatos_form .contatos_container_center {
+    margin-top   : 1%;
+    margin-right : 1%;
+    height       : auto;
+    width        : 99%;
+    overflow-y   : auto;
+}

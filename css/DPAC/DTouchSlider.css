@@ -1,0 +1,98 @@
+/* DTouchSlider */
+.DTouchSlider
+	{
+	background:#A5A5A5; 
+	}
+	
+.DTouchSlider .ui-slider-range-min
+	{
+	background:#A5A5A5; 
+	}
+
+.DTouchSlider .ui-slider-handle
+	{
+	border:0px !important;
+	border-radius:0px !important;
+	background:#CCC;
+	}
+	
+.DTouchSlider .ui-state-active
+	{
+	background:#354e72;
+	}
+	
+/* DTouchSlider Pages */
+.DTouchSliderPages
+	{
+	height: 80%; 
+	background:#A5A5A5; 
+	position: absolute; 
+	right: 0px; 
+	top: 5%;
+	width:4px;
+	}
+	
+.DTouchSliderPages .ui-slider-range-min
+	{
+	background:#A5A5A5; 
+	}
+
+.DTouchSliderPages .ui-slider-handle
+	{
+	background:#3167b3;
+	left:auto;
+	right:0px;
+	border:0px;
+	border-radius:0px;
+	border-top-left-radius:20px;
+	border-bottom-left-radius:20px;
+	height:25px;
+	width:15px;
+	}
+
+/* Slider Boxes */
+.DTouchSliderBoxes
+	{
+	position: absolute;
+	border: 0px;
+	}
+	
+.DTouchSliderBoxes .ui-slider-handle
+	{
+	}
+
+/* Slider Boxes Vertical */
+.DTouchSliderBoxesVertical
+	{
+	right:1px;
+	top:20%;
+	height:70%;
+	width:0px;
+	}
+	
+.DTouchSliderBoxesVertical .ui-slider-handle
+	{
+	left:1px;
+	right:auto;
+	border-top-right-radius:20px !important;
+	border-bottom-right-radius:20px !important;
+	width:15px;
+	height:25px;
+	}
+		
+/* Slider Boxes Horizontal */
+.DTouchSliderBoxesHorizontal
+	{
+	bottom: -5px;
+	height: 0px;
+	width: 80%;
+	left: 10%;
+	}
+
+.DTouchSliderBoxesHorizontal .ui-slider-handle
+	{
+	width:25px;
+	height:15px;
+	border-bottom-left-radius:20px !important;
+	border-bottom-right-radius:20px !important;
+	}

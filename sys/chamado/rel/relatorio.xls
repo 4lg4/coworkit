@@ -1,0 +1,129 @@
+#!/usr/bin/perl
+
+# use Encode;
+
+$nacess = "49";
+require "../../cfg/init.pl";
+
+print $query->header(-type=>"application/csv", -attachment=>"relatorio.csv", -charset=>"WINDOWS-1252");
+# print $query->header(-type=>"application/txt", -attachment=>"relatorio.txt");
+# print $query->header('type="application/csv"; charset="utf-8"; attachment="relatorio.csv"');
+# print $query->header('type="text"; charset="utf-8"; attachment="relatorio.txt"');
+# print $query->header({charset=>utf8});
+$dbh->do("SET CLIENT_ENCODING TO 'WINDOWS-1252'"); 
+
+print "sep=, \n";
+print "Plano,Ticket,Data,Tipo,Solicitante,Problema,Data acao,Tecnico,Solucao Aplicada,Executado,Faturado \n";
+
+#
+#   Dados
+# 
+
+# dados do pai
+$DBT = &DBE("
+    select
+        *
+    from
+        cob_tkt_full
+    where 
+        codigo = $COD
+");
+$cob_tkt = $DBT->fetchrow_hashref;
+$cob_tkt->{competencia} = &dateToShow($cob_tkt->{competencia},"yearmonth");
+
+# totais de horas 
+$DBT = &DBE("select sum(executado) as executado, sum(faturado) as faturado, (sum(executado) - sum(faturado)) as abono from cob_tkt_item_edit where cob_tkt = $COD");
+$TOTAL = $DBT->fetchrow_hashref;
+
+# dados filhos
+$DB = &DBE("
+    select
+        *
+    from
+        cob_tkt_item_edit
+    where 
+        cob_tkt = $COD
+    order by
+        tkt_plano, tkt asc
+");
+
+
+#
+#   Print
+# 
+# $c=1;
+
+# print items
+while($item = $DB->fetchrow_hashref) {
+    
+	# plano titulo + totais
+    if($item->{tkt_plano} ne $cob_tkt_plano_change){
+        
+        # calcula totais por plano
+        $DBT = &DBE("select sum(executado) as executado, sum(faturado) as faturado from cob_tkt_item_edit where tkt_plano = $item->{tkt_plano} and cob_tkt = $COD");
+        $T = $DBT->fetchrow_hashref;
+        
+        $item->{tkt_plano_descrp} =~ s/\r|\n|\,|\+|\-/ /gm;
+        
+        
+        # print ",,,,,,,,,";
+        
+        $P .= $item->{tkt_plano_descrp}.",";
+        $P .= &dateToShow($T->{executado}).",";
+        $P .= &dateToShow($T->{faturado})." \n";
+    
+        # print $L;
+                
+        $cob_tkt_plano_change = $item->{tkt_plano}; # container plano
+    }
+    
+	# ticket
+    if($item->{tkt} ne $cob_tkt_change){ # print "******* \n\n\n";
+        # dados do ticket
+        $DBT = &DBE("
+            select
+                *
+            from
+                tkt
+            where 
+                codigo = $item->{tkt}
+        ");
+        $tkt = $DBT->fetchrow_hashref;
+        
+        $cob_tkt_change = $item->{tkt}; 
+    }
+    
+    $tkt->{problema} =~ s/\r|\n|\,|\+|\-/ /gm;
+    $item->{descrp}  =~ s/\r|\n|\,|\+|\-/ /gm;
+    
+    
+    # $L  = "[$c]".$tkt->{codigo}.",";
+    $L = $item->{tkt_plano_descrp}.",";
+    $L .= $tkt->{codigo}.",";
+    $L .= &dateToShow($tkt->{data}).",";
+    $L .= $item->{tipo_descrp}.",";
+    $L .= $tkt->{solicitante}.",";
+    $L .= "".$tkt->{problema}.",";
+
+    print $L; 
+    
+    # $L  = "1,2,3,4,";
+    $L  = &dateToShow($item->{data_acao}).",";
+    $L .= $item->{executor_nome}.",";
+    $L .= "".$item->{descrp}.",";
+    $L .= &dateToShow($item->{executado}).",";
+    $L .= &dateToShow($item->{faturado})." \n";
+
+    print $L;
+
+
+# $c += 1;	
+}
+
+print "\n\n\n Plano,Total Executado,Total Faturado  \n";
+print $P;
+
+print "\n\n\n Total Executado,Total Faturado, Abono  \n";
+print $TOTAL->{executado}.",".$TOTAL->{faturado}.",".$TOTAL->{abono}
+
+

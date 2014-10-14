@@ -1,0 +1,46 @@
+#grid {
+    position: relative;
+    border: solid 1px #000;
+}
+#grid div {
+    position: absolute;
+}
+#grid div.selected {
+    border: 2px solid #000000;
+}
+#grid div.red {
+    background: #EE0000;
+}
+#grid div.green {
+    background: green;
+}
+#grid div.blue {
+    /* background: blue; */
+	/* background-image: url("/img/ui/eye.png"); */
+	background:url(/img/ui/eye.png) no-repeat scroll 0% 0% transparent;
+	background-size: 35px;
+}
+#grid div.yellow {
+    background: yellow;
+}
+#grid div.gray {
+    background: #888888;
+}
+#grid div.orange {
+    background: #FF9900;
+}
+
+#bejeweled_container 
+	{
+	text-align:center;
+	margin-top:2%;
+	/* width:100%; */
+	margin-left:30%;
+	}
+	
+#points_container
+	{
+	text-align:left;
+	float:left;
+	}
+	

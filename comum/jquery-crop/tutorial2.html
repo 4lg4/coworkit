@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script src="../jquery/jquery-1.10.1.min.js"></script>
+<script src="../jquery/jquery-ui-1.10.0.custom.min.js"></script>
+<script src="js/jquery.Jcrop.min.js"></script>
+<link rel="stylesheet" href="css/jquery.Jcrop.css" type="text/css" />
+<script type="text/javascript">
+
+
+  // Simple event handler, called from onChange and onSelect
+  // event handlers, as per the Jcrop invocation above
+  function showCoords(c)
+	{
+	$('#x1').val(c.x);
+	$('#y1').val(c.y);
+	};
+
+  function clearCoords()
+	{
+	$('#coords input').val('');
+	};
+	
+  $(function() {
+    var x = $("#x1");
+    var y = $("#y1");
+      
+  
+ 
+    $( "#dialog-form" ).dialog({
+      autoOpen: false,
+      modal: true,
+      buttons: {
+        "Cortar": function() {
+          var bValid = true;
+ 
+          if ( bValid ) {
+            $( "#users tbody" ).append( "<tr>" +
+              "<td>" + x.val() + "</td>" +
+              "<td>" + y.val() + "</td>" +
+            "</tr>" );
+            $( this ).dialog( "close" );
+          }
+        },
+        "Cancelar": function() {
+	if($("#x1").val()=="" || $("#y1").val()=="")
+		{
+		alert("Selecione a área");
+		return false;
+		}
+          $( this ).dialog( "close" );
+        }
+      }
+    });
+ 
+    $( "#create-user" )
+      .button()
+      .click(function() {
+        $( "#dialog-form" ).dialog( "open" );
+      });
+      
+   $(".ui-dialog-titlebar-close").hide();
+  });
+  </script>
+
+</head>
+<body>
+
+<div id="dialog-form" style="width:auto;">
+  <fieldset>
+   <img src="sago.jpg" id="target" alt="[Jcrop Example]" />
+    <div class="inline-labels">
+    <label><input type="hidden" size="4" id="x1" name="x1" /></label>
+    <label><input type="hidden" size="4" id="y1" name="y1" /></label>
+    </div>
+  </fieldset>
+</div>
+  
+<button id="create-user">Upload</button>
+    
+    
+</body>
+</html>
+

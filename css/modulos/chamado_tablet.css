@@ -1,0 +1,202 @@
+/* inputs */
+input[type="text"], input[type="file"], input[type="password"], select, textarea 
+	{
+    border: none;
+	}
+
+#DTouchPages_chamado_center
+	{
+	overflow:auto;
+	}
+
+/* formulario */
+#CAD
+	{
+	width:100%;
+	height:100%;
+	}
+	
+/* dados do cliente */
+#cliente_container
+	{
+	width:300px;
+	}
+	
+#cliente_descrp
+	{
+	width:89%;
+	border-right:0px;
+	border-left:0px;
+	margin-left:2%;
+	}
+	
+#cliente_holder_search
+	{
+	width:100%;
+	}
+
+#empresa_endereco_container
+	{
+	overflow: auto;
+	width:100%;
+	height: 77px;
+	}
+	
+
+/* chamado Descricao */
+#descrp_container
+	{
+	width:555px;
+	height:211px;
+	}
+	
+#chamado_descrp
+	{
+	height:100%;
+	width:96%;
+	padding-left:2%;
+	}
+
+#chamado_descrp textarea
+	{
+	width:100%;
+	height:176px;
+	margin:0px;
+	padding:0px;
+	border:none;
+	border-left-bottom-radius:3px;
+	border-right-bottom-radius:3px;
+	resize: none;
+	}
+		
+#descrp
+	{
+	/* margin-left:1.5% !important;
+	width:97% !important; */
+	}
+
+	
+/* box mais dados */
+#chamado_more_container
+	{
+	width:250px;
+	height:96px;
+	}
+
+#solicitante_container
+	{
+	width:250px;
+	padding-left:5px;
+	margin-top:10px;
+	clear:both;
+	padding-top:5px;
+	}
+	
+#solicitante
+	{
+	width:229px;
+	}
+
+#dtag
+	{
+	width:60px;
+	}
+
+#dtag_container
+	{
+	margin-left:5px;
+	width:90px;
+	float:left;
+	padding-top:5px;
+	}	
+#agendamento_container
+	{
+	margin-left:5px;
+	width:150px;
+	float:left;
+	padding-top:5px;
+	}		
+#agendamento
+	{
+	width:118px !important;
+	}
+	
+/* lista de emails do chamado */
+#emails_container
+	{
+	width:222px;
+	}
+	
+#emails_holder_field input
+	{
+	width:200px;
+	border-left:0px;
+	border-right:0px;
+	}
+#emails_list
+	{
+	height:77px;
+	overflow:auto;
+	margin-top:-2px;
+	}	
+
+#email
+	{
+	margin-left:2.5% !important;
+	width:85% !important;
+	}
+
+/* jwysiwyg */
+.wysiwyg
+	{
+	border:0px !important;
+	}
+	
+	
+/* left page lista de chamados */
+#list_container
+	{
+	padding:1%;
+	}
+	
+/* left page Grid */
+div.dataTables_scrollHead, div.dataTables_bottom
+	{
+	background-color:#3167b3;
+	}
+	
+div.dataTables_wrapper
+	{
+	border: 1px solid #3167b3;
+	max-height:100%;
+	}
+	
+.dataTables_filter label input[type=text]
+	{
+	width:200px;
+	}
+	
+.dataTables_filter	
+	{
+	text-align:left;
+	padding-left:5px;
+	}
+	
+/* altura da linha para pagina touch */
+.dataTable tbody tr td
+	{
+	padding-top:5px;
+	padding-bottom:5px;
+	}
+
+/*
+#grid_simple table thead
+	{
+	display:none;
+	}
+
+#grid_simple
+	{
+	width:100% !important;
+	}
+*/

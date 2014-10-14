@@ -1,0 +1,129 @@
+.dadosti_form #agrupamentos_container,
+.dadosti_form #grupos_container {
+    width  : 20%;
+    float  : left;
+    margin-left : 2%;
+    height : 195px;
+} 
+
+.dadosti_form .center_container {
+    margin : 1%;
+    width  : 98%;
+    clear  :both;
+    height: 195px;
+}
+
+.dadosti_form #enderecos_container, .dadosti_form #grupos_container {
+    height : 197px;
+}
+
+.dadosti_form #enderecos, .dadosti_form #grupos {
+    height : 174px !important;
+}
+
+.dadosti_form #enderecos_container {
+    width  : 77%;
+}
+
+
+.dadosti_form .center_container .DTouchRadio_list_line div,
+.dadosti_form .center_container .DTouchRadio_list_line div { 
+    color       : #fff;
+}
+
+.dadosti_form #enderecos_container .DTouchRadioContainer_vertical  {
+    height :100%;
+}
+
+.dadosti_form #enderecos_container .DTouchRadio_title {
+    border-bottom : 1px solid #fff;
+}
+
+.dadosti_form #search_container {
+    margin  : 1%;
+    width   : 96%;
+    clear   : both;
+    padding : 0.5%;
+}
+
+/**
+ *  Itens
+ */
+.dadosti_form #itens_container {
+    margin-top: 1%;
+    width: 97%;
+    margin-left: 1%;
+    height: 55%;
+    border-bottom: 2px solid rgb(49, 103, 179);
+    overflow : auto;
+}
+.dadosti_form #itens_container .DTouchRadio_selected .DTouchRadio_list_line div {
+	color: #FFF;
+}
+
+.dadosti_form #itens {
+    height: auto;
+}
+
+.dadosti_form #itens .DTouchRadio_title {
+    position : fixed;
+    width    : 91%;
+    background-color: rgba(255,255,255,0.6);
+    z-index  : 2;
+}
+
+.dadosti_form #itens_container .DTouchRadio_items:first-child {
+    margin-top : 40px;
+}
+
+/**
+ *  Edicao do item
+ */
+.dadosti_form #form_item_container {
+    width: 94%;
+    margin: 3%;
+    padding-bottom: 1%;
+}
+
+.dadosti_form .dti_form_right {
+    width  : 80%;
+    float  : left;
+    margin-top   : 1%;
+    margin-left   : 1%;
+    margin-right   : 1%;
+}
+
+.dadosti_form .dti_form_left {
+    float        : left;
+    width        : 16%;
+    margin-top   : 1%;
+    margin-right : 1%;
+    height      : 30px;
+    line-height : 2.5;
+    font-size   : 12px;
+    text-align  : right;
+    padding-right : 1%;
+}
+
+/**
+ *  Full screen guacamole
+ */
+
+.menu_actions_guaca {
+    left : -10% !important;
+}
+
+.main_container_guaca {
+    position : absolute !important;
+    float    : left !important;
+    width    : 100% !important;
+}
+
+#guacamole_cli {
+    width  : 100%;
+    height : 100%;
+}
+
+#icon_dti_del {
+    background : #9E3323;
+}

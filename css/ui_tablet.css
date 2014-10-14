@@ -1,0 +1,22 @@
+/* padrao inputs */
+input[type="text"], input[type="date"], input[type="datetime"], input[type="time"], input[type="number"], input[type="email"], input[type="file"], input[type="password"], select, textarea
+	{
+	/* border: none; */
+	}
+	
+#menu_top
+	{
+	height:5%
+	}
+
+#menu_top_right div img
+	{
+	height:20px;
+	}
+	
+
+#menu_top_right_chat
+	{
+	width:23px;
+	height:20px;
+	}

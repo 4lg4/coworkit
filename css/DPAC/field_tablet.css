@@ -1,0 +1,347 @@
+/* ------------------------------------------------------- 
+	[INI] Auto Complete Field
+		usado com classe fieldAutoComplete
+ -------------------------------------------------------*/
+.search 
+	{ 
+	background:#fff url("/img/field/field_search.png") no-repeat; 
+	background-position: top 2px;
+	background-size: 16px;
+	padding-left: 18px !important;
+	}
+	
+.searchAdd
+	{ 
+	background:#fff url("/img/field/field_search_add.png") no-repeat; 
+	background-position: -0.5px 2px;
+	background-size: 16px;
+	padding-left: 18px !important;
+	}	
+	
+.ui-autocomplete 
+	{ 
+	border: 1px solid #333;
+	border-top:0px !important;
+	padding:3px !important;
+	padding-right:4px !important;
+	border-top-left-radius: 0px !important;
+	border-top-right-radius: 0px !important;
+	border-bottom-left-radius: 4px !important;
+	border-bottom-right-radius: 4px !important;
+	width:20em !important;
+	}
+.ui-autocomplete a
+	{
+	font-size:0.8em;
+	}
+
+/* Auto select -------------------------------------------- */
+.acInput {
+	width: 200px;
+}
+.acResults {
+	padding: 0px;
+	border: 1px solid WindowFrame;
+	/* background-color: Window; */
+	background-color: #fff;
+	overflow: hidden;
+	-moz-border-radius: 0 0 5px 5px; 
+	-webkit-border-bottom-left-radius: 0px; 
+	-webkit-border-bottom-right-radius: 0px; 
+	border-bottom-left-radius: 0px;
+	border-bottom-right-radius: 0px;
+	
+}
+
+.acResults ul {
+	width: 100%;
+	list-style-position: outside;
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+.acResults li {
+	margin: 0px;
+	padding: 2px 5px;
+	cursor: pointer;
+	display: block;
+	width: 100%;
+	font: menu;
+	font-size: 12px;
+	overflow: hidden;
+}
+
+.acLoading {
+	background : url('indicator.gif') right center no-repeat;
+}
+
+.acSelect {
+	background-color: Highlight;
+	color: HighlightText;
+}
+/* ------------------------------------------------------- 
+	[END] Auto Complete Field
+		usado com classe fieldAutoComplete
+ -------------------------------------------------------*/
+
+/* ------------------------------------------------------- 
+	[INI] D-Fields (done fields)
+ -------------------------------------------------------*/
+
+/* field Money (campos somente Money) */
+.fieldMoney
+	{ 
+	background:#fff url("/img/field/field_money.png") top left 3px no-repeat; 
+	background-size: 18px;
+	width: 95px !important;
+	padding-left: 22px !important;
+	}
+
+/* field Date Time (campos com Date / Time) */
+.fieldDate
+	{ 
+	background:#fff url("/img/field/field_date.png") top left 4px no-repeat; 
+	background-size: 16px;
+	width: 90px !important;
+	padding-left: 22px !important;
+	}
+
+.fieldDateTimeMobile
+	{
+	-webkit-appearance: textfield;
+	}
+	
+.fieldDateTime
+	{ 
+	background:#fff url("/img/field/field_datetime.png") no-repeat; 
+	background-position: 1px -1px;
+	background-size: 18px;
+	width: 120px !important;
+	padding-left: 24px !important;
+	}
+	
+.fieldTime
+	{ 
+	background:#fff url("/img/field/field_time.png") no-repeat; 
+	background-position: top 3px;
+	background-size: 16px;
+	width: 50px !important;
+	padding-left: 20px !important;
+	}
+
+.fieldNumber
+	{ 
+	background:#fff url("/img/field/field_number.png") no-repeat; 
+	background-position: -1px 2px;
+	background-size: 16px;
+	padding-left: 20px !important;
+	}
+
+.fieldEmail
+	{ 
+	background:#fff url("/img/field/field_email.png") no-repeat; 
+	background-position: -1px 2px;
+	background-size: 16px;
+	padding-left: 20px !important;
+	}
+
+.fieldUser
+	{ 
+	background:#fff url("/img/field/field_user.png") no-repeat; 
+	background-position: top 1px;
+	background-size: 16px;
+	padding-left: 20px !important;
+	}
+
+.fieldPassword
+	{ 
+	background:#fff url("/img/field/field_password.png") no-repeat; 
+	background-position:top 3px;
+	background-size: 16px;
+	padding-left: 20px !important;
+	}
+
+.fieldDisable
+	{
+	background-color:#ccc;
+	}
+	
+.fieldContainer 
+	{
+	box-sizing: border-box;
+	}
+
+/* Checkbox ---------------------------------- 
+.fieldCheck, .ui-state-active
+	{
+	background:url("/img/field_check.png") center center no-repeat; 
+	background-size:15px 15px;
+	}
+
+
+.ui-state-active
+	{
+	border:none;
+	}
+	
+.ui-state-default
+	{
+	border:none;
+	}
+*/
+.fieldCheck
+	{
+	border:none;
+	}
+
+/* ----------------------------------------------------------------------------------------------------------------------------------
+	[INI] Selectmenu 
+---------------------------------------------------------------------------------------------------------------------------------- */
+.ui-selectmenu, ul.ui-selectmenu-menu li
+	{
+	font-size: 0.85em !important;
+	}
+
+/* remove bordas quando mouse over no item */
+.ui-selectmenu-menu li:hover 
+	{ 
+	border:0px dotted transparent; 
+	}
+	
+/* objeto select A */
+.ui-selectmenu 
+	{ 
+	display: inline-block; 
+	position:relative; 
+	height:14px;
+	text-decoration: none; 
+	overflow:hidden; 
+	vertical-align:bottom; 
+	margin-bottom:2px; 
+	/* background:#fff; */
+	border: none;
+	/* background-image: none; */
+	}
+	
+/* icone do select */	
+.ui-selectmenu-icon 
+	{ 
+	position:absolute; 
+	right:1px; 
+	margin-top:-8px; 
+	top: 50%; 
+	}
+	
+/* objeto select UL */	
+.ui-selectmenu-menu 
+	{ 
+	padding:0; 
+	margin:0; 
+	list-style:none; 
+	position:absolute; 
+	top: 0; 
+	visibility: hidden; 
+	overflow: auto; 
+	background:#fff; 
+	border:none;
+	}
+	
+/* objeto select UL */	
+.ui-selectmenu-open { visibility: visible; }
+.ui-selectmenu-menu-popup { margin-top: -1px; }
+.ui-selectmenu-menu-dropdown 
+	{ 
+	box-shadow: 1px 2px 6px rgba(0, 0, 0, 0.5);	
+	}
+
+/* Item select LI (option) */
+.ui-selectmenu-menu li 
+	{ 
+	padding:0; 
+	margin:0; 
+	display: block; 
+	border:none; 
+	font-weight: normal !important; 
+	}
+.ui-selectmenu-open li.ui-selectmenu-item-focus a {  }
+.ui-selectmenu-open li.ui-selectmenu-item-selected { }
+.ui-selectmenu-menu li span,.ui-selectmenu-status span { display:block; margin-bottom: .2em; }
+.ui-selectmenu-menu li .ui-selectmenu-item-header { font-weight: bold; }
+.ui-selectmenu-menu li .ui-selectmenu-item-content {  }
+.ui-selectmenu-menu li .ui-selectmenu-item-footer { opacity: .8; }
+.ui-selectmenu-menu li a,.ui-selectmenu-status { line-height: 1.4em; /* display:block; */ padding:.3em 1em; outline:none; text-decoration:none; }
+.ui-selectmenu-menu li.ui-selectmenu-hasIcon a,
+.ui-selectmenu-menu li .ui-icon, .ui-selectmenu-status .ui-icon { position: absolute; top: 1em; margin-top: -8px; left: 0; }
+
+.ui-selectmenu-status { line-height: 1.4em; }
+.ui-selectmenu-hasIcon .ui-selectmenu-status { padding-left: 20px; position: relative; margin-left: 5px; }
+.ui-selectmenu-menu .ui-selectmenu-group { font-size: 0.8em; }
+.ui-selectmenu-menu .ui-selectmenu-group .ui-selectmenu-group-label { line-height: 1.4em; display:block; padding:.6em .5em 0; font-weight: bold; }
+.ui-selectmenu-menu .ui-selectmenu-group ul { margin: 0; padding: 0; }
+
+.ui-selectmenu-hasIcon .ui-selectmenu-status { padding-left: 20px; position: relative; margin-left: 5px; }
+.ui-selectmenu-focus { background-color: #fff; color: #354e72; }
+
+.ui-selectmenu-menu li a:hover
+	{
+	background-color: #354e72;
+	color: #fff;
+	}
+	
+/* ----------------------------------------------------------------------------------------------------------------------------------
+	[END] Selectmenu 
+---------------------------------------------------------------------------------------------------------------------------------- */
+	
+/* ----------------------------------------------------------------------------------------------------------------------------------
+	Upload fake
+---------------------------------------------------------------------------------------------------------------------------------- */
+.file-wrapper {
+  cursor: pointer;
+  display: inline-block;
+  overflow: hidden;
+  position: relative;
+}
+.file-wrapper input {
+  cursor: pointer;
+  font-size: 100px;
+  height: 100%;
+  filter: alpha(opacity=1);
+  -moz-opacity: 0.01;
+  opacity: 0.01;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+.file-wrapper .button {
+  background: #354e72;
+  -moz-border-radius: 0px;
+  -webkit-border-radius: 0px;
+  border-radius: 0px;
+  color: #fff;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 11px;
+  font-weight: bold;
+  margin-right: 5px;
+  padding: 4px 18px;
+  text-transform: uppercase;
+}
+.upload_btn {
+  background: #354e72;
+  -moz-border-radius: 0px;
+  -webkit-border-radius: 0px;
+  border-radius: 0px;
+  color: #fff;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 11px;
+  font-weight: bold;
+  margin-right: 5px;
+  padding: 4px 18px;
+  text-transform: uppercase;
+  margin-top:-2px; 
+ }
+
+/* [END] Fields ------------------------------------------------------------------------------------------------------- */
+	

@@ -1,0 +1,671 @@
+#!/usr/bin/perl
+
+
+#use warnings;
+#use strict;
+
+require LWP::UserAgent;
+use POSIX;
+use URI::Escape;
+
+# Para CPUINFO
+use List::Util qw(sum);
+use Fcntl;
+
+use constant false => 0;
+use constant true  => 1;
+
+my $ua = LWP::UserAgent->new;
+$ua->timeout(60);
+
+# Versão do script
+$ver_my = '20130317';
+
+$interval = 5;
+
+$update = false;
+
+$pidfile = '/var/run/done_eye.pid';
+$logfile = '/var/log/done_eye.log';
+$hostname = `hostname`;
+$hostname =~ s/\n$//;
+
+
+# Testa se foi informado um parâmetro na linha de comando
+if($#ARGV == 0)
+	{
+	if($ARGV[0] eq "start")
+		{
+		&start();
+		}
+	elsif($ARGV[0] eq "stop")
+		{
+		&stop();
+		}
+	elsif($ARGV[0] eq "restart")
+		{
+		&restart();
+		}
+	elsif($ARGV[0] eq "status")
+		{
+		&status();
+		}
+	elsif($ARGV[0] eq "--help" || $ARGV[0] eq "--h" || $ARGV[0] eq "/h")
+		{
+		&usage;
+		}
+	else
+		{
+		print "$0: opção desconhecida: '$ARGV[0]'\n";
+		print "Experimente \"$0 --help\" para mais informações.\n";
+		exit;
+		}
+	}
+else
+	{
+	&usage;
+	}
+
+exit;
+
+
+
+
+
+
+sub usage
+	{
+	# Help
+	print "Uso: $0 {start|stop|restart|status}\n";
+	print "Cliente de monitoramento DoneEYE, desenvolvido pela Done TI para os\n";
+	print "clientes do CoWorkIT.\n\n";
+	print "Informe bugs do $0 para sistema\@done.com.br\n";
+	print "Para utilizar esse sistema de monitoramento, é necessário antes solicitar\n";
+	print "uma conta na homepage do projeto: <http://www.coworkit.com.br/>\n";
+	}
+	
+sub chk_run
+	{
+	# Verifica se daemon já está rodando
+	if(-e $pidfile)
+		{
+		# Busca o número do processo
+		$PID = `cat $pidfile`;
+		$PID =~ s/\n$//;
+		if($PID !~ /^\d+$/)
+			{
+			return false;
+			}
+		else
+			{
+			# Vê se o processo está em execução
+			$t= `ps --no-headers $PID`;
+			if($t eq "")
+				{
+				# Processo não está mais em execução
+				return false;
+				}
+			else
+				{
+				# Processo ainda está em execução
+				return true;
+				}
+			}
+		}
+	else
+		{
+		return false;
+		}
+	}
+
+
+sub chk_cpu
+	{
+	# Show per core CPU utilization of the system 
+	# This is a part of the post http://phoxis.org/2013/09/05/finding-overall-and-per-core-cpu-utilization
+
+	#Open /proc/stat file
+	open (my $STAT, "/proc/stat") or die "Cannot open /proc/stat\n";
+
+	my $count = 0;
+	while (<$STAT>)
+		{
+		next unless ("$_" =~ m/^cpu[0-9]+\s+/);
+	    
+		my @cpu_time_info = split (/\s+/, "$_");
+		shift @cpu_time_info;
+		my $total = sum(@cpu_time_info);
+		my $idle = $cpu_time_info[3];
+	    
+		my $del_idle = $idle - $idle_old[$count];
+		my $del_total = $total - $total_old[$count];
+	    
+		my $this_cpu_usage = 100 * (($del_total - $del_idle)/$del_total);
+		if($config{cpu} eq "media")
+			{
+			$m_cpu[$count] += $this_cpu_usage;
+			}
+		else
+			{
+			if($this_cpu_usage > $m_cpu[$count])
+				{
+				$m_cpu[$count] = $this_cpu_usage;
+				}
+			}
+
+		if($c_cpu == 1)
+			{
+			if($config{cpu} eq "media")
+				{
+				$this_cpu_usage = $m_cpu[$count]/$n_cpu;
+				}
+			else
+				{
+				$this_cpu_usage = $m_cpu[$count];
+				}
+			# Envia para servidor, 1 - CPU Nome, 2 - TIPO É CPU, 3 - MÁXIMO, 4 - USO
+			&sendlog($count, '5', '100', sprintf("%0.2f", $this_cpu_usage));
+			}
+					
+		#printf ("CPU%d Usage: %0.2f%%\n", $count, $this_cpu_usage);
+	    
+		$idle_old[$count] = $idle;
+		$total_old[$count] = $total;
+	    
+		$count++;
+		}
+	close ($STAT);
+
+	if($c_cpu > 11)
+		{
+		$c_cpu = 1;
+		$n_cpu = 12;
+		}
+	else
+		{
+		if($c_cpu == 1)
+		      {
+		      @m_cpu = ();
+		      }
+		$c_cpu++;
+		}
+	}
+
+	
+sub chk_mem
+	{
+	if($c_mem == 1)
+		{
+		# Usa o sistema operacional para determinar o uso de memória
+		my $tmp = `/usr/bin/free`;
+		
+		# Transforma em uma matriz o resultado, para trabalhar linha-a-linha
+		my @parts = split("\n", $tmp);
+		
+		# Percorre as linhas
+		for($f=1; $f<scalar(@parts); $f++)
+			{
+			# Quebra 1 linha em campos
+			my @parts_camp = split(/\s+/, $parts[$f]);
+
+			if($parts_camp[0] =~ /^\-\/\+/)
+				{
+				# Memória RAM
+				# Envia para servidor, 1 - qual, 2 - Tipo, 3 - Total, 4 - Uso
+				&sendlog("RAM", '6', ($parts_camp[2]+$parts_camp[3]), $parts_camp[2]); 
+				}
+			if($parts_camp[0] =~ /^Swap:/)
+				{
+				# Memória SWAP
+				# Envia para servidor, 1 - partição, 2 - Tipo, 3 - Total, 4 - Uso
+				if($parts_camp[1] > 0)
+					{
+					&sendlog("SWAP", '6', $parts_camp[1], $parts_camp[2]);
+					}
+				}
+			}
+		}
+	if($c_mem > 11)
+		{
+		$c_mem = 1;
+		}
+	else
+		{
+		$c_mem++;
+		}
+	}
+	
+sub chk_hd
+	{
+	if($c_hd == 1)
+		{
+		# Inicializa variável das partições que devem ser ignoradas
+		$parts_ignora = "";
+
+		# Usa o sistema operacional para obter a lista de partições montadas
+		my $tmp = `/bin/df`;
+
+		# Transforma em uma matriz o resultado, para trabalhar linha-a-linha
+		@parts = split("\n", $tmp);
+
+
+		for($f=1; $f<scalar(@parts); $f++)
+			{
+			# Quebra 1 linha em campos
+			my @parts_camp = split(/\s+/, $parts[$f]);
+
+			if($parts_camp[5] =~ /^\/dev/)
+				{
+				# Não monitora /dev
+				}
+			elsif($parts_camp[5] =~ /^\/run/)
+				{
+				# Não monitora /run
+				}
+			elsif($parts_camp[5] =~ /^\/lib\/init\/rw$/)
+				{
+				# Não monitora /lib/init/rw
+				}
+			else
+				{
+				if($parts_ignora !~ /\s$parts_camp[5]\s/)
+					{
+					# Monitora
+					$parts_ignora .= " ".$parts_camp[5]." ";
+					
+					# Envia para servidor, 1 - partição, 2 - Disco rígido, 3 - Total do HD, 4 - Disponível
+					&sendlog($parts_camp[5], '4', ($parts_camp[3]+$parts_camp[2]), $parts_camp[2]); 
+					}
+				}
+			}
+		}
+	if($c_hd > (5*12)*60*6)
+		{
+		$c_hd = 1;
+		}
+	else
+		{
+		$c_hd++;
+		}
+	}
+	
+sub chk_net
+	{
+	if($c_net == 1)
+		{
+		# Identifica as interfaces de rede
+		my @net=split(/\s+/, `ls -1 /sys/class/net | grep -v lo | grep -v sit`);
+
+		for($f=0; $f<scalar(@net); $f++)
+			{
+			$rx[$f] = `cat /sys/class/net/$net[$f]/statistics/rx_bytes`;
+			$tx[$f] = `cat /sys/class/net/$net[$f]/statistics/tx_bytes`;
+			if($arx[$f])
+				{
+				$RBS[$f] = $rx[$f] - $arx[$f];
+				$TBS[$f] = $tx[$f] - $atx[$f];
+				$RKbps[$f] = ceil($RBS[$f] / 1024 * 8 / ($interval*11));
+				$TKbps[$f] = ceil($TBS[$f] / 1024 * 8 / ($interval*11));
+				
+				# Envia para servidor, 1 - RX/TX, 2 - Rede, 3 - Total do link, 4 - banda
+				&sendlog('entrada', '7', $RKbps[$f], $RKbps[$f]);
+				&sendlog('saída', '7', $TKbps[$f], $TKbps[$f]);
+				}
+			$arx[$f] = $rx[$f];
+			$atx[$f] = $tx[$f];
+			}
+		}
+	if($c_net > 11)
+		{
+		$c_net = 1;
+		}
+	else
+		{
+		$c_net++;
+		}
+	}
+
+	
+	
+	
+sub start
+	{
+	if(&chk_run == true)
+		{
+		# Aborta execução
+		print "O processo (pid $PID) já está em execução... Abortando!\n";
+		exit;
+		}
+	else
+		{
+		`echo $$ > $pidfile`;
+		$PID = $$;
+		}
+	
+	&say("Iniciando monitoramento DoneEYE versão $ver_my");
+	
+	if(-e '/etc/done_eye.conf')
+		{
+		&get_config('/etc/done_eye.conf', \%config);
+		}
+	else
+		{
+		# Erro no caso de não ter arquivo de configuração
+		&say("ERRO: Não foi encontrado arquivo de configuração");
+		exit;
+		}
+
+	# Dados servidor monitoramento
+	if($config{server} eq "")
+		{
+		$config{server} = $config{servidor};
+		if($config{server} eq "")
+			{
+			$config{server} = 'http://coworkit.done.com.br';
+			}
+		}
+	# URL no servidor
+	$config{addr} = '/sys/monitor/add.cgi';
+	$config{update} = '/sys/monitor/update.cgi';
+	$config{cpu} = 'max';
+
+	if($config{code} eq "")
+		{
+		$config{code} = $config{codigo};
+		}
+	# Testa o código
+	if($config{code} !~ /^\d+$/)
+		{
+		&say("ERRO: Código inválido");
+		exit;
+		}
+
+	if($config{key} eq "")
+		{
+		$config{key} = $config{chave};
+		}
+	# Testa a chave
+	if($config{key} !~ /^\d+$/)
+		{
+		&say("ERRO: Chave inválida.");
+		exit;
+		}
+	$PIDF = fork();
+	if($PIDF)
+		{
+		print "[ \033[00;32mok\033[00;37m ] incializando DoneEYE... OK!\n";
+		exit;
+		}
+	elsif($PIDF == 0)
+		{
+		`echo $$ > $pidfile`;
+		&main;
+		}
+	else
+		{
+		&say("ERRO: Não foi possível rodar em background.");
+		print "ERRO: falha ao executar em background.\n";
+		exit;
+		}
+	}
+	
+sub restart
+	{
+	&stop();
+	system($0, "start");
+	exit;
+	}
+	
+sub main
+	{
+	# Inicializa estatísticas da CPU	
+	open (my $CPUINFO, "/proc/cpuinfo");
+	$cpu_count = 0;
+	while (<$CPUINFO>)
+		{
+		next unless "$_" =~ /^processor/;
+		$cpu_count++;
+		}
+	close ($CPUINFO);
+	
+	#Initialize old states for each cpu.
+	@idle_old = split ('', 0 x $cpu_count);
+	@total_old = split ('', 0 x $cpu_count);
+
+	$c_cpu=1;
+	$c_mem=1;
+	$c_hd=1;
+	$c_net=1;
+	@m_cpu = ();
+	$n_cpu = 1;
+	while($c_cpu > 0)
+		{
+		if(-e $pidfile)
+			{
+			&chk_hd;
+			&chk_cpu;
+			&chk_mem;
+			&chk_net;
+			sleep($interval);
+			if($update == true)
+				{
+				&update;
+				}
+			}
+		else
+			{
+			exit;
+			}
+		}
+	}
+	
+sub stop
+	{
+	if(&chk_run == false)
+		{
+		# Aborta execução
+		print "O processo não está em execução... Abortando!\n";
+		exit;
+		}
+	else
+		{
+		if($PID =~ /^\d+$/)
+			{
+			print "Enviando sinal de fim de execução..";
+			unlink($pidfile);
+			$t = $PID;
+			`kill $PID`;
+			while($t ne "")
+				{
+				print ".";
+				$t= `ps --no-headers $PID`;
+				}
+			print " OK!\n";
+			&say("Monitoramento DoneEYE versão $ver_my finalizado com sucesso");
+			}
+		}
+	}
+	
+sub status
+	{
+	if(&chk_run == false)
+		{
+		print "[ \033[00;31mFALHA\033[00;37m ] DoneEYE não está em execução ... falhou!\n";
+		}
+	else
+		{
+		print "[ \033[00;32mok\033[00;37m ] DoneEYE está em execução.\n";
+		}
+	exit;
+	}	
+	
+	
+sub sendlog
+	{
+	my ($vld, $vit, $vlmax, $vlnow) = @_;
+
+	&say("Enviando: $vld uso $vlnow de $vlmax ... ");
+	
+	my $vld = uri_escape($vld);
+	my $response = $ua->get($config{server}.$config{addr}.'?codigo='.$config{code}.'&chave='.$config{key}.'&descrp='.$vld.'&item='.$vit.'&max='.$vlmax.'&valor='.$vlnow);
+
+	if($response->is_success)
+		{
+		#&say($response->content);
+		if($update == false)
+			{
+			if($response->content ne "") 
+				{
+				&chk_update($response->content);
+				}
+			}
+		return true;
+		}
+	else
+        	{
+        	&say("ERRO: Falha ao enviar mensagem no LOG remoto!");
+        	if($update == false)
+			{
+			if($response->content ne "")
+				{
+				&chk_update($response->content);
+				}
+			}
+		return false;
+        	}
+	}
+	
+sub get_config
+	{
+	local ($config_line, $Name, $Value, $Config);
+
+	($File, $Config) = @_;
+
+	if(!open (CONFIG, "$File"))
+		{
+		# Erro no caso de não ter arquivo de configuração
+		&say("ERRO: Não foi encontrado arquivo de configuração.");
+		exit;
+		}
+	while(<CONFIG>)
+		{
+		$config_line=$_;
+		chop($config_line);          # Get rid of the trailling \n
+		$config_line =~ s/\s*//g;    # Remove espaços
+		$config_line =~ s/#.*//g;    # Remove comentários
+
+		if(($config_line !~ /^#/) && ($config_line ne ""))
+			{    # Ignore lines starting with # and blank lines
+			($Name, $Value) = split (/=/, $config_line);          # Split each line into name value pairs
+			$$Config{$Name} = $Value;                             # Create a hash of the name value pairs
+			}
+		}
+	close(CONFIG);
+	}
+	
+sub chk_update
+	{
+	my ($r) = @_;
+	
+	# Verifica se o servidor está atualizado
+	$r =~ /(Ver.\s+)(\d+)/;
+	$ver_server = $2;
+	if($ver_server =~ /^\d+$/)
+		{
+		if($ver_server > $ver_my)
+			{
+			&say("É necessário um update do script da versão $ver_my para a $ver_server");
+			$update = true;
+			return true;
+			}
+		}
+	else
+		{
+		&say("Não foi possível identificar a versão do servidor");
+		return false;
+		}
+	}
+	
+sub update
+	{
+	my $response = $ua->get($config{server}.$config{update}.'?codigo='.$config{code}.'&chave='.$config{key}.'&sis=linux');
+
+	if($response->is_success)
+		{
+		$bat=$response->content;
+		}
+	
+	if($bat !~ /^#!\/usr\/bin\/perl/)
+		{
+		&say("ERRO: Update corrompido! Abortando...");
+		return false;
+		}
+		
+	if($bat !~ /Done$/)
+		{
+		&say("ERRO: Update corrompido! Abortando...");
+		return false;
+		}
+
+	if($bat !~ /'$ver_server'/)
+		{
+		&say("ERRO: Versão incorreta no update! Abortando...");
+		return false;
+		}
+		
+	# Altera o script
+	if(open(ARQ, ">", $0))
+		{
+		print ARQ $bat;
+		close(ARQ);
+	
+		&say("Update realizado com sucesso!");
+		system($0, "restart");
+		}
+	else
+		{
+		&say("Não foi possível alterar o script $0: $!");
+		}
+	}
+	
+sub get_time
+	{
+	($sec, $min, $hora, $dia, $mes, $ano, $diaSem, $yday, $isdst) = localtime(time);
+	$ano += 1900;
+	@diaSem_string = ("Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab");
+	@mes_string = ("Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez");
+
+	if($dia < 10)
+        	{
+        	$dia = "0".$dia;
+        	}
+	if($hora < 10)
+       		{
+        	$hora = "0".$hora;
+        	}
+	if($min < 10)
+        	{
+        	$min = "0".$min;
+        	}
+	if($sec < 10)
+        	{
+        	$sec = "0".$sec;
+        	}
+	}
+	
+sub say
+	{
+	my ($msg) = @_;
+	$msg =~ s/\n/; /gm;
+	
+	&get_time;
+	$msg = $mes_string[$mes]." ".$dia." ".$hora.":".$min.":".$sec." ".$hostname." DoneEYE[".$PID."]: ".$msg."\n";
+	
+	# Abre log
+	open(LOG, ">>", $logfile) || die('Não foi possível criar um log');
+	print LOG $msg;
+	close(LOG);
+	}
+
+
+# Done

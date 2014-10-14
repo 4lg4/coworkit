@@ -1,0 +1,454 @@
+* {
+	outline:none; /* remove linha se selecao de objetos feita pelo browser */
+	
+	/* padrao de fonte usado pela ui */
+	font-family: Tahoma, sans-serif;
+	font-weight: normal;
+	font-style: normal;
+	letter-spacing: 1px;
+}
+
+html, body, form {
+	height:100%;
+	width:100%;	
+	margin:0px;
+	padding:0px;
+    text-align: center; 
+    overflow-x : hidden;
+}
+
+input[type=text], input[type=password] {
+    /*
+	background          : no-repeat; 
+	background-image    : url("/img/field/field_upload.png");
+	background-size     : 40px;
+    background-position : 0px 0px;
+    */
+    background-color:transparent;
+    padding-left  : 5px;  
+    padding-right  : 5px;  
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    
+    
+    border:0px;
+    border-bottom:2px solid #E6CFA8; /* #3167b3; */
+    color:#fff;
+    font-size: 250%;
+    height: 40%;
+    width: 80%;
+    text-align:right;
+}
+input[type=text] {
+	/* background-image    : url("/img/field/field_upload.png"); */
+}
+input[type=password] {
+	/* background-image    : url("/img/field/field_upload.png"); */
+}
+
+#login_container {
+    width      : 100%;
+    height     : 100%;
+    position   : relative;
+    min-width  : 1000px;
+    min-height : 300px;
+}
+
+#login_form {
+    min-width: 400px;
+    min-height: 590px;
+    /* background: url("/img/login/form_bg.png") repeat scroll 0% 0% / 100% 100% transparent; */
+    position: relative;
+    width: 35%;
+    height: 90%;
+    top: 4%;
+    
+    border-radius: 9px;
+    z-index: 10;
+    box-shadow: 2px 5px 15px rgba(0,0,0,0.4);
+    
+    background: rgb(219,35,41); /* Old browsers */
+    background: -moz-linear-gradient(45deg,  rgba(219,35,41,1) 0%, rgba(242,103,57,1) 50%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left bottom, right top, color-stop(0%,rgba(219,35,41,1)), color-stop(50%,rgba(242,103,57,1))); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(45deg,  rgba(219,35,41,1) 0%,rgba(242,103,57,1) 50%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(45deg,  rgba(219,35,41,1) 0%,rgba(242,103,57,1) 50%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(45deg,  rgba(219,35,41,1) 0%,rgba(242,103,57,1) 50%); /* IE10+ */
+    background: linear-gradient(45deg,  rgba(219,35,41,1) 0%,rgba(242,103,57,1) 50%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#db2329', endColorstr='#f26739',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+}
+
+#login_form_bg {
+    position : absolute;
+    z-index  : 1;
+    width    : 100%;
+}
+#login_form_bg img {
+    width    : 100%;
+}
+
+#login_form_fields_container {
+    position : absolute;
+    z-index  : 2;
+}
+
+#login_form_fields {
+    padding-top: 6%;
+    position :relative;
+    height: 30%;
+    margin-left:2%;
+}
+#login_form_fields input {
+    margin-bottom:15px;
+    
+	background:no-repeat; 
+	background-image: url("/img/login/mark.svg");
+	background-size: 26px;
+    background-position: 3px 7px;
+    
+    padding-left: 37px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+#login_form_btn {
+    margin-top: 3%;
+    position :relative;
+}
+#login_form_btn div {
+    width : 22%;
+}
+#login_form_user {
+    margin-top: 12%;
+    position :relative;
+}
+#login_form_user img {
+    width:53%;
+    /* background : url("/img/login/coworkit.svg"); 
+    box-shadow: 2px 5px 15px rgba(0,0,0,0.4);
+    */
+}
+
+#btn_login {
+    cursor : pointer;
+    width  : 100%;
+}
+
+#logo_eos {
+    position: absolute;
+    z-index: 99;
+    right: 21%;
+    top: -5%;
+}
+
+#logo_eos a img {
+	width:200px;
+}
+
+#slogan {
+    font-size: 24px;
+    display: block;
+    float: right;
+    margin-top: 150px;
+    margin-left: -30px;
+    color: #afafaf;
+}
+		
+#login_footer {
+    position: absolute;
+    z-index: 98;
+    bottom: -240px;
+    margin: 0px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    border: 0px none;
+    right: -15px;
+    padding-left: 10px;
+    background: none repeat scroll 0% 0% orange;
+    width: 300px;
+    border-radius: 50% 50% 50% 50%;
+    height: 300px;
+}
+
+#login_footer span {
+    float: left;
+    margin-top: 20px;
+    margin-left: 65px;
+}
+
+
+#login_footer_container {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    top: 0px;
+    position: fixed;
+}
+
+#circle_container {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    top: 0px;
+    position: fixed;
+}
+		
+#circle_one {
+    position: absolute;
+    z-index: 0;
+    bottom: -500px;
+    left: -200px;
+    background: none repeat scroll 0% 0% transparent;
+    border: 5px solid orange;
+    width: 1000px;
+    height: 1000px;
+    border-radius: 50% 50% 50% 50%;
+}
+
+#circle_two {
+    position: absolute;
+    z-index: 0;
+    bottom: -400px;
+    left: -300px;
+    background: none repeat scroll 0% 0% transparent;
+    border: 5px solid #3167b3;
+    width: 1000px;
+    height: 1000px;
+    border-radius: 50% 50% 50% 50%;
+}
+
+#circle_three {
+    position: absolute;
+    z-index: 0;
+    bottom: -600px;
+    left: -200px;
+    background: none repeat scroll 0% 0% transparent;
+    border: 5px solid #3167b3;
+    width: 1000px;
+    height: 1000px;
+    border-radius: 50% 50% 50% 50%;
+}
+
+#circle_four {
+    position: absolute;
+    z-index: 0;
+    bottom: -700px;
+    left: -300px;
+    background: none repeat scroll 0% 0% transparent;
+    border: 5px solid orange;
+    width: 1000px;
+    height: 1000px;
+    border-radius: 50% 50% 50% 50%;
+}
+
+
+
+#logins_form {
+    position: absolute;
+    top: 10%;
+    left: 66.5%;
+    width: 100px;
+    height: 90px;
+    /* height: 170px; */
+    border-radius: 9px;
+    /* background: #3167b3; */
+    background:#fff;
+    box-shadow: 2px 5px 15px rgba(0,0,0,0.4);
+    border: 1px solid #ddd;
+    z-index: 9;
+}
+
+#logins_form img {
+    margin-top   : 15px;
+    margin-right : 10px;
+    float        : right;
+    cursor       : pointer;
+}
+
+#goog {
+    display : none;
+}
+
+
+
+
+/** 
+ *  add this on UI base 
+ */
+
+
+/** 
+ *  modal 
+ */
+#modal_container {
+    width  : 110%;
+    height : 110%;
+    background : rgba(0,0,0,0.65);
+    transition : all 0.3s ease;
+    position : absolute;
+    top  : 0px;
+    left : 0px;
+    z-index : 0;
+    opacity : 0;
+    min-height : 450px;
+}
+
+.modal_container_show {
+    opacity : 1 !important;
+    z-index : 999999999  !important;
+}
+
+#modal_form_container {
+    position : relative;
+    width    : 91%;
+    height   : 100%;
+}
+
+#modal_form_bg {
+    position : relative;
+    z-index  : 1;
+    width: 30%;
+    background: orange;
+
+    background : rgba(242,103,57,1);
+    height: 55%;
+    min-height: 400px;
+    max-height: 600px;
+    border-radius: 100%;
+    top: 13%;
+    min-width: 400px;
+    max-width: 600px;
+}
+
+#modal_form_text {
+    position    : relative;
+    width       : 70%;
+    top         : 15%;
+    font-size   : 250%;
+    text-align  : center;
+    color       : #fff;
+}
+
+#modal_form_btn {
+    position : absolute;
+    width    : 25%;
+    left     : 35%;
+    bottom   : 10%;
+}
+
+#modal_form_btn img {
+    width : 100%;
+    cursor : pointer;
+}
+
+
+
+/* tool tip */
+.tooltip {
+    position: relative;
+}
+
+.tooltip:hover {
+    color: #c00;
+    text-decoration: none;
+}
+
+.tooltip:hover:after {
+    background: #111;
+    background: rgba(49,103,179,0.8);
+    border-radius: 5px;
+    color: #fff;
+    content: attr(tooltip);
+    display: block;
+    bottom: -45px;
+    left: 55%;
+    
+    padding-left: 10px;
+    padding-right: 10px;    
+    height : 32px;
+    line-height:2;
+    
+    position: absolute;
+    text-shadow: 0 1px 0 #000;
+    white-space: nowrap;
+    z-index: 9999999998;
+}
+
+.tooltip:hover:before {
+    position:relative;
+    border: solid;
+    border-color: #111 transparent;
+    border-color: rgba(49,103,179,0.8) transparent;
+    border-width: 0px 10px 10px 10px;
+    bottom: -13px;
+    left: 70%;
+    content: "";
+    display: block;
+    position: absolute;
+    z-index: 9999999999;
+}
+
+
+/* tool tip up */
+.tooltip_up {
+    position: relative;
+}
+
+.tooltip_up:hover {
+    color: #c00;
+    text-decoration: none;
+}
+
+.tooltip_up:hover:after {
+    background: #111;
+    background: rgba(49,103,179,0.8);
+    border-radius: 5px;
+    color: #fff;
+    content: attr(tooltip);
+    display: block;
+    top: -37px;
+    right: 55%;
+    
+    padding-left: 10px;
+    padding-right: 10px;    
+    height : 32px;
+    line-height:2;
+    
+    position: absolute;
+    text-shadow: 0 1px 0 #000;
+    white-space: nowrap;
+    z-index: 9999999998;
+}
+
+.tooltip_up:hover:before {
+    position:relative;
+    border: solid;
+    border-color: #111 transparent;
+    border-color: rgba(49,103,179,0.8) transparent;
+    border-width: 10px 10px 0px 10px;
+    top: -5px;
+    right: 60%;
+    content: "";
+    display: block;
+    position: absolute;
+    z-index: 9999999999;
+}
+
+/* Place holde colors */
+::-webkit-input-placeholder {
+	color: rgba(255,255,255,0.7);
+}
+
+:-moz-placeholder / Firefox 18- / { 
+	color: rgba(255,255,255,0.7);
+}
+
+::-moz-placeholder / Firefox 19+ / {  
+	color: rgba(255,255,255,0.7);
+}
+
+:-ms-input-placeholder {  
+	color: rgba(255,255,255,0.7);
+}
+

@@ -1,0 +1,385 @@
+#!/usr/bin/perl
+
+use PDF::Reuse;
+
+$nacess = "660";
+require "../../cfg/init.pl";
+# $COD = &get('NF');
+# $COD = 22;
+$ID = &get('ID');
+$COD = &get('NF');
+# debug();
+# ajusta encoding do banco
+$rv = $dbh->do("SET CLIENT_ENCODING TO 'WINDOWS-1254'");
+
+# testa se erro
+if($dbh->err ne "") { &erroDBH("Falha ao gerar relatório !!!"); &erroDBR; exit; } 
+
+# [INI] SQLs necessarios para relatorio ----------------------------------------------------------------------------------------	  
+# Soma totais
+#$DB = &select("select nf.*, regexp_replace(regexp_replace(nf.v1::money::text, '[R\$.]', '', 'g'),',','.')::numeric as vc1, regexp_replace(regexp_replace(nf.v2::money::text, '[R\$.]', '', 'g'),',','.')::numeric as vc2, regexp_replace(regexp_replace(nf.v3::money::text, '[R\$.]', '', 'g'),',','.')::numeric as vc3, empresa.nome as cliente_nome from nf left join empresa on (empresa.codigo = nf.cliente) where nf.codigo = $COD");
+#$TOTAL = $DB->fetchrow_hashref();
+
+# Pega dados do pai
+#$DB = &select("select coletor_relatorio.*, usuario.nome as usuario_nome, empresa.nome as cliente_nome, empresa.apelido as cliente_apelido, empresa.class as empresa_class from coletor_relatorio left join usuario on (usuario.usuario = coletor_relatorio.usuario) left join empresa on (empresa.codigo = coletor_relatorio.cliente) where coletor_relatorio.codigo = $COD;");
+# $PAI = $DB->fetchrow_hashref();
+# corrige se campo apelido estiver vazio
+#if($PAI->{cliente_apelido} eq "")
+#	{ $filename = substr($PAI->{cliente_nome}, 0, 15); } 
+#else
+#	{ $filename = $PAI->{cliente_apelido}; } 
+# ajuste para listagem avulsa
+#if($PAI->{cliente} == NULL)
+#	{ $PAI->{cliente_nome} = "Clientes Avulso"; }
+
+
+# cfg da impressao
+$DB = &select("select * from nf_print");
+while($nf_print = $DB->fetchrow_hashref)
+	{
+	# $$nf_print->{descrp} = { 'left' = $nf_print->{left_}, 'top' = $nf_print->{top} };
+	
+	$left->{$nf_print->{descrp}} = $nf_print->{left_};
+	$top->{$nf_print->{descrp}} = $nf_print->{top};
+	
+	# my @cfg()
+	# $cfg[$nf_print->{descrp}]->[0] = $nf_print->{left_};
+	# $cfg[$nf_print->{descrp}]->[1] = $nf_print->{top};
+	# $print .= "\$('#cfg_left_$nf_print->{descrp}').css('width','60px').val('$nf_print->{left_}'); \$('#cfg_top_$nf_print->{descrp}').css('width','60px').val('$nf_print->{top}'); cfg_left_$nf_print->{descrp} = new fieldNumber('cfg_left_$nf_print->{descrp}', '4'); cfg_top_$nf_print->{descrp} = new fieldNumber('cfg_top_$nf_print->{descrp}', '4');";
+	}
+
+	
+# gera relatorio
+$sth = &select("select nf.*, regexp_replace(regexp_replace(nf.v1::money::text, '[R\$.]', '', 'g'),',','.')::numeric as vc1, regexp_replace(regexp_replace(nf.v2::money::text, '[R\$.]', '', 'g'),',','.')::numeric as vc2, regexp_replace(regexp_replace(nf.v3::money::text, '[R\$.]', '', 'g'),',','.')::numeric as vc3, empresa.nome as cliente_nome, empresa_endereco.endereco as cliente_endereco, empresa_endereco.cidade as cliente_municipio, empresa_endereco.uf as cliente_uf, empresa_endereco.complemento as cliente_complemento, empresa_endereco.cep as cliente_cep from nf left join empresa on (empresa.codigo = nf.cliente) left join empresa_endereco on (empresa_endereco.empresa = empresa.codigo and empresa_endereco.tipo = 1) where nf.codigo = $COD");
+if($sth->rows() < 1) { &erroDBH("Nenhum !!!"); &erroDBR; exit; } 
+$nf = $sth->fetchrow_hashref;
+
+$sth = &select("select * from empresa_doc where empresa = $nf->{cliente}");
+while($cli = $sth->fetchrow_hashref)
+	{
+    # CNPJ / CPF
+	if($cli->{doc} == 1)
+		{	$cliente_cnpj = $cli->{descrp}	}
+    elsif($cli->{doc} == 2)
+        {	$cliente_cnpj = $cli->{descrp}	}
+    
+    # inscricao municipal / RG
+	if($cli->{doc} == 3)
+		{	$cliente_ie = $cli->{descrp}	}
+    elsif($cli->{doc} == 4)
+        {	$cliente_ie = $cli->{descrp}	}
+	}
+# [END] SQLs necessarios para relatorio ----------------------------------------------------------------------------------------	  
+
+# [INI] configuracao inicial da impressao --------------------------------------------------------------------------------
+# nome do arquivo pdf
+$filename .= ".pdf";
+# numero pagina inicial
+$page = 1; 
+	
+# linha
+$LINI = 590;
+$L = $LINI;
+	
+$CINI = 43;
+$C = $CINI;
+
+# default fonte
+$font{family} = "Helvetica";
+$font{size} = "10";
+$font{color_r} = "0";
+$font{color_g} = "0";
+$font{color_b} = "0";
+
+# header necessario para pdf files
+print $query->header('application/pdf');
+prFile( {
+		file => $filename,
+		FitWindow  => 0,
+		effect => load,
+		CenterWindow => 1
+		} );
+prCompress(1);
+
+# page size
+# prMbox(0, 0, 419.81, 594.99);
+
+
+# usando modelo folha timbrada
+# prForm( {
+#		file => 'print_modelo.pdf',
+#		page => 1
+#		} );
+# [END] configuracao inicial da impressao --------------------------------------------------------------------------------
+
+# [INI] Impressao --------------------------------------------------------------------------------------------------------
+# header, default for pages
+# &pgHead();
+
+# config padrao de fonte
+prFont($font{family});
+prFontSize($font{size});
+prColor($font{color_r}, $font{color_g}, $font{color_b});
+
+# prAdd("q $C ".($L+2)." 4 4 re 0 0 0.5 rg f Q");
+
+# cliente nome
+prText($left->{nome},$top->{nome}, $nf->{cliente_nome}); #." - ".$left->{end}." - ".$top->{end}." - ".$left->{municipio}." - ".$top->{municipio});
+# cliente endereco
+prText($left->{end},$top->{end}, $nf->{cliente_endereco}." ".$nf->{cliente_complemento});
+prText($left->{municipio},$top->{municipio}, $nf->{cliente_municipio});
+prText($left->{uf},$top->{uf}, $nf->{cliente_uf});
+prText($left->{cep},$top->{cep}, $nf->{cliente_cep});
+# cliente docs
+prText($left->{cnpj},$top->{cnpj}, $cliente_cnpj);
+prText($left->{ie},$top->{ie}, $cliente_ie);
+
+# data 
+prText($left->{data_emissao},$top->{data_emissao}, &dateToShow($nf->{data_emissao},"DATE"));
+
+# descrp e valores
+# prFontSize(8);
+# &left("\\s\\s$coletores->{descrp}", $C+140, $font{family}, 10, 280);
+$L = $top->{d1};
+&left($nf->{d1},$left->{d1},$font{family}, 10, 200);
+$nf->{v1} =~ s/R\$/R\$ /gm;
+prText($left->{v1},$top->{v1}, $nf->{v1});
+
+$L = $top->{d2};
+&left($nf->{d2},$left->{d2},$font{family}, 10, 200);
+$nf->{v2} =~ s/R\$/R\$ /gm;
+prText($left->{v2},$top->{v2}, $nf->{v2});
+
+$L = $top->{d3};
+&left($nf->{d3},$left->{d3},$font{family}, 10, 200);
+$nf->{v3} =~ s/R\$/R\$ /gm;
+prText($left->{v3},$top->{v3}, $nf->{v3});
+
+$total = $nf->{vc1} + $nf->{vc2} + $nf->{vc3};
+$total = money($total);
+
+# totais
+prText($left->{total},$top->{total}, $total); 
+prText($left->{liquido},$top->{liquido}, $total);
+
+# Obs
+prFontSize(8);
+$L = $top->{obs};
+&left($nf->{obs},$left->{obs},$font{family}, 10, 100);
+
+# descricao
+# prFontSize(8);
+# &left("\\s\\s$nf->{descrp}", $C+140, $font{family}, 10, 280);
+# [END] Impressao --------------------------------------------------------------------------------------------------------
+
+# [INI] Footer -----------------------------------------------------------------------------------------------------------
+
+# prAdd("q 30 ".($L+10)." 540 0.5 re 0 0.3 0.6 rg f Q"); # line horizontal 3
+
+# ajusta fonte
+# prFontSize(10);
+# prColor(23, 54, 93);
+
+# total duracao
+# prText($C+55,$L, &dateToShow($TOTAL->{tempo_exec_total})."h");
+
+# total faturado
+# prText($C+100,$L, &dateToShow($TOTAL->{tempo_faturado_total})."h");
+
+# titulo final 
+# prFontSize(12);
+# prText($C+450,$L-4, "Total de Horas", "right");
+
+# obs field
+# $L -= 60;
+# prText($C+40, $L, "Obs.:", "left");
+# prFontSize(8);
+# prColor(0, 0, 0);
+# $L -= 14;
+# &left("\\s\\s$PAI->{obs}", $C+45, $font{family}, 10, 280);
+
+# prAdd("q 80 ".($L+10)." 400 0.5 re 0 0.3 0.6 rg f Q"); # line horizontal 4
+# prAdd("q 80 ".($L-3.9)." 0.5 14 re 0 0.3 0.6 rg f Q"); # line vertical 3
+# prAdd("q ".($C+526.5)." ".($L-3.8)." 0.5 14 re 0 0.3 0.6 rg f Q"); # line vertical 4
+# prAdd("q 80 ".($L-4)." 400 0.5 re 0 0.3 0.6 rg f Q"); # line horizontal 5
+
+# mostra page
+prPage();
+prEnd();
+# [END] Footer -----------------------------------------------------------------------------------------------------------
+
+# [INI] Funcoes usadas para gerar pdf ------------------------------------------------------------------------------------
+# header
+sub pgHead
+	{
+	# Cabeçalho
+	if($L eq $LINI && $C eq $CINI)
+		{
+		# font config
+		prFont($font{family}."-Bold");
+		prFontSize(20);
+		prColor(23, 54, 93);
+		
+		# titulo
+		prText($C, $L, "Relatório de Horas", "left");
+		# prAdd(q\n $Column  $Line re\n $Width  $Height  $color_R_G_B rg\nf\nQ\n);
+		prAdd("q\n$C ".($L-4)." 500 0.5 re\n0 0.3 0.6 rg\nf\nQ\n"); # line horizontal 0
+		$L -= 18;
+		
+		# empresa
+		prFont($font{family}."-BoldOblique"); 
+		prFontSize(12);
+		prText($C, $L, "  $PAI->{'cliente_nome'}", "left");
+		$L -= 14;
+		
+		# periodo 
+		prFont($font{family}."-Oblique"); 
+		prFontSize(10);
+		prText($C, $L, "   Período: ".&dateToShow($PAI->{data_ini},"DATE")." até ".&dateToShow($PAI->{data_fim},"DATE")." ", "left");
+		$L -= 25;
+		
+		# data header
+		prFont($font{family}."-Bold"); 
+		prFontSize(9);
+		prAdd("q 30 ".($L+10)." 540 0.5 re 0 0.3 0.6 rg f Q"); # line horizontal 1
+		prAdd("q 30 ".($L-3.9)." 0.5 14 re 0 0.3 0.6 rg f Q"); # line vertical 1
+		prText($C+5, $L, "Data", "left");
+		prText($C+53, $L, "Duração", "left");
+		prText($C+96, $L, "Faturado", "left");
+		prText($C+145, $L, "Descrição", "left");
+		prFontSize(8);
+		prText($C+392, $L, "Profissional", "left");
+		prText($C+458, $L, "Forma", "left");
+		prText($C+492, $L, "Servidor", "left");
+		prAdd("q ".($C+526.5)." ".($L-3.8)." 0.5 14 re 0 0.3 0.6 rg f Q"); # line vertical 2
+		prAdd("q 30 ".($L-4)." 540 0.5 re 0 0.3 0.6 rg f Q"); # line horizontal 2
+		$L -= 20;
+		}
+	}
+	
+# quebra de pagina
+sub pgBreak
+	{
+	if($C == 43)
+		{
+		$L = 750;
+		$C = 315;
+		}
+	else
+		{
+		$L = 32;
+		prFontSize(8);
+		prText(555, $L, "Página $page", "right");
+		prPage();
+
+		$page++;
+		$L = 785;
+		$C = 43;
+
+		&pgHead;
+		}
+	}
+
+# cor da fonte
+sub prColor
+	{
+	my($intRed, $intGreen, $intBlue) = @_;
+	$intSaveR = $intRed;
+	$intSaveG = $intGreen;
+	$intSaveB = $intBlue;
+	prAdd(($intRed/256)." ".($intGreen/256)." ".($intBlue/256)." rg");
+	}
+	
+# linha com alinhamento a esquerda
+sub left
+	{
+	my $string = shift;
+	my $x = shift || 25;
+	my $fnt = shift || "H";
+	my $tam = shift || 8;
+	my $r = shift || 250;
+	my @WM;
+	my @WM2;
+	@WM = split(' ',$string);
+	my $t = 0;
+	my $t2=0;
+	$WM2[0] = "";
+	while($t < @WM)
+		{
+		if($L < 50)
+			{
+			&pgBreak;
+			$x = $C;
+			}
+		$WM[$t] =~ s/\\t/          /gm;
+		$WM[$t] =~ s/\\s/ /gm;
+		if(prStrWidth($WM2[$t2].$WM[$t], $fnt, $tam) > $r)
+			{
+			$t2++;
+			}
+		$WM2[$t2] .= $WM[$t]." ";
+		$t++;
+		}
+	for($f=0; $f < @WM2; $f++)
+		{
+		prText($x, $L, @WM2[$f]);
+		$L-=($tam+1);
+		}
+	}
+
+# linha justificada
+sub justify
+	{
+	my $string = shift;
+	my $x = shift || 25;
+	my $fnt = shift || "H";
+	my $rend = shift || 570;
+	my $r = $rend - $x;
+	my @WM;
+	my @WM2;
+	@WM = split(' ',$string);
+	my $t=0;
+	my $t2=0;
+	$WM2[0] = "";
+	while($t < @WM)
+		{
+		if(prStrWidth($WM2[$t2].$WM[$t], $fnt, 8) > $r)
+			{
+			$t2++;
+			}
+		$WM2[$t2] .= $WM[$t]." ";
+		$t++;
+		}
+	for($f=0; $f < @WM2-1; $f++)
+		{
+		$WM2[$f] = substr($WM2[$f],0,-1);
+		$t=length($WM2[$f])-2;
+		while(prStrWidth(@WM2[$f], $fnt, 8) < $r)
+			{
+			if(substr($WM2[$f], $t, 1) eq " ")
+				{
+				$WM2[$f] = substr($WM2[$f], 0, $t)." ".substr($WM2[$f], $t);
+				}
+			if($t < 1)
+				{
+				$t = length($WM2[$f])-2;
+				}
+			else
+				{
+				$t--;
+				}
+			}
+		my $p = rindex($WM2[$f], " ");
+		$WM2[$f] =~ s/[#]/  /gm;
+		prText($x, $L, substr($WM2[$f], 0, $p));
+		prText($rend-1, $L, substr($WM2[$f], $p), 'right');
+		$L-=9;
+		}
+	prText($x, $L, @WM2[$f]);
+	if($L < 75)
+		{
+		&fimR;
+		&headR;
+		}
+	}
+# [END] Funcoes usadas para gerar pdf ------------------------------------------------------------------------------------

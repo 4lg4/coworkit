@@ -1,0 +1,78 @@
+input[type="text"], input[type="password"]
+	{
+    border-radius: 15px;
+	height:25px;
+	font-size:1.5em;
+	width:90% !important;
+	}
+
+
+body
+	{
+	background-size:400px;
+	min-width:inherit;
+	min-height:inherit;
+	background-position:center 100px;
+	}
+	
+#btn_login_round
+	{
+	height:30px;
+	padding-top:1px;
+	border-radius:25px;
+	font-size:1.2em;
+	}
+	
+#login_footer
+	{
+	display:none;
+	}
+	
+#logo_eos
+	{
+	left:0px;
+	width:100%;
+	text-align:center;
+	display:none;
+	}
+	
+#login_mobile_link
+	{
+	display:none;
+	}
+
+#login_mobile
+ 	{
+	bottom:-1px;
+    position: absolute;
+    right: -4px;
+	background-color:#dbdbdb; 
+	border-top-left-radius:20px;
+	padding-left:5px;
+	}
+
+#login_form
+	{
+	top:50px;
+	width:75%;
+	}
+	
+#login_logo
+	{
+	top:30px;
+	}
+
+#login_logo img
+	{
+	width:70%;
+	}
+	
+.fieldUser
+	{ 
+	background-image:none !important;
+	}
+
+.fieldPassword
+	{ 
+	background-image:none !important;
+	}

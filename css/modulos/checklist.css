@@ -1,0 +1,101 @@
+.checklist_form {
+    overflow : auto;
+}
+
+.checklist_form .checklist_page_line {
+    width    : 100%;
+    clear    : both;
+    overflow : hidden;
+    padding-bottom : 1%;
+}
+.checklist_form .checklist_page_line:first-child {
+    margin-top: 0.5%;
+}
+
+.checklist_form #checklist_container_center {
+    margin-top   : 0.5%;
+    margin-right : 0.5%;
+    height       : auto;
+    width        : 99%;
+    overflow-y   : auto;
+}
+
+.checklist_form #dados_container {
+    width  : 98%;
+    margin : 1%;
+    float  : left;
+}
+
+.checklist_form #descrp_container {
+    width  : 70%;
+    float : left;
+}
+.checklist_form #dados_principais,
+.checklist_form #dados_principais2 {
+    width  : 99%;
+    margin : 0.5%;
+    clear : both;
+    height : 30px;
+}
+.checklist_form #dados_principais #tkt {
+    width  : 27.5%;
+    margin-right : 0.5%;
+    float : left;
+    height : 30px;
+    
+    color            : #333;
+    padding-left     : 1%;
+    padding-right    : 1%;
+    background-color : #fff;
+    font-size        : 14px;
+    line-height      : 2;
+}
+.checklist_form #dados_principais #cliente {
+    width  : 68%;
+    float : left;
+    height : 30px;
+    
+    color            : #333;
+    padding-left     : 1%;
+    padding-right    : 1%;
+    background-color : #fff;
+    font-size        : 14px;
+    line-height      : 2;
+}
+
+.checklist_form #dtag_container {
+    width  : 29.5%;
+    margin-right : 0.5%;
+    float : left;
+}
+
+
+.checklist_form #inventario_container {
+    width   : 27%;
+    margin  : 1%;
+    padding : 0.5%;
+}
+
+
+.checklist_form #servico_container {
+    width   : 67%;
+    margin  : 1%;
+    padding : 0.5%;
+}
+
+.checklist_form #servico_list,
+.checklist_form #inventario_list {
+    margin-top: 0.5%;
+}
+
+.checklist_form #inventario_container .DTouchRadio_list_line ,
+.checklist_form #servico_container .DTouchRadio_list_line { 
+    height : 30px;
+}
+
+.checklist_form #inventario_container .DTouchRadio_list_line div,
+.checklist_form #servico_container .DTouchRadio_list_line div { 
+    height      : 30px;
+    line-height : 2;
+    color       : #fff;
+}

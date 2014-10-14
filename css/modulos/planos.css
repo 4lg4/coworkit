@@ -1,0 +1,105 @@
+.planos_form {
+    overflow : auto;
+}
+
+.planos_form .planos_page_line {
+    width    : 100%;
+    clear    : both;
+    overflow : hidden;
+    padding-bottom : 1%;
+}
+.planos_form .planos_page_line:first-child {
+    margin-top: 0.5%;
+}
+
+.planos_form #planos_container_center {
+    margin-top   : 1%;
+    margin-right : 1%;
+    height       : auto;
+    width        : 99%;
+    overflow-y   : auto;
+}
+
+.planos_form #dados_container {
+    width  : 40%;
+    margin : 0.5%;
+    clear  : both;
+}
+
+
+.planos_form #area_tipo_container {
+    width  : 40%;
+    margin : 0.5%;
+    float  : left;
+}
+.planos_form #cobranca_container {
+    width  : 19.5%;
+    margin : 0.5%;
+    float  : left;
+}
+.planos_form #status_container {
+    width  : 19.5%;
+    margin : 0.5%;
+    float  : left;
+}
+
+.planos_form #descrp_container {
+    width  : 98%;
+    margin : 1%;
+}
+
+.planos_form #obs_container {
+    width  : 98%;
+    margin : 1%;
+    margin-top : 0px;
+}
+
+
+.planos_form .img_list {
+    height : 30px;
+}
+
+
+
+.planos_form #dados_last_line {
+    width  : 100%;
+    margin : 1%;
+    height : 30px;
+}
+.planos_form #cob_day_container {
+    margin-right : 1%;
+    width       : 49%;
+    float       : left;
+}
+.planos_form #hora_container {
+    width       : 48%;
+    float       : left;
+}
+
+/* empresa */
+.planos_form #empresa_container {
+    width   : 40%;
+    margin  : 0.5%;
+}
+.planos_form #empresa_container div {
+    margin : 1%;
+    width  : 98%;
+}
+
+/* vigencia */
+.planos_form #vigencia_container {
+    width  : 40%;
+    margin : 0.5%;
+    float  : left;
+}
+.planos_form #vigencia_ini_container {
+    margin : 1%;
+    float  : left;
+    width  : 48.5%;
+}
+.planos_form #vigencia_fim_container {
+    margin : 1%;
+    margin-left : 0px;
+    float  : left;
+    width  : 48.5%;
+}

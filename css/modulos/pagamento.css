@@ -1,0 +1,45 @@
+/** 
+ *  Formulario
+ */
+
+/* linha container */
+.pagamento_form {
+    width    : 98%;
+    clear    : both;
+    overflow : hidden;
+    margin   : 1%;
+}
+
+.pagamento_form {
+    overflow : auto;
+}
+
+
+#pagamentos_page_center,
+#pagamentos_page_left {
+    position : absolute !important;
+}
+
+
+#dados_container,
+#features_container,
+#pagamentos_container {
+    width : 98%;
+    margin-bottom : 1%;
+}
+
+#cliente_container div,
+#plano_container div {
+    display : inline-block;
+}
+
+
+
+#features .DTouchRadio_list_line div, 
+#pagamentos .DTouchRadio_list_line div {
+    color : #fff;
+
+
+
+
+
