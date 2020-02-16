@@ -1,0 +1,1379 @@
+/* importa css usado pelo jquery como base, e apos aplica os overrides */
+@import "comum/jquery.css";
+@import "comum/dataTable.css";
+
+@import "/css/jquery.css";
+@import "/css/dataTable.css";
+
+/* ------------------------------------------------
+ [INI]   CSS Base
+------------------------------------------------ */
+
+/* FONTE definicao da, ----- */
+body, tr, td, input[type="text"], input[type="file"], input[type="password"], select, textarea, input[type="button"], input[type="submit"], input[type="reset"], .ui-widget, .ui-widget input, .ui-widget select, .ui-widget textarea, .ui-widget button
+	{
+	font-family: Tahoma, sans-serif;
+	font-size: 11px;
+	font-weight: normal;
+	font-style: normal;
+	letter-spacing: 0.02em;
+	}
+	
+body
+	{
+	min-width: 1024px;
+	padding: 0px;
+	}
+
+tr, td
+	{
+	}
+	
+/* commented backslash hack for mac-ie5 \ */
+dt
+	{
+	clear: both;
+	}
+
+input[type="text"], input[type="file"], input[type="password"], select, textarea
+	{
+	width: 100%;
+	border: solid 1px #aaaaaa;
+	margin: 0px;
+	margin-bottom: 2px;
+	padding: 2px;
+	/*
+	border-radius: 0px;
+	border-top-left-radius:15px;
+	border-bottom-left-radius:15px;
+	*/
+	padding-left: 8px;
+	
+	}
+	
+textarea
+	{
+	padding-left: 2px;
+	border-radius: 0px;
+	}	
+	
+input[type="button"], input[type="submit"], input[type="reset"]
+	{
+	border-style:none;
+	padding: 0px;
+	background: transparent;
+	width: 70px;
+	height: 18px;
+	cursor: pointer;
+	}
+	
+select
+	{
+	padding: 2px;
+	margin: 0px;
+	width: auto;
+	background-color: white;
+	}
+
+button[disabled], input[disabled], optgroup[disabled], option[disabled], select[disabled], textarea[disabled], password[disabled]
+	{
+	color: #000;
+	background-color: #cdcdcd;
+	}
+
+/* ------------------------------------------------
+ [INI]   Modal Alerts
+------------------------------------------------ */
+
+.ui_alerta
+	{
+	position: absolute;
+	z-index: 2000000;
+	}
+	
+.ui_frame
+	{
+	width: 400px;
+	/* padding: 5px;
+	padding-top: 5px; */
+	background-color: #fff;
+	position: relative;
+	top: 20px;
+	left: 50px;
+	border: solid 1px #fff;
+	border-radius: 0px;
+	box-shadow: 5px 5px 5px rgba(255, 255, 255, 0.3);
+	text-align:center;
+	}
+	
+.ui_box
+	{
+	font-size: 14px;
+	font-weight: bold;
+	position: relative;
+	/* display:block; */
+	background:rgb(299,299,299);
+	min-height:130px;
+	}
+.ui_buttons
+	{
+	margin-top: 20px;
+	margin-bottom: 40px;
+	}
+.ui_title
+	{
+	margin-bottom: 6px;
+	color: #ffffff;
+	font-size: 11px;
+	font-weight: bold;
+	background-color: #354e72;
+	padding-top:5px;
+	padding-bottom:5px;
+	}
+#ui_title_name
+	{
+	width:60%;
+	float:right;
+	font-weight:normal;
+	text-align:left;
+	margin-left:4%;
+	}
+		
+.ui_msg 
+	{
+	width: 80%; 
+	float: left; 
+	margin-left: 5px;
+	margin-top: 10px;
+	}
+	
+#ui_sys_name
+	{
+	width:90%;
+	text-align:left;
+	margin-left:4%;
+	}
+
+.ui_sys_title
+	{
+	width:40%;
+	/* float:left; */
+	}	
+	
+/* Bota Padrao modal UI --------------------------------------------------------------------- */
+.ui_btn_bar 
+	{
+	position: relative;  
+	top:0px; 
+	left: 0px;  
+	width: 60px; 
+	height: 100%;
+	float: left;
+	border:0px;   
+	border-right: solid 0px #555555;   
+	border-top: none 0px;   
+	background-color: #fff;  
+	z-index: 1;
+	min-height:130px;
+	}
+	
+.ui_btn_title 
+	{
+	font-size:12px;
+	padding-top:1px;
+	font-weight:normal;
+	}
+	
+.ui_btn_container 
+	{
+	display:table-cell;
+	vertical-align:bottom;
+	width: 46px;
+	height: 46px;
+	}
+	
+.ui_btn {
+	margin-top:3px;
+	width: 46px;
+	height: 46px;
+	cursor: pointer;
+	/* background: url(/img/icon_glow.png) top center #70242d; */
+	border-radius: 0px;;
+	font-family:Arial;
+	color:#fff;
+	margin-top:3px;
+	background:#354e72;
+	text-shadow: none;
+}
+.ui_btn:hover {
+	color:#c8d9f2;
+	text-shadow: none;
+	background:#354e72;
+}
+	
+/* ------------------------------------------------
+ [END]   Modal Alerts
+------------------------------------------------ */
+
+/* Definicao padrao de botoes **************************/
+#btn_default
+	{
+	background-image: url(/img/ui/btn_default.png);
+	background-repeat:no-repeat;
+	border-style: none;
+	width: 73px;
+	height: 21px;
+	padding: 0px;
+	cursor: pointer;
+	float: left;
+	position: relative;
+	left: 40%;
+	}
+
+
+	
+	
+/* Modal Background ------------------------------------------------------------------------------ */
+.DHTMLSuite_modalDialog_transparentDivs
+	{	
+	opacity:0.65 !important;
+	background-color:#000 !important;
+	}
+
+
+
+	
+	
+/* code view ----------------------------------------------------------------------------------- */
+.code-container
+	{
+	width:99.5%; 
+	height:100%; 
+	background:#fff;
+	}
+	
+.code-view 
+	{
+	width:100%; 
+	height:500px;
+	border:0px;
+	}
+
+
+/*  -------------------------------------------------------------------------------------------
+	D-tips  
+------------------------------------------------------------------------------------------- */
+#Dtips {
+	background: #EEE;
+    color: #000;
+    border: 1px solid #DDD;
+    padding: 5px;
+    /* width: 250px; */
+    text-align: left;
+	}
+
+/*  -------------------------------------------------------------------------------------------
+	Arredondar bordas padrao usado 
+-------------------------------------------------------------------------------------------  */ 
+.no_rounded 
+	{
+	border-radius: 0px;
+	}
+.rounded 
+	{
+	border-radius: 0px;
+	}
+.rounded_top_right 
+	{
+	border-top-right-radius: 0px;	
+	}
+.rounded_top_left 
+	{
+	border-top-left-radius: 0px;	
+	}
+.rounded_tr 
+	{
+	border-top-right-radius: 0px;	
+	}
+.rounded_tl 
+	{
+	border-top-left-radius: 0px;	
+	}
+.rounded_u 
+	{
+	border-bottom-left-radius: 0px;
+	border-bottom-right-radius: 0px;
+	}
+.rounded_n 
+	{
+	border-top-left-radius: 0px;
+	border-top-right-radius: 0px;
+	}
+.rounded_ud 
+	{
+	border-top-right-radius: 0px;
+	border-bottom-left-radius: 0px;
+	border-bottom-right-radius: 0px;
+	}
+
+/*  -------------------------------------------------------------------------------------------
+  HighLight padrao
+-------------------------------------------------------------------------------------------  */ 
+.noglow { background-color:#ccc; }
+.glow { background-color: #99aec9; }
+.glowa { background-color: #cabebf; }
+.glowb { background-color: #fff; }
+
+	
+/* ----------------------------------------------------------------------------------------------
+	[INI] Tabs 
+---------------------------------------------------------------------------------------------- */
+.ui-tabs-nav 
+	{
+	border:none !important;
+	background:none !important;
+	padding-bottom:none !important;
+	}
+	
+.ui-tabs-nav li a 
+	{
+	padding: 0.4em 1em !important;
+	font-size: 0.8em !important;
+	}
+	
+.ui-tabs-nav li
+	{
+	margin-top:0px !important;
+	}
+		
+.ui-tabs-nav ul
+	{
+	margin-bottom:-2px !important;
+	border-bottom:0px;
+	}
+.ui-tabs
+	{
+	border:none !important;
+	}
+
+.ui-widget-content 
+	{
+	padding:0px !important;
+	}
+	
+div.ui-tabs
+	{
+	border:none !important;
+	background:none !important;
+	}
+
+.ui-tabs .ui-tabs-nav li a, .ui-tabs.ui-tabs-collapsible .ui-tabs-nav li.ui-tabs-selected a	
+	{
+	cursor:pointer;
+	border:none !important;
+	background:none !important;
+	}
+	
+.ui-tabs-panel
+	{
+	border:1px solid #354e72 !important;
+	overflow-y:auto;
+	}
+
+/* Botao de remover aba no cadastro de clientes */
+.tabs_btn_del 
+	{
+	float:left; 
+	margin-left:-6px; 
+	margin-top: -1px; 
+	}
+/* cor das abas das tabs ------------------------------------------------------ */
+
+/* quando ativo  */
+.ui-tabs .ui-tabs-nav li.ui-tabs-selected a, .ui-tabs .ui-tabs-nav li.ui-state-disabled a, .ui-tabs .ui-tabs-nav li.ui-state-processing a 
+	{ 
+	/* border-bottom: solid 4px !important; */
+	}  
+/* Google Chrome hack */
+@media screen and (-webkit-min-device-pixel-ratio:0){
+	.ui-tabs .ui-tabs-nav li.ui-tabs-selected a, .ui-tabs .ui-tabs-nav li.ui-state-disabled a, .ui-tabs .ui-tabs-nav li.ui-state-processing a { background-color:#31517b; border-bottom: solid 3px #31517b; } 
+	}
+
+/* quando inativo  */
+.ui-tabs .ui-tabs-nav li a, .ui-tabs.ui-tabs-collapsible .ui-tabs-nav li.ui-tabs-selected a 
+	{ 
+	/* border-bottom: solid 4px !important; */
+	}
+
+/* Google Chrome hack */
+@media screen and (-webkit-min-device-pixel-ratio:0){
+	.ui-tabs .ui-tabs-nav li a, .ui-tabs.ui-tabs-collapsible .ui-tabs-nav li.ui-tabs-selected a { border-bottom: solid 3px #ccc;}
+	}
+
+/* ----------------------------------------------------------------------------------------------
+	[END] Tabs 
+---------------------------------------------------------------------------------------------- */
+
+
+/* -----------------------------------------------------------------
+	[INI] Date Picker 
+----------------------------------------------------------------- */
+.ui-datepicker {
+	background: #ffffff;
+	border: 1px solid #808080 !important;
+	padding-left: 2px !important;
+	padding-right: 2px !important;
+	}
+.ui-datepicker-title 
+	{
+	border-radius:0px;
+	margin-left:2px;
+	margin-right:2px;
+	line-height:1.1em !important;
+	background:#ccc;
+	}
+.ui-datepicker a.ui-state-default 
+	{
+	border-radius:0px;
+	}
+table.ui-datepicker-calendar tbody td.highlight > a 
+	{ 
+	border: 1px solid #354e72; 
+	background: #354e72 url(/img/jquery/ui-bg_highlight-soft_65_31517a_1x100.png) 50% 50% repeat-x; 
+	font-weight: bold; 
+	color: #ffffff; 
+	}
+/*
+{
+    background: #70242d; / url("/img/ui/ui-bg_inset-hard_55_ffeb80_1x100.png") repeat-x scroll 50% bottom #70242d; /
+    color: #fff;
+    border: 1px solid #500000;
+}
+*/
+.ui-datepicker td 
+	{
+	padding:2px !important;
+	}
+
+	
+/* ------------------------------------------------------- 
+	Auto Complete Field
+		usado com classe fieldAutoComplete
+/* -------------------------------------------------------*/
+.search 
+	{ 
+	background:#fff url("/img/field/field_search.png") top left 2px no-repeat; 
+	background-size: 16px;
+	padding-left: 18px !important;
+	}
+	
+.searchAdd
+	{ 
+	background:#fff url("/img/field/field_search_add.png") top -0.5px left 2px no-repeat; 
+	background-size: 16px;
+	padding-left: 18px !important;
+	}	
+	
+.ui-autocomplete 
+	{ 
+	border: 1px solid #333;
+	border-top:0px !important;
+	padding:3px !important;
+	padding-right:4px !important;
+	border-top-left-radius: 0px !important;
+	border-top-right-radius: 0px !important;
+	border-bottom-left-radius: 4px !important;
+	border-bottom-right-radius: 4px !important;
+	width:20em !important;
+	}
+.ui-autocomplete a
+	{
+	font-size:0.8em;
+	}
+
+/* Auto select -------------------------------------------- */
+.acInput {
+	width: 200px;
+}
+.acResults {
+	padding: 0px;
+	border: 1px solid WindowFrame;
+	/* background-color: Window; */
+	background-color: #fff;
+	overflow: hidden;
+	-moz-border-radius: 0 0 5px 5px; 
+	-webkit-border-bottom-left-radius: 0px; 
+	-webkit-border-bottom-right-radius: 0px; 
+	border-bottom-left-radius: 0px;
+	border-bottom-right-radius: 0px;
+	
+}
+
+.acResults ul {
+	width: 100%;
+	list-style-position: outside;
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+.acResults li {
+	margin: 0px;
+	padding: 2px 5px;
+	cursor: pointer;
+	display: block;
+	width: 100%;
+	font: menu;
+	font-size: 12px;
+	overflow: hidden;
+}
+
+.acLoading {
+	background : url('indicator.gif') right center no-repeat;
+}
+
+.acSelect {
+	background-color: Highlight;
+	color: HighlightText;
+}
+
+/* ------------------------------------------------------- 
+	[INI] D-Fields (done fields)
+/* -------------------------------------------------------*/
+
+/* field Money (campos somente Money) */
+.fieldMoney
+	{ 
+	background:#fff url("/img/field/field_money.png") top left 3px no-repeat; 
+	background-size: 18px;
+	width: 95px !important;
+	padding-left: 22px !important;
+	}
+
+/* field Date Time (campos com Date / Time) */
+.fieldDate
+	{ 
+	background:#fff url("/img/field/field_date.png") top left 4px no-repeat; 
+	background-size: 16px;
+	width: 90px !important;
+	padding-left: 22px !important;
+	}
+
+.fieldDateTime
+	{ 
+	background:#fff url("/img/field/field_datetime.png") top -1.5px left 4px no-repeat; 
+	background-size: 18px;
+	width: 120px !important;
+	padding-left: 24px !important;
+	}
+	
+.fieldTime
+	{ 
+	background:#fff url("/img/field/field_time.png") top left 3px no-repeat; 
+	background-size: 16px;
+	width: 50px !important;
+	padding-left: 20px !important;
+	}
+
+.fieldNumber
+	{ 
+	background:#fff url("/img/field/field_number.png") top left 1px no-repeat; 
+	background-size: 16px;
+	padding-left: 20px !important;
+	}
+
+.fieldEmail
+	{ 
+	background:#fff url("/img/field/field_email.png") top left 1px no-repeat; 
+	background-size: 16px;
+	padding-left: 20px !important;
+	}
+
+.fieldUser
+	{ 
+	background:#fff url("/img/field/field_user.png") top left 1px no-repeat; 
+	background-size: 16px;
+	padding-left: 20px !important;
+	}
+
+.fieldPassword
+	{ 
+	background:#fff url("/img/field/field_password.png") top left 3px no-repeat; 
+	background-size: 16px;
+	padding-left: 20px !important;
+	}
+
+.fieldDisable
+	{
+	background-color:#ccc;
+	}
+	
+.fieldContainer 
+	{
+	box-sizing: border-box;
+	}
+
+/* Checkbox ---------------------------------- 
+.fieldCheck, .ui-state-active
+	{
+	background:url("/img/field_check.png") center center no-repeat; 
+	background-size:15px 15px;
+	}
+
+
+.ui-state-active
+	{
+	border:none;
+	}
+	
+.ui-state-default
+	{
+	border:none;
+	}
+*/
+.fieldCheck
+	{
+	border:none;
+	}
+
+/* ----------------------------------------------------------------------------------------------------------------------------------
+	Selectmenu 
+---------------------------------------------------------------------------------------------------------------------------------- */
+.fieldSelect 
+	{
+	font-size: 0.8em !important;
+	}
+	
+/* .ui-selectmenu, li.ui-corner-bottom, li.ui-selectmenu-item-selected */
+
+.ui-selectmenu, ul.ui-selectmenu-menu li
+	{
+	font-size: 0.85em !important;
+	}
+
+/* .ui-selectmenu .ui-selectmenu-menu { width: 100px; } */
+.ui-selectmenu-menu li:hover { border:0px dotted transparent; } /* remove bordas quando mouse over no item */
+.ui-selectmenu-menu a:hover { color:#fff; } /* remove bordas quando mouse over no item */
+.ui-selectmenu 
+	{ 
+	display: inline-block; 
+	position:relative; 
+	height:14px;
+	text-decoration: none; 
+	overflow:hidden; 
+	vertical-align:bottom; 
+	margin-bottom:2px; 
+	/* background:#fff;  */
+	border: none;
+	background-image: none;
+	}
+.ui-selectmenu-icon { position:absolute; right:1px; margin-top:-8px; top: 50%; }
+.ui-selectmenu-menu 
+	{ 
+	padding:0; 
+	margin:0; 
+	list-style:none; 
+	position:absolute; 
+	top: 0; 
+	visibility: hidden; 
+	overflow: auto; 
+	background:#fff; 
+	border:none;
+	}
+.ui-selectmenu-open { visibility: visible; }
+.ui-selectmenu-menu-popup { margin-top: -1px; }
+.ui-selectmenu-menu-dropdown 
+	{ 
+	box-shadow: 1px 2px 6px rgba(0, 0, 0, 0.5);	
+	}
+.ui-selectmenu-menu li 
+	{ 
+	padding:0; 
+	margin:0; 
+	display: block; 
+	border:none; 
+	font-weight: normal !important; 
+	}
+.ui-selectmenu-menu li a,.ui-selectmenu-status { line-height: 1.4em; /* display:block; */ padding:.3em 1em; outline:none; text-decoration:none; }
+.ui-selectmenu-menu li.ui-selectmenu-hasIcon a,
+.ui-selectmenu-hasIcon .ui-selectmenu-status { padding-left: 20px; position: relative; margin-left: 5px; }
+.ui-selectmenu-menu li .ui-icon, .ui-selectmenu-status .ui-icon { position: absolute; top: 1em; margin-top: -8px; left: 0; }
+.ui-selectmenu-status { line-height: 1.4em; }
+.ui-selectmenu-open li.ui-selectmenu-item-focus a {  }
+.ui-selectmenu-open li.ui-selectmenu-item-selected { }
+.ui-selectmenu-menu li span,.ui-selectmenu-status span { display:block; margin-bottom: .2em; }
+.ui-selectmenu-menu li .ui-selectmenu-item-header { font-weight: bold; }
+.ui-selectmenu-menu li .ui-selectmenu-item-content {  }
+.ui-selectmenu-menu li .ui-selectmenu-item-footer { opacity: .8; }
+
+.ui-selectmenu-menu .ui-selectmenu-group { font-size: 0.8em; }
+.ui-selectmenu-menu .ui-selectmenu-group .ui-selectmenu-group-label { line-height: 1.4em; display:block; padding:.6em .5em 0; font-weight: bold; }
+.ui-selectmenu-menu .ui-selectmenu-group ul { margin: 0; padding: 0; }
+
+.ui-selectmenu-focus
+	{
+	background-color: #fff;
+	color: #354e72;
+	}
+
+.ui-selectmenu-menu li a:hover
+	{
+	background-color: #354e72;
+	color: #fff;
+	}
+	
+#grupo-button 
+	{
+	
+	}
+/* ----------------------------------------------------------------------------------------------------------------------------------
+	Upload fake
+---------------------------------------------------------------------------------------------------------------------------------- */
+.file-wrapper {
+  cursor: pointer;
+  display: inline-block;
+  overflow: hidden;
+  position: relative;
+}
+.file-wrapper input {
+  cursor: pointer;
+  font-size: 100px;
+  height: 100%;
+  filter: alpha(opacity=1);
+  -moz-opacity: 0.01;
+  opacity: 0.01;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+.file-wrapper .button {
+  background: #70242d;
+  -moz-border-radius: 0px;
+  -webkit-border-radius: 0px;
+  border-radius: 0px;
+  color: #fff;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 11px;
+  font-weight: bold;
+  margin-right: 5px;
+  padding: 4px 18px;
+  text-transform: uppercase;
+}
+.upload_btn {
+  background: #70242d;
+  -moz-border-radius: 0px;
+  -webkit-border-radius: 0px;
+  border-radius: 0px;
+  color: #fff;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 11px;
+  font-weight: bold;
+  margin-right: 5px;
+  padding: 4px 18px;
+  text-transform: uppercase;
+  margin-top:-2px; 
+ }
+
+
+/* [END] Fields ------------------------------------------------------------------------------------------------------- */
+
+
+
+/* -------------------------------------------------------------------------------------------------------------------
+  -------------------------------------------------------------------------------------------------------------------
+
+	CSS especifico (Classificar comentando)
+	
+-------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------- */
+
+.thor:hover
+	{
+	cursor: pointer;
+	text-decoration: underline;
+	}
+
+.asc
+	{
+	background: url(/img/sort_asc.png) no-repeat #354e72 99% 20%;
+	}
+
+.asc:hover
+	{
+	background: url(/img/sort_asc.png) no-repeat #354e72 99% 20%;
+	cursor: pointer;
+	text-decoration: underline;
+	}
+
+.desc
+	{
+	background: url(/img/sort_desc.png) no-repeat #354e72 99% 20%;
+	}
+
+.desc:hover
+	{
+	background: url(/img/sort_desc.png) no-repeat #354e72 99% 20%;
+	cursor: pointer;
+	text-decoration: underline;
+	}
+
+#mensagem
+	{
+	text-align: center;
+	font-size: 13px;
+	font-weight: bold;
+	color: red;
+	}
+
+.info
+	{
+	text-align: left;
+	font-size: 12px;
+	font-weight: normal;
+	color: #354e72;
+	}
+	
+.infobold
+	{
+	text-align: left;
+	font-size: 12px;
+	font-weight: bold;
+	color: #354e72;
+	}
+
+.grid
+	{
+	border: solid 1px #354e72;
+	background-color: white;
+	padding: 0px;
+	margin-top: 8px;
+	}
+
+.grid tr:first-child td
+	{
+	padding-top: 15px;
+	}
+
+.grid td:first-child
+	{
+	padding-left: 20px;
+	}
+
+.grid th
+	{
+	font-size: 12px;
+	text-align: left;
+	padding: 3px;
+	padding-left: 10px;
+	margin: 0px;
+	background-color: #354e72;
+	color: white;
+	}
+
+.grid td
+	{
+	padding: 2px;
+	padding-left: 10px;
+	padding-right: 10px;
+	}
+
+.grid tr[first]
+	{
+	padding-top: 20px;
+	}
+	
+	
+/* navegacao */
+.anavigateable_box
+	{
+	position:relative;
+	/*
+	border: solid 1px #808080;
+	border-radius: 0px;
+	*/
+	background-color: #fff; 
+	padding: 0px; 
+	/* padding-top:0px; */
+	/*
+	overflow-y: auto;
+	height:100%;
+	
+	border-radius:0px;
+	border-top-left-radius:0px;
+	border-top-right-radius:0px;
+	*/
+	}
+
+.navigateable table, th, td
+	{
+	font-size: 11px;
+	}
+
+/* header TH -> titulo das listas criadas nos formularios usando table */	
+.navigateable th
+	{
+	background-color: #354e72;
+	color: white;
+	}
+
+.selected td
+	{
+	background-color: #99aec9;
+	}
+	
+.formtxt
+	{
+	font-weight: normal;
+	color: #354e72;
+	}
+
+.txtbold
+	{
+	font-weight: bold;
+	color: #808080;
+	}
+
+dl.form
+	{
+	width: 96%;
+	margin: 7px 0;
+	padding: 0;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	padding-right: 0px;
+	}
+	
+dl.form dl
+	{
+ 	margin: 0px;
+	}
+
+.form dt
+	{
+	width: 15%;
+	float: left;
+	margin: 0 0 0 0;
+	padding: 3px;
+	font-weight: normal;
+	color: #354e72;
+	}
+
+td.form
+	{
+	font-size: 12px;
+	font-weight: bold;
+	color: #354e72;
+	}
+
+
+.form dd
+	{
+	float: left;
+	margin: 0 0 0 0;
+	padding: 1px;
+	font-weight: normal;
+	width: 70%;
+	}
+
+.separator
+	{
+	color: white;
+	background-color: #999999;
+	padding: 4px;
+	font-weight: bold;
+	}
+
+.separator_aba
+	{
+	font-size: 12px;
+	color: white;
+	background-color: #808080;
+	padding: 4px;
+	width: 94.6%;
+	font-weight: bold;
+	margin-left: 2.5%;
+	border-radius: 0px;	
+	}
+	
+.separator_titulo
+	{
+	font-size: 12px;
+	color: white;
+	background-color: #354e72;
+	padding: 4px;
+	width: 94.6%;
+	font-weight: bold;
+	margin-left: 2.5%;
+	border-radius: 0px;	
+	}
+	
+/* ------------------------------------------------------------------------------------------
+	Simula aba
+------------------------------------------------------------------------------------------ */
+.fake_aba
+	{
+	font-size: 12px;
+	color: white;
+	background-color: #808080;
+	padding: 4px;
+	width: 94.6%;
+	font-weight: bold;
+	border-top-left-radius: 0px;
+	border-top-right-radius: 0px;
+	}
+.fake_aba_sub
+	{
+	background:#808080; 
+	padding-bottom:6px !important;
+	padding-top:8px !important; 
+	text-align:right; 
+	width:100%;
+	border-top-right-radius: 0px;
+	color:#fff;
+	}
+.fake_aba_azul
+	{
+	font-size: 12px;
+	color: white;
+	background-color: #354e72;
+	padding: 4px;
+	width: 94.6%;
+	font-weight: bold;
+	margin-left: 2.5%;
+	border-top-left-radius: 0px;
+	border-top-right-radius: 0px;
+	}
+
+.textarea
+	{
+	font-size: 12px;
+	width: 99%;
+	border: solid 1px #aaaaaa;
+	margin-bottom: 5px;
+	margin-left: 10px;
+	padding: 2px;
+	padding-left: 5px;
+	}
+	
+.box
+	{
+	color: white;
+	background-image: url(/img/menu_fundo_sel.png);
+	border: solid #000055 1px;
+	cursor: pointer;
+	padding: 4px;
+	font-weight: bold;
+	}
+  
+#grid_pesq table
+	{
+	width: 100%;
+	padding-bottom: 0px;
+	color: white;
+	background-color: #354e72;
+	}
+
+.grupo:link
+	{
+	text-decoration: none;
+	}
+
+.grupo:active, .grupo:visited 
+	{
+	text-decoration: underline;
+	}
+	
+#detalhes
+	{
+	background-color: ivory;
+	border: solid 1px gray;
+	text-align: left;
+	padding: 4px;
+	overflow: hidden;
+	border-radius: 0px;
+	}
+
+#detalhes .box
+	{
+	font-size: 12px;
+	text-align: left;
+	font-weight: bold;
+	color: white;
+	background-color: #354e72;
+	width: 210px;
+	padding: 6px 4px 6px 4px;
+	border-radius: 0px;
+	}
+
+.agrupo
+	{
+	background-color: #6282ab;
+	color: white;
+	font-weight: bold;
+	padding-top: 2px;
+	padding-bottom: 2px;
+	}
+
+.legenda_box
+	{
+	border: solid 1px #ccc;
+	background-color: #dcdcdc;
+	border-radius: 0px;
+	padding: 4px 20px 4px 20px;
+	color: black;
+	}
+
+.legenda_th
+	{
+	background-color: #575971;
+	border: solid 1px black;
+	}
+	
+.legenda_agrupo
+	{
+	background-color: #6282ab;
+	border: solid 1px black;
+	}
+
+
+/* simula botao - cursor mouse */
+.btn_img {
+	cursor:pointer;
+}
+
+
+/* -----------------------------------------------------------------------------------------------------------------------------------------------
+	tables sorter plugin 
+----------------------------------------------------------------------------------------------------------------------------------------------- */
+/*
+table.tablesorter {
+	font-family:arial;
+	background-color: #CDCDCD;
+	margin:10px 0pt 15px;
+	font-size: 8pt;
+	width: 100%;
+	text-align: left;
+}
+table.tablesorter thead tr th, table.tablesorter tfoot tr th {
+	background-color: #e6EEEE;
+	border: 1px solid #FFF;
+	font-size: 8pt;
+	padding: 4px;
+}
+table.tablesorter tbody td {
+	color: #3D3D3D;
+	padding: 4px;
+	background-color: #FFF;
+	vertical-align: top;
+}
+table.tablesorter tbody tr.odd td {
+	background-color:#F0F0F6;
+}
+table.tablesorter thead tr .headerSortDown, table.tablesorter thead tr .headerSortUp {
+background-color: #8dbdd8;
+}
+*/
+table.tablesorter thead tr .header 
+	{
+	background-repeat: no-repeat;
+	background-position: center right;
+	cursor: pointer;
+	background-color:#354e72 !important;
+	color:#fff;
+	padding-top:3px;
+	padding-bottom:3px;
+	}
+	
+table.tablesorter thead tr .header 
+	{
+	background-image: url(/img/grid/bg.gif);
+	}
+	
+table.tablesorter thead tr .headerSortUp 
+	{
+	background-image: url(/img/grid/asc.gif);
+	}
+	
+table.tablesorter thead tr .headerSortDown 
+	{
+	background-image: url(/img/grid/desc.gif);
+	}
+
+
+/* -----------------------------------------------------------------------------------------------------------------------------------------------
+	 box for container and organize stuff on screen
+----------------------------------------------------------------------------------------------------------------------------------------------- */
+.dbox
+	{
+	border:1px solid #354e72;
+	background-color:#fff;
+	/* margin:10px; */
+	width:100%;
+	}
+.dbox_title
+	{
+	width:100%;
+	height:19px;
+	padding-top:1px;
+	color:#fff;
+	font-weight:bold;
+	background-color:#354e72;
+	/*
+	background-image:url(/img/ui/arrow_right.png);
+	background-position:3px 2px;
+	background-repeat:no-repeat;
+	 background-size:15px; */
+	cursor:pointer;
+	}
+.dbox_title span
+	{
+	margin-left:10px;
+	}
+.dbox_cont
+	{
+	background-color:#fff;
+	padding-top:2px;
+	padding-bottom:1px;
+	}
+	
+.dbox_min
+	{
+	height:20px !important;
+	overflow:hidden !important;
+	min-height:20px !important;
+	}
+.dbox_full
+	{
+	max-width:80% !important;	
+	width:80% !important;
+	height:80% !important;
+	max-height:80% !important;
+	z-index:999999999999 !important;
+	position:absolute !important;
+	}
+.dbox_title_form
+	{
+	color:#fff;
+	background-color:#aaa;
+	text-align:right;
+	padding-top:3px;
+	padding-bottom:1px;
+	padding-right:4px;
+	}
+
+/* ----------------------------------------------------------------------------------------------------------------------------
+	empresa CSS 
+---------------------------------------------------------------------------------------------------------------------------- */	
+
+/* dados principais */
+#empresa_dbox_1 
+	{
+	float:left;
+	/* min-width:1024px; */
+	width:75%;
+	}
+	
+/* grupos */
+#empresa_dbox_2 
+	{
+	float:right;
+	/* min-width:400px; */
+	width:20%;
+	/* max-height:100px;
+	 min-height:100px; 
+	margin-right:80px; */
+	height:80px;
+	}
+	
+/* dados bancarios */
+#empresa_dbox_3 
+	{
+	float:right;
+	width:38%;
+	min-height:158px;
+	max-height:158px;
+	}
+	
+/* enderecos */
+#empresa_dbox_4 
+	{
+	width:55%;
+	float:left;
+	}
+	
+/* enderecos tabs */
+.empresa_tabs
+	{
+	clear:both; 
+	margin:10px; 
+	background-color:transparent;
+	}
+
+.empresa_dbox_end_0
+	{
+	clear:both; 
+	margin:10px;
+	top:100px;
+	}
+	
+	
+/* [INI] Modal Jquery ------------------------------------- */
+.ui-widget-overlay 
+	{
+	opacity:0.65;
+	background:#000;
+	}
+	
+.ui-dialog
+	{
+	box-shadow: 5px 5px 5px rgba(255, 255, 255, 0.3);
+	padding:0px !important;
+	/* background-color: rgb(112,36,45) !important; */
+	border:none !important;
+	}
+	
+.ui-dialog-titlebar
+	{
+	background-color:#354e72;
+	color:#fff !important;
+	}
+
+.ui-dialog-title-dialog
+	{
+	background-color: rgb(112,36,45) !important;
+	color:#fff !important;
+	}
+	
+.ui-dialog .ui-dialog-content 
+	{ 
+	float:right;
+	width:75% !important;
+	}
+
+.ui-dialog .ui-dialog-buttonpane 
+	{ 
+	width:20%;
+	padding-left:5px !important;
+	float:left;
+	border:0px;
+	}
+
+/* start.cgi */
+#main2 
+	{
+	padding-top:10px;
+	overflow:auto;
+	}
+
+div.dataTables_scrollHead, div.dataTables_bottom
+	{
+	background-color:#354e72;
+	}
+	
+div.dataTables_wrapper
+	{
+	border: 1px solid #354e72;
+	max-height:100%;
+	}
